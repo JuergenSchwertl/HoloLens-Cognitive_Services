@@ -28,8 +28,21 @@ void ::CogniTest::MainPage::InitializeComponent()
 
 void ::CogniTest::MainPage::Connect(int __connectionId, ::Platform::Object^ __target)
 {
-    __connectionId;         // unreferenced 
-    __target;               // unreferenced
+    switch (__connectionId)
+    {
+    case 1:
+        {
+            ::Windows::UI::Xaml::Controls::Button^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element1))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
+        }
+        break;
+    case 2:
+        {
+            this->LblResult = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+        }
+        break;
+    }
     _contentLoaded = true;
 }
 

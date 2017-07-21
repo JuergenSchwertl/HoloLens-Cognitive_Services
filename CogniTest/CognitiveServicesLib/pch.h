@@ -2,7 +2,6 @@
 
 #include <collection.h>
 #include <ppltasks.h>
-#include <experimental\resumable>
 #include <pplawait.h>
 
 #include "Enums.h"

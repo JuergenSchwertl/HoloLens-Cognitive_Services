@@ -86,7 +86,7 @@ Concurrency::task<Windows::Storage::Streams::IRandomAccessStream^> HpptClientImp
 
 task<String^> HpptClientImpl::PostFileAsync(Uri^ _Uri, String^ _Filename)
 {
-
+	String^ key = this->m_strSubscriptionKey;
 	//String^ mediatype = ContentTypes::GetFromFileName(_Filename);
 	String^ mediatype = ref new String(ContentTypes::ApplicationOctetStream);
 

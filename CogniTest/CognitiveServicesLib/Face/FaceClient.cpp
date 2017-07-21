@@ -8,17 +8,23 @@ using namespace CognitiveServicesLib::Common;
 using namespace Platform;
 using namespace Windows::Foundation;
 
-FaceClient::FaceClient(AzureRegions _Region, String^ _SubscriptionKey) : 
-	m_Region( _Region ),
-	m_SubscriptionKey( _SubscriptionKey),
-	m_WebClient ( HpptClientImpl(_Region, _SubscriptionKey) )
+///<summary>Creates a new FaceClient for Cognitive Services face recognition</summary>
+///<param name="Region">A member of the <see cref="AzureRegions" /> enumeration</param>
+///<param name="SubscriptionKey">Your subscription key from the <see cref="https://portal.azure.com">Azure Portal</cref></param>
+FaceClient::FaceClient(AzureRegions Region, String^ SubscriptionKey) :
+	m_Region( Region ),
+	m_SubscriptionKey( SubscriptionKey),
+	m_WebClient ( HpptClientImpl(Region, SubscriptionKey) )
 {
 
 }
 
-IAsyncOperation<String^>^ FaceClient::DetectAsync(Platform::String^ _FileName)
+///<summary>Detects faces from an image file</summary>
+///<param name="FileName">Image file name</param>
+///<returns>async task completing with Face - Detect API response as json string</returns>
+IAsyncOperation<String^>^ FaceClient::DetectAsync(Platform::String^ FileName)
 {
-	auto postaction = create_async([this]() {
+	auto postaction = create_async([=]() {
 		Uri^ uri = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, Parameters::FaceAttributes);
 		return m_WebClient.PostFileAsync(uri, L"test");
 	});

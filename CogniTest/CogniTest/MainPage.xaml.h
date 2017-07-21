@@ -14,8 +14,13 @@ namespace CogniTest
 	/// </summary>
 	public ref class MainPage sealed
 	{
+	private:
+		CognitiveServicesLib::FaceClient^ m_FaceClient;
+
 	public:
 		MainPage();
 
+	private:
+		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

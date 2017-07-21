@@ -7,6 +7,15 @@
 //------------------------------------------------------------------------------
 
 
+namespace Windows {
+    namespace UI {
+        namespace Xaml {
+            namespace Controls {
+                ref class TextBlock;
+            }
+        }
+    }
+}
 
 namespace CogniTest
 {
@@ -23,6 +32,7 @@ namespace CogniTest
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ LblResult;
     };
 }
 

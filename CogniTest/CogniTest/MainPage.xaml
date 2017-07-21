@@ -8,6 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Click="Button_Click" Content="Detect" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <TextBlock Name="LblResult" Grid.Row="1" VerticalAlignment="Stretch" Text="Result box"/> 
     </Grid>
 </Page>
