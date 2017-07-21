@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>b9f009b0-2959-40a2-9aac-9ebf023f6f5e</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Face">
+      <UniqueIdentifier>{6293fa35-8df3-434b-bff5-9737171c9c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{775734d8-dc30-4136-957e-3ae5aed4d65a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="HpptClientImpl.cpp" />
+    <ClCompile Include="Authentication.cpp" />
+    <ClCompile Include="Common\Strings.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Enums.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Face\FaceClient.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="HpptClientImpl.h" />
+    <ClInclude Include="Authentication.h" />
+    <ClInclude Include="Common\Strings.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\FaceClient.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h" />
+  </ItemGroup>
+</Project>
