@@ -25,6 +25,7 @@
     <ClCompile Include="Face\FaceClient.cpp">
       <Filter>Face</Filter>
     </ClCompile>
+    <ClCompile Include="FileHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -37,5 +38,6 @@
       <Filter>Face</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="FileHelper.h" />
   </ItemGroup>
 </Project>

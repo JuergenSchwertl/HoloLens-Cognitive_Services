@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CogniTest", "CogniTest\CogniTest.vcxproj", "{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CognitiveServicesLib", "CognitiveServicesLib\CognitiveServicesLib.vcxproj", "{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|ARM.Build.0 = Debug|ARM
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|x64.ActiveCfg = Debug|x64
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|x64.Build.0 = Debug|x64
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|x86.ActiveCfg = Debug|Win32
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Debug|x86.Build.0 = Debug|Win32
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|ARM.ActiveCfg = Release|ARM
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|ARM.Build.0 = Release|ARM
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|x64.ActiveCfg = Release|x64
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|x64.Build.0 = Release|x64
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|x86.ActiveCfg = Release|Win32
+		{EA92DCE6-F882-491D-B4CF-DB9E616C72B0}.Release|x86.Build.0 = Release|Win32
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|ARM.Build.0 = Debug|ARM
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|x64.ActiveCfg = Debug|x64
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|x64.Build.0 = Debug|x64
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|x86.ActiveCfg = Debug|Win32
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Debug|x86.Build.0 = Debug|Win32
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|ARM.ActiveCfg = Release|ARM
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|ARM.Build.0 = Release|ARM
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|x64.ActiveCfg = Release|x64
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|x64.Build.0 = Release|x64
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|x86.ActiveCfg = Release|Win32
+		{619BE75A-3EF9-4ABC-AD30-A5E8B12DA19C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

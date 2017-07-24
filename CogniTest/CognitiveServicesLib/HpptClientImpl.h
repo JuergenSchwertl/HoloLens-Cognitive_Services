@@ -17,11 +17,8 @@ namespace CognitiveServicesLib
 		Windows::Storage::Streams::Buffer^ m_readBuffer;
 
 		void setHttpHeaders(Windows::Web::Http::HttpRequestMessage^ _Request);
-
-		//Concurrency::task<Windows::Storage::Streams::IInputStream^> getAsStreamAsync(Windows::Foundation::Uri^);
-		Concurrency::task<int> testAsync() __resumable;
-		Concurrency::task<Windows::Storage::Streams::IRandomAccessStream^> getInputFileStreamAsync(Platform::String^ _FileName);
-		Concurrency::task<Windows::Storage::Streams::IRandomAccessStream^> getOutputFileStreamAsync(Platform::String^ _FileName);
+		Windows::Web::Http::HttpStringContent^ buildJsonUrlContent(Windows::Foundation::Uri^ _FileUri);
+		Windows::Web::Http::HttpStreamContent^ buildFileStreamContent(Windows::Storage::Streams::IRandomAccessStream^ _FileStream);
 
 	public:
 		HpptClientImpl(AzureRegions, Platform::String^);
@@ -29,7 +26,9 @@ namespace CognitiveServicesLib
 
 		Concurrency::task<Platform::String^> GetAsFileAsync(Windows::Foundation::Uri^);
 		//Windows::Foundation::IAsyncOperationWithProgress<Platform::String^, Windows::Web::Http::HttpProgress>^ PostFileAsync(Windows::Foundation::Uri^ _Uri, Platform::String^ _Filename);
-		Concurrency::task<Platform::String^> PostFileAsync(Windows::Foundation::Uri^ _Uri, Platform::String^ _Filename);
+		Concurrency::task<Platform::String^> PostStreamAsync(Windows::Foundation::Uri^ _Uri, Windows::Storage::Streams::IRandomAccessStream^ _FileStream);
+		Concurrency::task<Platform::String^> PostFileAsync(Windows::Foundation::Uri^ _Uri, Platform::String^ _FileName);
+		Concurrency::task<Platform::String^> PostUriAsync(Windows::Foundation::Uri^ _Uri, Windows::Foundation::Uri^ _FileUri);
 
 	};
 }
