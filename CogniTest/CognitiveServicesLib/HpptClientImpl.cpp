@@ -40,7 +40,7 @@ void HpptClientImpl::setHttpHeaders(Windows::Web::Http::HttpRequestMessage^ _Req
 }
 
 
-HttpStringContent^ buildJsonUrlContent(Uri^ _FileUri)
+HttpStringContent^ HpptClientImpl::buildJsonUrlContent(Uri^ _FileUri)
 {
 	// Build json object 
 	JsonObject^ json = ref new JsonObject();
@@ -49,7 +49,7 @@ HttpStringContent^ buildJsonUrlContent(Uri^ _FileUri)
 	// build IHttpContent with content-type and content-length
 	String^ strJson = json->Stringify();
 	HttpStringContent^ content = ref new HttpStringContent( strJson );
-	content->Headers->ContentLength = strJson->Length();
+	content->Headers->ContentLength = (unsigned long long) strJson->Length();
 	content->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationJson));
 	return content;
 }
@@ -117,9 +117,9 @@ task<String^> HpptClientImpl::PostUriAsync(Uri^ _EndpointUri, Uri^ _FileUri)
 	if (schema.compare(L"msappx") == 0)
 	{ // local file in application install folder
 		IRandomAccessStream^ fileStream = co_await FileHelper::GetInputFileStreamAsync(_FileUri);
-		//auto strResponse = co_await PostStreamAsync(_EndpointUri, fileStream);
-		//co_return strResponse;
-		return PostStreamAsync(_EndpointUri, fileStream);
+		auto strResponse = co_await PostStreamAsync(_EndpointUri, fileStream);
+		co_return strResponse;
+		//return PostStreamAsync(_EndpointUri, fileStream);
 	}
 	else
 	{
@@ -135,9 +135,9 @@ task<String^> HpptClientImpl::PostUriAsync(Uri^ _EndpointUri, Uri^ _FileUri)
 		HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
 		response->EnsureSuccessStatusCode();
 
-		//auto strResponse = co_await response->Content->ReadAsStringAsync();
-		//co_return strResponse;
-		return response->Content->ReadAsStringAsync();
+		auto strResponse = co_await response->Content->ReadAsStringAsync();
+		co_return strResponse;
+		//return response->Content->ReadAsStringAsync();
 
 	}
 }
