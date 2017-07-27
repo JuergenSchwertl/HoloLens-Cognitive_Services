@@ -11,6 +11,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{775734d8-dc30-4136-957e-3ae5aed4d65a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Errors">
+      <UniqueIdentifier>{12e43281-09bc-4f22-ab80-2c64ce6c4ee5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -26,6 +29,9 @@
       <Filter>Face</Filter>
     </ClCompile>
     <ClCompile Include="FileHelper.cpp" />
+    <ClCompile Include="Errors\ErrorResponse.cpp">
+      <Filter>Errors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -39,5 +45,8 @@
     </ClInclude>
     <ClInclude Include="Enums.h" />
     <ClInclude Include="FileHelper.h" />
+    <ClInclude Include="Errors\ErrorResponse.h">
+      <Filter>Errors</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

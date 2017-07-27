@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <filesystem>
+#include "Errors/ErrorResponse.h"
 #include "FileHelper.h"
 #include "HpptClientImpl.h"
 

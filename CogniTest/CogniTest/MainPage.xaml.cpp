@@ -34,7 +34,8 @@ MainPage::MainPage()
 
 void CogniTest::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	create_task(m_FaceClient->DetectAsync(L"Test.png")).then([=](Platform::String^ result) {
+	Uri^ uriTestImage = ref new Uri(L"msappx:////Assets/JuergenSchwertl.jpg");
+	create_task(m_FaceClient->DetectAsync(uriTestImage)).then([=](Platform::String^ result) {
 		LblResult->Text = result;
 	}, task_continuation_context::use_current());
 }

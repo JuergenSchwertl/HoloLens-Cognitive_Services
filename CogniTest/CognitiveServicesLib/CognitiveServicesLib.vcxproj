@@ -209,6 +209,7 @@
     <ClInclude Include="Authentication.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Common\Strings.h" />
+    <ClInclude Include="Errors\ErrorResponse.h" />
     <ClInclude Include="Face\FaceClient.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="HpptClientImpl.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Authentication.cpp" />
     <ClCompile Include="Enums.cpp" />
     <ClCompile Include="Common\Strings.cpp" />
+    <ClCompile Include="Errors\ErrorResponse.cpp" />
     <ClCompile Include="Face\FaceClient.cpp" />
     <ClCompile Include="FileHelper.cpp" />
     <ClCompile Include="HpptClientImpl.cpp" />
