@@ -32,6 +32,9 @@
     <ClCompile Include="Errors\ErrorResponse.cpp">
       <Filter>Errors</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Logger.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -47,6 +50,9 @@
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="Errors\ErrorResponse.h">
       <Filter>Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Logger.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

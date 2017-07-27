@@ -7,6 +7,17 @@ namespace CognitiveServicesLib
 {
 	namespace Common
 	{
+	
+		class Globals
+		{
+		public:
+			static const wchar_t cstrEmptyString[];
+			static const wchar_t cstrTrue[];
+			static const wchar_t cstrFalse[];
+
+			static PCWSTR Bool_ToString(bool param);
+		};
+
 		class HttpHeaderName
 		{
 			public:
@@ -51,8 +62,33 @@ namespace CognitiveServicesLib
 				static const wchar_t WestCentralUS[];
 				static const wchar_t WestEurope[];
 				static const wchar_t SoutheastAsia[];
+
+				static const wchar_t *lstRegions[];
 			public:
 				static PCWSTR GetRegionName(AzureRegions);
+		};
+
+		class FaceAttributeHelper
+		{
+		private:
+			static const wchar_t cstrAge[];
+			static const wchar_t cstrGender[];
+			static const wchar_t cstrHeadPose[];
+			static const wchar_t cstrSmile[];
+			static const wchar_t cstrFacialHair[];
+			static const wchar_t cstrGlasses[];
+			static const wchar_t cstrEmotion[];
+			static const wchar_t cstrHair[];
+			static const wchar_t cstrMakeup[];
+			static const wchar_t cstrOcclusion[];
+			static const wchar_t cstrAccessories[];
+			static const wchar_t cstrBlur[];
+			static const wchar_t cstrExposure[];
+			static const wchar_t cstrNoise[];
+
+			static const wchar_t *lstAttributes[];
+		public:
+			static PCWSTR GetFaceAttribute(FaceAttributes _Attribute);
 		};
 
 		class EndpointHelper
@@ -64,11 +100,15 @@ namespace CognitiveServicesLib
 				static const wchar_t FaceIdentify[];
 				static const wchar_t FaceVerify[];
 
-				static Platform::String^ BuildEndpointString(PCWSTR, PCWSTR, PCWSTR);
-				static Windows::Foundation::Uri^ BuildEndpointUri(PCWSTR, PCWSTR, PCWSTR);
+				static Platform::String^ BuildEndpointString(PCWSTR, PCWSTR, Platform::String^);
+				static Windows::Foundation::Uri^ BuildEndpointUri(PCWSTR, PCWSTR, Platform::String^);
 
 			public:
-				static Windows::Foundation::Uri^ BuildEndpointUri(PCWSTR, AzureRegions, PCWSTR);
+				static Windows::Foundation::Uri^ BuildEndpointUri(PCWSTR, AzureRegions, Platform::String^ Parameters);
+				static Platform::String^ BuildParameterList(
+					bool ReturnFaceId,
+					bool ReturnFaceLandmarks,
+					Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
 		};
 
 

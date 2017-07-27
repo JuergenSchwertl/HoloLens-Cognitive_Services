@@ -44,7 +44,10 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="C:\Users\jschwert\OneDrive\Pictures\Juergen_Schwertl.jpg">
+    <Image Include="Assets\FB_JSchwert.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Juergen_Schwertl.jpg">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

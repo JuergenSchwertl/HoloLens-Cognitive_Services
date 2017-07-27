@@ -207,6 +207,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Authentication.h" />
+    <ClInclude Include="Common\Logger.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Common\Strings.h" />
     <ClInclude Include="Errors\ErrorResponse.h" />
@@ -217,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Authentication.cpp" />
+    <ClCompile Include="Common\Logger.cpp" />
     <ClCompile Include="Enums.cpp" />
     <ClCompile Include="Common\Strings.cpp" />
     <ClCompile Include="Errors\ErrorResponse.cpp" />

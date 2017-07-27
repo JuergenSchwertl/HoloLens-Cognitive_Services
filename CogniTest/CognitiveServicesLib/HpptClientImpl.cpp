@@ -15,6 +15,7 @@ using namespace Windows::Web::Http;
 using namespace Windows::Data::Json;
 using namespace std::experimental::filesystem::v1;
 
+
 Windows::Web::Http::HttpClient^ m_httpClient = nullptr;
 
 
@@ -35,9 +36,12 @@ HpptClientImpl::~HpptClientImpl()
 	m_httpClient = nullptr;
 }
 
-void HpptClientImpl::setHttpHeaders(Windows::Web::Http::HttpRequestMessage^ _Request)
+HttpRequestMessage^ HpptClientImpl::buildHttpRequestWithHeaders(HttpMethod^ method, Uri^ uri)
 {
-	_Request->Headers->Append(ref new String( HttpHeaderName::OcpApimSubscriptionKey ), m_strSubscriptionKey);
+	HttpRequestMessage^ request = ref new HttpRequestMessage(method, uri);
+	request->Headers->Append(ref new String( HttpHeaderName::OcpApimSubscriptionKey ), m_strSubscriptionKey);
+	//request->Headers->Append(ref new String(HttpHeaderName::OcpApimSubscriptionKey), L"incorrect key to test");
+	return request;
 }
 
 
@@ -52,6 +56,7 @@ HttpStringContent^ HpptClientImpl::buildJsonUrlContent(Uri^ _FileUri)
 	HttpStringContent^ content = ref new HttpStringContent( strJson );
 	content->Headers->ContentLength = (unsigned long long) strJson->Length();
 	content->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationJson));
+	__LOGMSG(content->Headers->ToString());
 	return content;
 }
 
@@ -60,6 +65,9 @@ HttpStreamContent^ HpptClientImpl::buildFileStreamContent(IRandomAccessStream^ _
 	HttpStreamContent^ streamContent = ref new HttpStreamContent(_FileStream);
 	streamContent->Headers->ContentLength = _FileStream->Size;
 	streamContent->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationOctetStream));
+
+	__LOGMSG(streamContent->Headers->ToString());
+
 	return streamContent;
 }
 
@@ -67,9 +75,8 @@ task<String^> HpptClientImpl::GetAsFileAsync(Uri^ _Uri)
 {
 	IInputStream^ httpStream;
 
-	HttpRequestMessage^ request = ref new HttpRequestMessage(HttpMethod::Get, _Uri);
-	setHttpHeaders(request);
-
+	HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Get, _Uri);
+	
 	HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
 	response->EnsureSuccessStatusCode();
 
@@ -94,52 +101,55 @@ task<String^> HpptClientImpl::GetAsFileAsync(Uri^ _Uri)
 
 task<String^> HpptClientImpl::PostStreamAsync(Uri^ _Uri, IRandomAccessStream^ _FileStream)
 {
-	String^ key = this->m_strSubscriptionKey;
-	//String^ mediatype = ContentTypes::GetFromFileName(_Filename);
+	__LOGMSG(_Uri);
 
-	HttpRequestMessage^ request = ref new HttpRequestMessage(HttpMethod::Post, _Uri);
-	setHttpHeaders(request);
-
-	HttpStreamContent^ streamContent = buildFileStreamContent(_FileStream);
-	request->Content = streamContent;
-
+	HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Post, _Uri);
+	request->Content = buildFileStreamContent(_FileStream);
+	
 	HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
-	response->EnsureSuccessStatusCode();
+	__LOGMSG(response->ReasonPhrase);
 
 	auto strResponse = co_await response->Content->ReadAsStringAsync();
+	if (!response->IsSuccessStatusCode)
+	{
+		auto ex = Platform::Exception::CreateException(BG_E_HTTP_ERROR_BASE | (int)response->StatusCode, strResponse);
+		__LOG_EXCEPTION(ex);
+		throw ex;
+	}
 	co_return strResponse;
 }
 
 task<String^> HpptClientImpl::PostUriAsync(Uri^ _EndpointUri, Uri^ _FileUri)
 {
+	__LOGMSG(_EndpointUri);
+
 	std::wstring schema(_FileUri->SchemeName->Data());
 	std::transform(schema.begin(), schema.end(), schema.begin(), ::tolower);
 
-	if (schema.compare(L"msappx") == 0)
+	if (schema.compare(L"ms-appx") == 0)
 	{ // local file in application install folder
 		IRandomAccessStream^ fileStream = co_await FileHelper::GetInputFileStreamAsync(_FileUri);
 		auto strResponse = co_await PostStreamAsync(_EndpointUri, fileStream);
 		co_return strResponse;
-		//return PostStreamAsync(_EndpointUri, fileStream);
 	}
 	else
 	{
-		String^ key = this->m_strSubscriptionKey;
-		//String^ mediatype = ContentTypes::GetFromFileName(_Filename);
-
-		HttpRequestMessage^ request = ref new HttpRequestMessage(HttpMethod::Post, _EndpointUri);
-		setHttpHeaders(request);
-
-		HttpStringContent^ httpContent = buildJsonUrlContent( _FileUri );
-		request->Content = httpContent;
+		HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Post, _EndpointUri);
+		request->Content = buildJsonUrlContent( _FileUri );
 
 		HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
-		response->EnsureSuccessStatusCode();
+		__LOGMSG(response->ReasonPhrase);
 
-		auto strResponse = co_await response->Content->ReadAsStringAsync();
+		String^ strResponse = co_await response->Content->ReadAsStringAsync();
+
+		if (!response->IsSuccessStatusCode)
+		{
+			auto ex = Platform::Exception::CreateException(BG_E_HTTP_ERROR_BASE | (int)response->StatusCode, strResponse);
+			__LOG_EXCEPTION(ex);
+			throw ex;
+		}
+
 		co_return strResponse;
-		//return response->Content->ReadAsStringAsync();
-
 	}
 }
 
@@ -147,5 +157,14 @@ task<String^> HpptClientImpl::PostFileAsync(Uri^ _EndpointUri, String^ _Filename
 {
 	IRandomAccessStream^ fileStream = co_await FileHelper::GetInputFileStreamAsync(_Filename);
 	auto strResponse = co_await PostStreamAsync(_EndpointUri, fileStream);
+	co_return strResponse;
+}
+
+task<String^> HpptClientImpl::PostBufferAsync(Uri^ _EndpointUri, Array<byte>^ _Buffer)
+{
+	InMemoryRandomAccessStream^ stream = ref new InMemoryRandomAccessStream();
+	//InMemoryRandomAccessStream::
+
+	auto strResponse = co_await PostStreamAsync(_EndpointUri, stream);
 	co_return strResponse;
 }

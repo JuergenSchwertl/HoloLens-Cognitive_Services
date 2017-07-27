@@ -24,29 +24,65 @@ FaceClient::FaceClient(AzureRegions Region, String^ SubscriptionKey) :
 
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">Image file name</param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
-IAsyncOperation<String^>^ FaceClient::DetectAsync(Platform::String^ FileName)
+IAsyncOperation<String^>^ FaceClient::DetectAsync(
+	Platform::String^ FileName, 
+	bool ReturnFaceId, 
+	bool ReturnFaceLandmarks, 
+	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
 {
 	auto postaction = create_async([=]() {
-		Uri^ uri = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, Parameters::FaceAttributes);
+		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+		Uri^ uri = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, strParams);
 		return m_WebClient.PostFileAsync(uri, L"test");
 	});
 	return postaction;
 }
 
-///<summary>Detects faces from an image file</summary>
-///<param name="FileUri">Uri to an Image on the web or locally (msappx://)</param>
+///<summary>Detects faces from an image iri</summary>
+///<param name="FileUri">Uri to an Image on the web or locally (ms-appx://)</param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
-IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(Uri^ FileUri)
+IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
+	Uri^ FileUri,
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
 {
 	auto postaction = create_async([=]() {
-		Uri^ uriEndpoint = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, Parameters::FaceAttributes);
+		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+		Uri^ uriEndpoint = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, strParams);
 
 		return m_WebClient.PostUriAsync(uriEndpoint, FileUri);
 	});
 	return postaction;
 }
 
+///<summary>Detects faces from an image iri</summary>
+///<param name="ImageData">byte-array with image data</param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
+///<returns>async task completing with Face - Detect API response as json string</returns>
+IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
+	Array<byte>^ ImageData,
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+{
+	auto postaction = create_async([=]() {
+		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+		Uri^ uriEndpoint = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, m_Region, strParams);
+
+		return m_WebClient.PostBufferAsync(uriEndpoint, ImageData);
+	});
+	return postaction;
+}
 
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">Image file name</param>

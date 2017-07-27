@@ -21,8 +21,7 @@ task<IRandomAccessStream^> FileHelper::GetInputFileStreamAsync(Platform::String 
 
 task<IRandomAccessStream^> FileHelper::GetInputFileStreamAsync(Uri ^ _Uri)
 {
-	String^ str = _Uri->ToString();
-	OutputDebugStringW(str->Data);
+	__LOGMSG(_Uri->ToString()->Data());
 
 	StorageFile^ storagefile = co_await StorageFile::GetFileFromApplicationUriAsync( _Uri );
 	IRandomAccessStream^ fileStream = co_await storagefile->OpenAsync(FileAccessMode::Read);
@@ -32,7 +31,7 @@ task<IRandomAccessStream^> FileHelper::GetInputFileStreamAsync(Uri ^ _Uri)
 
 task<IRandomAccessStream^> FileHelper::GetOutputFileStreamAsync(String ^ _FileName)
 {
-	OutputDebugStringW(_FileName->Data);
+	__LOGMSG( (LPCWSTR)_FileName->Data());
 	
 	StorageFolder^ cacheFolder = Windows::Storage::ApplicationData::Current->LocalCacheFolder;
 	StorageFile^ storagefile = co_await cacheFolder->CreateFileAsync("test");

@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include <string.h>
+#include <sstream>
 
 #include "Enums.h"
 #include "Strings.h"
@@ -10,7 +11,14 @@ using namespace CognitiveServicesLib::Common;
 using namespace Platform;
 using namespace Windows::Foundation;
 
+const wchar_t Globals::cstrEmptyString[] = L"";
+const wchar_t Globals::cstrTrue[] = L"true";
+const wchar_t Globals::cstrFalse[] = L"false";
 
+PCWSTR Globals::Bool_ToString(bool param)
+{
+	return param ? cstrTrue : cstrFalse;
+}
 // Common Header strings
 const wchar_t HttpHeaderName::ContentType[] = L"Content-Type";
 const wchar_t HttpHeaderName::OcpApimSubscriptionKey[] = L"Ocp-Apim-Subscription-Key";
@@ -103,29 +111,64 @@ const wchar_t AzureRegionHelper::WestEurope[] = L"westeurope";
 /// <summary>Azure region Southeast Asia: southeastasia.api.cognitive.microsoft.com</summary>
 const wchar_t AzureRegionHelper::SoutheastAsia[] = L"southeastasia";
 
+const wchar_t * AzureRegionHelper::lstRegions[] = {
+	Globals::cstrEmptyString,
+	WestUS,
+	EastUS2,
+	WestCentralUS,
+	WestEurope,
+	SoutheastAsia
+};
+
 PCWSTR AzureRegionHelper::GetRegionName(AzureRegions _Region)
 {
-	switch (_Region)
-	{
-	case AzureRegions::WestUS:
-		return AzureRegionHelper::WestUS;
-		break;
-	case AzureRegions::EastUS2:
-		return AzureRegionHelper::EastUS2;
-		break;
-	case AzureRegions::WestCentralUS:
-		return AzureRegionHelper::WestCentralUS;
-		break;
-	case AzureRegions::WestEurope:
-		return AzureRegionHelper::WestEurope;
-		break;
-	case AzureRegions::SoutheastAsia:
-		return AzureRegionHelper::SoutheastAsia;
-		break;
-	default:
+	int index = (int)_Region;
+	if (index > 0 && index < (sizeof(lstRegions) / sizeof(PCWSTR)))
+		return lstRegions[index];
+	else
 		return nullptr;
-		break;
-	}
+}
+
+const wchar_t FaceAttributeHelper::cstrAge[] = L"age";
+const wchar_t FaceAttributeHelper::cstrGender[] = L"gender";
+const wchar_t FaceAttributeHelper::cstrHeadPose[] = L"headPose";
+const wchar_t FaceAttributeHelper::cstrSmile[] = L"smile";
+const wchar_t FaceAttributeHelper::cstrFacialHair[] = L"facialHair";
+const wchar_t FaceAttributeHelper::cstrGlasses[] = L"glasses";
+const wchar_t FaceAttributeHelper::cstrEmotion[] = L"emotion";
+const wchar_t FaceAttributeHelper::cstrHair[] = L"hair";
+const wchar_t FaceAttributeHelper::cstrMakeup[] = L"makeup";
+const wchar_t FaceAttributeHelper::cstrOcclusion[] = L"occlusion";
+const wchar_t FaceAttributeHelper::cstrAccessories[] = L"accessories";
+const wchar_t FaceAttributeHelper::cstrBlur[] = L"blur";
+const wchar_t FaceAttributeHelper::cstrExposure[] = L"exposure";
+const wchar_t FaceAttributeHelper::cstrNoise[] = L"noise";
+
+const wchar_t *FaceAttributeHelper::lstAttributes[] = { 
+	Globals::cstrEmptyString,
+	cstrAge, 
+	cstrGender,
+	cstrHeadPose,
+	cstrSmile,
+	cstrFacialHair,
+	cstrGlasses,
+	cstrEmotion,
+	cstrHair,
+	cstrMakeup,
+	cstrOcclusion,
+	cstrAccessories,
+	cstrBlur,
+	cstrExposure,
+	cstrNoise
+};
+
+PCWSTR FaceAttributeHelper::GetFaceAttribute(FaceAttributes _Attribute)
+{
+	int index = (int)_Attribute;
+	if (index > 0 && index < (sizeof(lstAttributes) / sizeof(PCWSTR)) )
+		return lstAttributes[index];
+	else
+		return nullptr;
 }
 
 //
@@ -152,10 +195,10 @@ const wchar_t EndpointHelper::FaceVerify[] = L"https://%s.api.cognitive.microsof
 ///<param name="_Region">Azure region</param>
 ///<param name="_Parameter">additional URL parameter </param>
 ///<returns>Formatted URI string as <see cref="Platform::String^" /></returns>
-String^ EndpointHelper::BuildEndpointString(PCWSTR _BaseUri, PCWSTR _Region, PCWSTR _Parameter)
+String^ EndpointHelper::BuildEndpointString(PCWSTR _BaseUri, PCWSTR _Region, String^ _Parameters)
 {
 	std::wstring strEndpoint(1024,'0');
-	swprintf_s((PWSTR) strEndpoint.c_str(), strEndpoint.size(), _BaseUri, _Region, _Parameter);
+	swprintf_s((PWSTR) strEndpoint.c_str(), strEndpoint.size(), _BaseUri, _Region, _Parameters->Data());
 	return ref new Platform::String(strEndpoint.c_str());
 }
 
@@ -164,9 +207,9 @@ String^ EndpointHelper::BuildEndpointString(PCWSTR _BaseUri, PCWSTR _Region, PCW
 ///<param name="_Region">Azure region</param>
 ///<param name="_Parameter">additional URL parameter </param>
 ///<returns>Formatted <see cref="Windows::Foundation::Uri^" /></returns>
-Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, PCWSTR _Region, PCWSTR _Parameter)
+Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, PCWSTR _Region, String^ _Parameters)
 {
-	return ref new Uri( BuildEndpointString(_BaseUri, _Region, _Parameter) );
+	return ref new Uri( BuildEndpointString(_BaseUri, _Region, _Parameters) );
 }
 
 /// <summary>Helper function to build endpoint Uri</summary>
@@ -174,7 +217,27 @@ Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, PCWSTR _Region, PCWSTR _P
 ///<param name="_Region">Azure region</param>
 ///<param name="_Parameter">additional URL parameter </param>
 ///<returns>Formatted <see cref="Windows::Foundation::Uri^" /></returns>
-Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, AzureRegions _Region, PCWSTR _Parameter)
+Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, AzureRegions _Region, String^ _Parameters)
 {
-	return BuildEndpointUri(_BaseUri, AzureRegionHelper::GetRegionName(_Region), _Parameter);
+	return BuildEndpointUri(_BaseUri, AzureRegionHelper::GetRegionName(_Region), _Parameters);
+}
+
+Platform::String^ EndpointHelper::BuildParameterList(
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+{
+	std::wstringstream ssParams;
+	ssParams << L"?" << Parameters::FaceId << L"=" << Globals::Bool_ToString(ReturnFaceId);
+	ssParams << L"&" << Parameters::FaceLandmarks << L"=" << Globals::Bool_ToString(ReturnFaceLandmarks);
+	if (ReturnFaceAttributes != nullptr && ReturnFaceAttributes->First()->HasCurrent)
+	{
+		auto iter = ReturnFaceAttributes->First();
+		ssParams << L"&" << Parameters::FaceAttributes << L"=" << FaceAttributeHelper::GetFaceAttribute(iter->Current);
+		while (iter->MoveNext())
+			if (iter->HasCurrent)
+				ssParams << L"," << FaceAttributeHelper::GetFaceAttribute(iter->Current);
+	}
+
+	return ref new String(ssParams.str().c_str());
 }

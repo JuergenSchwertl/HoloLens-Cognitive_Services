@@ -16,7 +16,7 @@ namespace CognitiveServicesLib
 		Concurrency::cancellation_token_source m_cancellationTokenSource;
 		Windows::Storage::Streams::Buffer^ m_readBuffer;
 
-		void setHttpHeaders(Windows::Web::Http::HttpRequestMessage^ _Request);
+		Windows::Web::Http::HttpRequestMessage^ HpptClientImpl::buildHttpRequestWithHeaders(Windows::Web::Http::HttpMethod^ method, Windows::Foundation::Uri^ uri);
 		Windows::Web::Http::HttpStringContent^ buildJsonUrlContent(Windows::Foundation::Uri^ _FileUri);
 		Windows::Web::Http::HttpStreamContent^ buildFileStreamContent(Windows::Storage::Streams::IRandomAccessStream^ _FileStream);
 
@@ -29,6 +29,7 @@ namespace CognitiveServicesLib
 		Concurrency::task<Platform::String^> PostStreamAsync(Windows::Foundation::Uri^ _Uri, Windows::Storage::Streams::IRandomAccessStream^ _FileStream);
 		Concurrency::task<Platform::String^> PostFileAsync(Windows::Foundation::Uri^ _Uri, Platform::String^ _FileName);
 		Concurrency::task<Platform::String^> PostUriAsync(Windows::Foundation::Uri^ _Uri, Windows::Foundation::Uri^ _FileUri);
+		Concurrency::task<Platform::String^> PostBufferAsync(Windows::Foundation::Uri^ _Uri, Array<byte>^ _Buffer);
 
 	};
 }

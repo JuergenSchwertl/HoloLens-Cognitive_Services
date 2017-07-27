@@ -11,6 +11,7 @@ using namespace CogniTest;
 
 using namespace Concurrency;
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::UI::Xaml;
@@ -34,8 +35,38 @@ MainPage::MainPage()
 
 void CogniTest::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	Uri^ uriTestImage = ref new Uri(L"msappx:////Assets/JuergenSchwertl.jpg");
-	create_task(m_FaceClient->DetectAsync(uriTestImage)).then([=](Platform::String^ result) {
+	Uri^ uriTestImage = ref new Uri(L"ms-appx:///Assets/Juergen_Schwertl.jpg");
+	Vector<FaceAttributes>^ lstAttributes = ref new Vector<FaceAttributes>(
+		{
+			FaceAttributes::Age,
+			FaceAttributes::Gender,
+			FaceAttributes::HeadPose,
+			FaceAttributes::Smile,
+			FaceAttributes::FacialHair,
+			FaceAttributes::Glasses,
+			FaceAttributes::Emotion,
+			FaceAttributes::Hair,
+			FaceAttributes::Makeup,
+			FaceAttributes::Occlusion,
+			FaceAttributes::Accessories,
+			FaceAttributes::Blur,
+			FaceAttributes::Exposure,
+			FaceAttributes::Noise
+		}
+	);
+
+
+	Concurrency::create_task(m_FaceClient->DetectAsync(uriTestImage, true, true, lstAttributes))
+	.then([=](Platform::String^ result) {
 		LblResult->Text = result;
+	}, task_continuation_context::use_current())
+	.then([=](task<void> t) {
+		try {
+			t.get();
+		}
+		catch (Exception^ ex)
+		{
+			LblResult->Text = ex->Message;
+		}
 	}, task_continuation_context::use_current());
 }
