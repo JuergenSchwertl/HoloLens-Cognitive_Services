@@ -12,6 +12,9 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class TextBlock;
+                ref class CaptureElement;
+                ref class Canvas;
+                ref class Button;
             }
         }
     }
@@ -33,6 +36,11 @@ namespace CogniTest
         bool _contentLoaded;
     
         private: ::Windows::UI::Xaml::Controls::TextBlock^ LblResult;
+        private: ::Windows::UI::Xaml::Controls::CaptureElement^ PreviewControl;
+        private: ::Windows::UI::Xaml::Controls::Canvas^ FacesCanvas;
+        private: ::Windows::UI::Xaml::Controls::Button^ BtnFile;
+        private: ::Windows::UI::Xaml::Controls::Button^ BtnCamera;
+        private: ::Windows::UI::Xaml::Controls::Button^ PhotoButton;
     };
 }
 

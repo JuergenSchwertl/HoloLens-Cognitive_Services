@@ -64,13 +64,13 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 }
 
 ///<summary>Detects faces from an image iri</summary>
-///<param name="ImageData">byte-array with image data</param>
+///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
 ///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
 IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
-	Array<byte>^ ImageData,
+	Windows::Storage::Streams::IBuffer^ ImageData,
 	bool ReturnFaceId,
 	bool ReturnFaceLandmarks,
 	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)

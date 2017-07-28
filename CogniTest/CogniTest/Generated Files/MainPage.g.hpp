@@ -32,14 +32,38 @@ void ::CogniTest::MainPage::Connect(int __connectionId, ::Platform::Object^ __ta
     {
     case 1:
         {
-            ::Windows::UI::Xaml::Controls::Button^ element1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(element1))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
-                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
+            this->LblResult = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
         }
         break;
     case 2:
         {
-            this->LblResult = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            this->PreviewControl = safe_cast<::Windows::UI::Xaml::Controls::CaptureElement^>(__target);
+        }
+        break;
+    case 3:
+        {
+            this->FacesCanvas = safe_cast<::Windows::UI::Xaml::Controls::Canvas^>(__target);
+        }
+        break;
+    case 4:
+        {
+            this->BtnFile = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->BtnFile))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
+        }
+        break;
+    case 5:
+        {
+            this->BtnCamera = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->BtnCamera))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::BtnCamera_Click);
+        }
+        break;
+    case 6:
+        {
+            this->PhotoButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PhotoButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::PhotoButton_Click);
         }
         break;
     }

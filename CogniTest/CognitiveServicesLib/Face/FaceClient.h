@@ -29,7 +29,7 @@ namespace CognitiveServicesLib
 			Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
 
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ DetectAsync(
-			Platform::Array<byte> ImageData,
+			Windows::Storage::Streams::IBuffer^ ImageData,
 			bool ReturnFaceId,
 			bool ReturnFaceLandmarks,
 			Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);

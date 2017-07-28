@@ -11,8 +11,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Click="Button_Click" Content="Detect" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <TextBlock Name="LblResult" Grid.Row="1" VerticalAlignment="Stretch" Text="Result box"/> 
+        <StackPanel Orientation="Horizontal">
+            <Button Name="BtnFile" Grid.Row="0" Click="Button_Click" Content="Detect from File" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            <Button Name="BtnCamera" Grid.Row="0" Click="BtnCamera_Click" Content="Detect from Camera" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
+            <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False">
+                <Viewbox>
+                    <SymbolIcon Symbol="Camera"/>
+                </Viewbox>
+            </Button>
+        </StackPanel>
+        <TextBlock Name="LblResult" Grid.Row="1" VerticalAlignment="Stretch" Text="Result box"/>
+        <!--Camera preview-->
+        <CaptureElement Name="PreviewControl" Grid.Row="2" Stretch="Uniform"/>
+        <Canvas Grid.Row="2">
+            <!--Canvas that will host the face detection bounding boxes, will share the same bounds as the preview within the CaptureElement-->
+            <!--It's contained inside of another canvas to allow for adjusting its size and position after applying a RenderTransform -->
+            <!--For more details, see SetFacesCanvasRotation-->
+            <Canvas Name="FacesCanvas" RenderTransformOrigin="0.5,0.5"/>
+        </Canvas>
     </Grid>
 </Page>

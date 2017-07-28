@@ -62,13 +62,39 @@ HttpStringContent^ HpptClientImpl::buildJsonUrlContent(Uri^ _FileUri)
 
 HttpStreamContent^ HpptClientImpl::buildFileStreamContent(IRandomAccessStream^ _FileStream)
 {
-	HttpStreamContent^ streamContent = ref new HttpStreamContent(_FileStream);
-	streamContent->Headers->ContentLength = _FileStream->Size;
-	streamContent->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationOctetStream));
+	HttpStreamContent^ content = ref new HttpStreamContent(_FileStream);
+	content->Headers->ContentLength = _FileStream->Size;
+	content->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationOctetStream));
 
-	__LOGMSG(streamContent->Headers->ToString());
+	__LOGMSG(content->Headers->ToString());
 
-	return streamContent;
+	return content;
+}
+
+HttpBufferContent^ HpptClientImpl::buildBufferContent(IBuffer^ _Buffer)
+{
+	HttpBufferContent^ content = ref new HttpBufferContent(_Buffer);
+	content->Headers->ContentLength = (unsigned long long) _Buffer->Length;
+	content->Headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationOctetStream));
+
+	__LOGMSG(content->Headers->ToString());
+
+	return content;
+}
+
+task<String^> HpptClientImpl::retrieveResponseAsync(HttpRequestMessage^ request)
+{
+	HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
+	__LOGMSG(response->ReasonPhrase);
+
+	auto strResponse = co_await response->Content->ReadAsStringAsync();
+	if (!response->IsSuccessStatusCode)
+	{
+		auto ex = Platform::Exception::CreateException(BG_E_HTTP_ERROR_BASE | (int)response->StatusCode, strResponse);
+		__LOG_EXCEPTION(ex);
+		throw ex;
+	}
+	co_return strResponse;
 }
 
 task<String^> HpptClientImpl::GetAsFileAsync(Uri^ _Uri)
@@ -105,17 +131,7 @@ task<String^> HpptClientImpl::PostStreamAsync(Uri^ _Uri, IRandomAccessStream^ _F
 
 	HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Post, _Uri);
 	request->Content = buildFileStreamContent(_FileStream);
-	
-	HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
-	__LOGMSG(response->ReasonPhrase);
-
-	auto strResponse = co_await response->Content->ReadAsStringAsync();
-	if (!response->IsSuccessStatusCode)
-	{
-		auto ex = Platform::Exception::CreateException(BG_E_HTTP_ERROR_BASE | (int)response->StatusCode, strResponse);
-		__LOG_EXCEPTION(ex);
-		throw ex;
-	}
+	String^ strResponse = co_await retrieveResponseAsync( request );
 	co_return strResponse;
 }
 
@@ -136,19 +152,7 @@ task<String^> HpptClientImpl::PostUriAsync(Uri^ _EndpointUri, Uri^ _FileUri)
 	{
 		HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Post, _EndpointUri);
 		request->Content = buildJsonUrlContent( _FileUri );
-
-		HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
-		__LOGMSG(response->ReasonPhrase);
-
-		String^ strResponse = co_await response->Content->ReadAsStringAsync();
-
-		if (!response->IsSuccessStatusCode)
-		{
-			auto ex = Platform::Exception::CreateException(BG_E_HTTP_ERROR_BASE | (int)response->StatusCode, strResponse);
-			__LOG_EXCEPTION(ex);
-			throw ex;
-		}
-
+		String^ strResponse = co_await retrieveResponseAsync(request);
 		co_return strResponse;
 	}
 }
@@ -160,11 +164,12 @@ task<String^> HpptClientImpl::PostFileAsync(Uri^ _EndpointUri, String^ _Filename
 	co_return strResponse;
 }
 
-task<String^> HpptClientImpl::PostBufferAsync(Uri^ _EndpointUri, Array<byte>^ _Buffer)
+task<String^> HpptClientImpl::PostBufferAsync(Uri^ _EndpointUri, IBuffer^ _Buffer)
 {
-	InMemoryRandomAccessStream^ stream = ref new InMemoryRandomAccessStream();
-	//InMemoryRandomAccessStream::
+	__LOGMSG(_EndpointUri);
 
-	auto strResponse = co_await PostStreamAsync(_EndpointUri, stream);
+	HttpRequestMessage^ request = buildHttpRequestWithHeaders(HttpMethod::Post, _EndpointUri);
+	request->Content = buildBufferContent(_Buffer);
+	String^ strResponse = co_await retrieveResponseAsync(request);
 	co_return strResponse;
 }
