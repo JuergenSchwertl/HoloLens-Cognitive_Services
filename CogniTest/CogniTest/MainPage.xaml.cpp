@@ -53,34 +53,33 @@ MainPage::MainPage()
 	_systemMediaControls = SystemMediaTransportControls::GetForCurrentView();
 
 	m_FaceClient = ref new FaceClient(AzureRegions::WestEurope, L"c36cbe9c22c3409a9e5ee9f56bb5c543");
-
+	Vector<FaceAttributes>^ m_FaceAttributeList = ref new Vector<FaceAttributes>(
+	{
+		FaceAttributes::Age,
+		FaceAttributes::Gender,
+		FaceAttributes::HeadPose,
+		FaceAttributes::Smile,
+		FaceAttributes::FacialHair,
+		FaceAttributes::Glasses,
+		FaceAttributes::Emotion,
+		FaceAttributes::Hair,
+		FaceAttributes::Makeup,
+		FaceAttributes::Occlusion,
+		FaceAttributes::Accessories,
+		FaceAttributes::Blur,
+		FaceAttributes::Exposure,
+		FaceAttributes::Noise
+	}
+	);
 }
 
 
 void CogniTest::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	Uri^ uriTestImage = ref new Uri(L"ms-appx:///Assets/Juergen_Schwertl.jpg");
-	Vector<FaceAttributes>^ lstAttributes = ref new Vector<FaceAttributes>(
-		{
-			FaceAttributes::Age,
-			FaceAttributes::Gender,
-			FaceAttributes::HeadPose,
-			FaceAttributes::Smile,
-			FaceAttributes::FacialHair,
-			FaceAttributes::Glasses,
-			FaceAttributes::Emotion,
-			FaceAttributes::Hair,
-			FaceAttributes::Makeup,
-			FaceAttributes::Occlusion,
-			FaceAttributes::Accessories,
-			FaceAttributes::Blur,
-			FaceAttributes::Exposure,
-			FaceAttributes::Noise
-		}
-	);
 
 
-	Concurrency::create_task(m_FaceClient->DetectAsync(uriTestImage, true, true, lstAttributes))
+	Concurrency::create_task(m_FaceClient->DetectAsync(uriTestImage, true, true, m_FaceAttributeList))
 	.then([=](Platform::String^ result) {
 		LblResult->Text = result;
 	}, task_continuation_context::use_current())
@@ -98,10 +97,7 @@ void CogniTest::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xa
 
 void CogniTest::MainPage::BtnCamera_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	InitializeCameraAsync()
-		.then([=]() {
-		return StartPreviewAsync();
-	});
+	InitializeCameraAsync();
 }
 
 
@@ -136,6 +132,9 @@ task<void> MainPage::InitializeCameraAsync()
 		}
 
 		_mediaCapture = ref new Capture::MediaCapture();
+
+		_mediaCaptureFailedEventToken =
+			_mediaCapture->Failed += ref new Capture::MediaCaptureFailedEventHandler(this, &MainPage::MediaCapture_Failed);
 
 		auto settings = ref new Capture::MediaCaptureInitializationSettings();
 		settings->VideoDeviceId = camera->Id;
@@ -265,17 +264,30 @@ task<void> MainPage::TakePhotoAsync()
 	// Take the picture
 	//WriteLine("Taking photo...");
 	return create_task(_mediaCapture->CapturePhotoToStreamAsync(Windows::Media::MediaProperties::ImageEncodingProperties::CreateJpeg(), inputStream))
-		.then([this, inputStream]()
+	.then([this, inputStream]()
 	{
-		return create_task(_captureFolder->CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption::GenerateUniqueName));
-	}).then([this, inputStream](StorageFile^ file)
+		inputStream->Seek(0);
+		auto pos = inputStream->Position;
+		auto size = inputStream->Size;
+		Windows::Storage::Streams::Buffer^ buf = ref new Windows::Storage::Streams::Buffer(inputStream->Size);
+		
+		return create_task(inputStream->ReadAsync(buf, inputStream->Size, Windows::Storage::Streams::InputStreamOptions::None));
+	})
+	.then([this](Windows::Storage::Streams::IBuffer^ buf) 
 	{
+		return create_task(m_FaceClient->DetectAsync(buf, true, true, m_FaceAttributeList ));
+	})
+	.then([this](Platform::String^ result) 
+	{
+			LblResult->Text = result;		
+			
 		//WriteLine("Photo taken! Saving to " + file->Path);
 
 		// Done taking a photo, so re-enable the button
 
-		auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
-		return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
+		//auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
+		//return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
+			return create_task([]() {});
 	}).then([this](task<void> previousTask)
 	{
 		try
@@ -477,4 +489,11 @@ int MainPage::ConvertDisplayOrientationToDegrees(DisplayOrientations orientation
 void MainPage::PhotoButton_Click(Object^, Windows::UI::Xaml::RoutedEventArgs^)
 {
 	TakePhotoAsync();
+}
+
+
+void MainPage::MediaCapture_Failed(Capture::MediaCapture ^currentCaptureObject, Capture::MediaCaptureFailedEventArgs^ errorEventArgs)
+{
+
+	CleanupCameraAsync();
 }

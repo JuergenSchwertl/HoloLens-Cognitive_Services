@@ -28,6 +28,7 @@ namespace CogniTest
 	{
 	private:
 		CognitiveServicesLib::FaceClient^ m_FaceClient;
+		Platform::Collections::Vector<CognitiveServicesLib::FaceAttributes>^ m_FaceAttributeList;
 
 	public:
 		MainPage();
@@ -90,6 +91,7 @@ namespace CogniTest
 		Concurrency::task<void> SetPreviewRotationAsync();
 		Concurrency::task<void> StopPreviewAsync();
 		Concurrency::task<void> TakePhotoAsync();
+		void MediaCapture_Failed(Windows::Media::Capture::MediaCapture ^currentCaptureObject, Windows::Media::Capture::MediaCaptureFailedEventArgs^ errorEventArgs);
 
 		// Rotation helpers
 		Windows::Devices::Sensors::SimpleOrientation GetCameraOrientation();
