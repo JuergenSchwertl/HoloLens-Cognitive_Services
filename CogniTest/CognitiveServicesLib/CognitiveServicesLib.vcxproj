@@ -305,10 +305,13 @@
     <ClInclude Include="Common\Strings.h" />
     <ClInclude Include="Errors\ErrorResponse.h" />
     <ClInclude Include="Face\FaceClient.h" />
+    <ClInclude Include="Face\FaceLandmarks.h" />
+    <ClInclude Include="Face\FaceRectangle.h" />
     <ClInclude Include="Face\FeatureCoordinate.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="HpptClientImpl.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PropertyHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Authentication.cpp" />
@@ -317,6 +320,8 @@
     <ClCompile Include="Common\Strings.cpp" />
     <ClCompile Include="Errors\ErrorResponse.cpp" />
     <ClCompile Include="Face\FaceClient.cpp" />
+    <ClCompile Include="Face\FaceLandmarks.cpp" />
+    <ClCompile Include="Face\FaceRectangle.cpp" />
     <ClCompile Include="Face\FeatureCoordinate.cpp" />
     <ClCompile Include="FileHelper.cpp" />
     <ClCompile Include="HpptClientImpl.cpp" />

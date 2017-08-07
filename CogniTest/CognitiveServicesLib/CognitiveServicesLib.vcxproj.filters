@@ -36,6 +36,12 @@
     <ClCompile Include="Face\FeatureCoordinate.cpp">
       <Filter>Face</Filter>
     </ClCompile>
+    <ClCompile Include="Face\FaceRectangle.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+    <ClCompile Include="Face\FaceLandmarks.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -56,6 +62,13 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Face\FeatureCoordinate.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyHelper.h" />
+    <ClInclude Include="Face\FaceRectangle.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\FaceLandmarks.h">
       <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,31 +1,31 @@
 #pragma once
-#define DEFINE_PROPERTY(proptype, propname) \
-private: \
-	proptype m_##propname ; \
-	/*static const wchar_t m_NameOf_##propname []; */ \
-public: \
-	property proptype propname { \
-		proptype get(){ return m_##propname ;} \
-		void set(proptype val){ m_##propname = val;} \
-	};
-
-//#define POPEL(tt,nn) \
-//private: \
-//	tt nn; \
 
 namespace CognitiveServicesLib
 {
 	public ref class FeatureCoordinate sealed
 	{
-	private:
-		//static const wchar_t m_X_Name[];
 
 	public:
 		FeatureCoordinate();
 
-		DEFINE_PROPERTY(double, X)
-		DEFINE_PROPERTY(double, Y)
+		static FeatureCoordinate^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
 
+#pragma region Properties
+	private:
+		DEFINE_PROPERTY_VARIABLES(FeatureCoordinate, double, X, L"x")
+		DEFINE_PROPERTY_VARIABLES(FeatureCoordinate, double, Y, L"x")
+
+	public:
+
+		///<summary>Gets or sets the x in pixel</summary>
+		///<value>The x of the feature coordinate</value>
+		property double X { double get(); void set(double); }
+
+		///<summary>Gets or sets the y in pixel</summary>
+		///<value>The y of the feature coordinate</value>
+		property double Y { double get(); void set(double); }
+
+#pragma endregion
 	};
 }
 
