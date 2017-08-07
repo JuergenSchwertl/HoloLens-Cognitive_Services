@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CogniTest_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
+    <None Include="CogniTest_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />

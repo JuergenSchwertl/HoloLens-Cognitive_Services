@@ -63,7 +63,7 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	return postaction;
 }
 
-///<summary>Detects faces from an image iri</summary>
+///<summary>Detects faces from an image data buffer</summary>
 ///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>

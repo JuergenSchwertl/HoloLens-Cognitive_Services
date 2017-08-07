@@ -175,19 +175,24 @@ PCWSTR FaceAttributeHelper::GetFaceAttribute(FaceAttributes _Attribute)
 // Face API endpoints
 //
 
-/// <summary>Face-Detect Endpoint:POST https://[location].api.cognitive.microsoft.com/face/v1.0/detect[?returnFaceId][&returnFaceLandmarks][&returnFaceAttributes]</summary>
+/// <summary>Face-Detect Endpoint:POST https://[location].api.cognitive.microsoft.com/face/v1.0/detect[?returnFaceId][&returnFaceLandmarks][&returnFaceAttributes]
+/// <see cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236" /></summary>
 const wchar_t EndpointHelper::FaceDetect[] = L"https://%s.api.cognitive.microsoft.com/face/v1.0/detect?%s";
 
-/// <summary>Face-Find Similar Endpoint:POST https://[location].api.cognitive.microsoft.com/face/v1.0/findsimilars</summary>
+/// <summary>Face-Find Similar Endpoint:POST https://[location].api.cognitive.microsoft.com/face/v1.0/findsimilars
+/// <see cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237" /></summary>
 const wchar_t EndpointHelper::FaceFindSimilar[] = L"https://%s.api.cognitive.microsoft.com/face/v1.0/findsimilars";
 
-/// <summary>Face-Group Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/group</summary>
+/// <summary>Face-Group Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/group
+/// <see cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395238" /></summary>
 const wchar_t EndpointHelper::FaceGroup[] = L"https://%s.api.cognitive.microsoft.com/face/v1.0/group";
 
-/// <summary>Face-Identify Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/identify</summary>
+/// <summary>Face-Identify Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/identify
+/// <see cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239" /></summary>
 const wchar_t EndpointHelper::FaceIdentify[] = L"https://%s.api.cognitive.microsoft.com/face/v1.0/identify";
 
-/// <summary>Face-Verify Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/verify</summary>
+/// <summary>Face-Verify Endpoint: https://[location].api.cognitive.microsoft.com/face/v1.0/verify
+/// <see cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a" /></summary>
 const wchar_t EndpointHelper::FaceVerify[] = L"https://%s.api.cognitive.microsoft.com/face/v1.0/verify";
 
 /// <summary>Helper function to build endpoint string</summary>

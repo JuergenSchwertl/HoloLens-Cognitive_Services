@@ -266,12 +266,13 @@ task<void> MainPage::TakePhotoAsync()
 	return create_task(_mediaCapture->CapturePhotoToStreamAsync(Windows::Media::MediaProperties::ImageEncodingProperties::CreatePng(), inputStream))
 	.then([this, inputStream]()
 	{
+		unsigned int nImageSize = (unsigned int)inputStream->Size;
 		// make sure to rewind stream!
 		inputStream->Seek(0);
 
-		Windows::Storage::Streams::Buffer^ buf = ref new Windows::Storage::Streams::Buffer(inputStream->Size);
+		Windows::Storage::Streams::Buffer^ buf = ref new Windows::Storage::Streams::Buffer(nImageSize);
 		
-		return create_task(inputStream->ReadAsync(buf, inputStream->Size, Windows::Storage::Streams::InputStreamOptions::None));
+		return create_task(inputStream->ReadAsync(buf, nImageSize, Windows::Storage::Streams::InputStreamOptions::None));
 	})
 	.then([this](Windows::Storage::Streams::IBuffer^ buf) 
 	{

@@ -75,3 +75,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/CogniTest/AppPkg

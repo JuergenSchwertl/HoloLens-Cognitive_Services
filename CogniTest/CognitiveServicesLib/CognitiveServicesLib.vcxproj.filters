@@ -22,9 +22,6 @@
     <ClCompile Include="Common\Strings.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Enums.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="Face\FaceClient.cpp">
       <Filter>Face</Filter>
     </ClCompile>
@@ -34,6 +31,10 @@
     </ClCompile>
     <ClCompile Include="Common\Logger.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Enums.cpp" />
+    <ClCompile Include="Face\FeatureCoordinate.cpp">
+      <Filter>Face</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,9 @@
     </ClInclude>
     <ClInclude Include="Common\Logger.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\FeatureCoordinate.h">
+      <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
