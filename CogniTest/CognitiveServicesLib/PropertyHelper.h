@@ -26,6 +26,6 @@ const Platform::String^ propclass :: __JSON_PROPERTYNAME( propname ) = jsonname;
 proptype propclass :: propname :: get() { \
 	return PROPERTY_VARIABLE( propname ); \
 } \
-void propclass :: propname:: set(proptype val) { \
-	PROPERTY_VARIABLE( propname ) = val; \
+void propclass :: propname:: set(proptype value) { \
+	PROPERTY_VARIABLE( propname ) = value; \
 }

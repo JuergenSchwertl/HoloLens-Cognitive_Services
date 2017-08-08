@@ -42,6 +42,9 @@
     <ClCompile Include="Face\FaceLandmarks.cpp">
       <Filter>Face</Filter>
     </ClCompile>
+    <ClCompile Include="Face\Face.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -69,6 +72,9 @@
       <Filter>Face</Filter>
     </ClInclude>
     <ClInclude Include="Face\FaceLandmarks.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\Face.h">
       <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>

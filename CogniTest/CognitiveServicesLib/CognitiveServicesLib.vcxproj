@@ -304,6 +304,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Common\Strings.h" />
     <ClInclude Include="Errors\ErrorResponse.h" />
+    <ClInclude Include="Face\Face.h" />
     <ClInclude Include="Face\FaceClient.h" />
     <ClInclude Include="Face\FaceLandmarks.h" />
     <ClInclude Include="Face\FaceRectangle.h" />
@@ -319,6 +320,7 @@
     <ClCompile Include="Enums.cpp" />
     <ClCompile Include="Common\Strings.cpp" />
     <ClCompile Include="Errors\ErrorResponse.cpp" />
+    <ClCompile Include="Face\Face.cpp" />
     <ClCompile Include="Face\FaceClient.cpp" />
     <ClCompile Include="Face\FaceLandmarks.cpp" />
     <ClCompile Include="Face\FaceRectangle.cpp" />
