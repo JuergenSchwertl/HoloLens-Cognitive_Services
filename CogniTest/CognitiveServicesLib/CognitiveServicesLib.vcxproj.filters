@@ -45,6 +45,17 @@
     <ClCompile Include="Face\Face.cpp">
       <Filter>Face</Filter>
     </ClCompile>
+    <ClCompile Include="Face\Exposure.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+    <ClCompile Include="EnumHelper.cpp" />
+    <ClCompile Include="Face\Accessory.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+    <ClCompile Include="Face\Blur.cpp" />
+    <ClCompile Include="Face\FaceAttributes.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -75,6 +86,17 @@
       <Filter>Face</Filter>
     </ClInclude>
     <ClInclude Include="Face\Face.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\Exposure.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumHelper.h" />
+    <ClInclude Include="Face\Accessory.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\Blur.h" />
+    <ClInclude Include="Face\FaceAttributes.h">
       <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>

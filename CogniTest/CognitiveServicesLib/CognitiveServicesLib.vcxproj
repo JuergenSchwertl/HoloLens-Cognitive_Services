@@ -301,10 +301,15 @@
   <ItemGroup>
     <ClInclude Include="Authentication.h" />
     <ClInclude Include="Common\Logger.h" />
+    <ClInclude Include="EnumHelper.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Common\Strings.h" />
     <ClInclude Include="Errors\ErrorResponse.h" />
+    <ClInclude Include="Face\Accessory.h" />
+    <ClInclude Include="Face\Blur.h" />
+    <ClInclude Include="Face\Exposure.h" />
     <ClInclude Include="Face\Face.h" />
+    <ClInclude Include="Face\FaceAttributes.h" />
     <ClInclude Include="Face\FaceClient.h" />
     <ClInclude Include="Face\FaceLandmarks.h" />
     <ClInclude Include="Face\FaceRectangle.h" />
@@ -317,10 +322,15 @@
   <ItemGroup>
     <ClCompile Include="Authentication.cpp" />
     <ClCompile Include="Common\Logger.cpp" />
+    <ClCompile Include="EnumHelper.cpp" />
     <ClCompile Include="Enums.cpp" />
     <ClCompile Include="Common\Strings.cpp" />
     <ClCompile Include="Errors\ErrorResponse.cpp" />
+    <ClCompile Include="Face\Accessory.cpp" />
+    <ClCompile Include="Face\Blur.cpp" />
+    <ClCompile Include="Face\Exposure.cpp" />
     <ClCompile Include="Face\Face.cpp" />
+    <ClCompile Include="Face\FaceAttributes.cpp" />
     <ClCompile Include="Face\FaceClient.cpp" />
     <ClCompile Include="Face\FaceLandmarks.cpp" />
     <ClCompile Include="Face\FaceRectangle.cpp" />

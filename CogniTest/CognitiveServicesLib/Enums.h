@@ -14,7 +14,7 @@ namespace CognitiveServicesLib
 		SoutheastAsia
 	};
 
-	public enum class FaceAttributes : int
+	public enum class FaceAttributeOptions : int
 	{
 		Age=1, 
 		Gender, 

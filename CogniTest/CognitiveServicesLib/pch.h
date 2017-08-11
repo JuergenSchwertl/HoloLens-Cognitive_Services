@@ -4,6 +4,7 @@
 #include <ppltasks.h>
 #include <pplawait.h>
 
+#include "EnumHelper.h"
 #include "PropertyHelper.h"
 
 #include "Enums.h"

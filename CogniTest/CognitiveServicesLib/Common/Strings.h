@@ -68,7 +68,7 @@ namespace CognitiveServicesLib
 				static PCWSTR GetRegionName(AzureRegions);
 		};
 
-		class FaceAttributeHelper
+		class FaceAttributeOptionsHelper
 		{
 		private:
 			static const wchar_t cstrAge[];
@@ -88,7 +88,7 @@ namespace CognitiveServicesLib
 
 			static const wchar_t *lstAttributes[];
 		public:
-			static PCWSTR GetFaceAttribute(FaceAttributes _Attribute);
+			static PCWSTR GetFaceAttribute(FaceAttributeOptions _Attribute);
 		};
 
 		class EndpointHelper
@@ -108,7 +108,7 @@ namespace CognitiveServicesLib
 				static Platform::String^ BuildParameterList(
 					bool ReturnFaceId,
 					bool ReturnFaceLandmarks,
-					Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
+					Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
 		};
 
 

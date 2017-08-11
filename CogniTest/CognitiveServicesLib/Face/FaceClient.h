@@ -20,19 +20,19 @@ namespace CognitiveServicesLib
 			Platform::String^ FileName,
 			bool ReturnFaceId, 
 			bool ReturnFaceLandmarks, 
-			Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
+			Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
 
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ DetectAsync(
 			Windows::Foundation::Uri^ FileUri,
 			bool ReturnFaceId,
 			bool ReturnFaceLandmarks,
-			Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
+			Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
 
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ DetectAsync(
 			Windows::Storage::Streams::IBuffer^ ImageData,
 			bool ReturnFaceId,
 			bool ReturnFaceLandmarks,
-			Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes);
+			Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
 
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ FakeDetectAsync(Platform::String^ FileName);
 	};

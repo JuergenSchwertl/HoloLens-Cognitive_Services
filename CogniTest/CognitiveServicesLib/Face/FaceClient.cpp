@@ -26,13 +26,13 @@ FaceClient::FaceClient(AzureRegions Region, String^ SubscriptionKey) :
 ///<param name="FileName">Image file name</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
-///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
 IAsyncOperation<String^>^ FaceClient::DetectAsync(
 	Platform::String^ FileName, 
 	bool ReturnFaceId, 
 	bool ReturnFaceLandmarks, 
-	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
 {
 	auto postaction = create_async([=]() {
 		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
@@ -46,13 +46,13 @@ IAsyncOperation<String^>^ FaceClient::DetectAsync(
 ///<param name="FileUri">Uri to an Image on the web or locally (ms-appx://)</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
-///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
 IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	Uri^ FileUri,
 	bool ReturnFaceId,
 	bool ReturnFaceLandmarks,
-	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
 {
 	auto postaction = create_async([=]() {
 		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
@@ -67,13 +67,13 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 ///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
-///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributes" /></param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
 IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	Windows::Storage::Streams::IBuffer^ ImageData,
 	bool ReturnFaceId,
 	bool ReturnFaceLandmarks,
-	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
 {
 	auto postaction = create_async([=]() {
 		String^ strParams = EndpointHelper::BuildParameterList(ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);

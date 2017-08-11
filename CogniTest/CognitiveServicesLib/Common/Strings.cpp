@@ -129,22 +129,22 @@ PCWSTR AzureRegionHelper::GetRegionName(AzureRegions _Region)
 		return nullptr;
 }
 
-const wchar_t FaceAttributeHelper::cstrAge[] = L"age";
-const wchar_t FaceAttributeHelper::cstrGender[] = L"gender";
-const wchar_t FaceAttributeHelper::cstrHeadPose[] = L"headPose";
-const wchar_t FaceAttributeHelper::cstrSmile[] = L"smile";
-const wchar_t FaceAttributeHelper::cstrFacialHair[] = L"facialHair";
-const wchar_t FaceAttributeHelper::cstrGlasses[] = L"glasses";
-const wchar_t FaceAttributeHelper::cstrEmotion[] = L"emotion";
-const wchar_t FaceAttributeHelper::cstrHair[] = L"hair";
-const wchar_t FaceAttributeHelper::cstrMakeup[] = L"makeup";
-const wchar_t FaceAttributeHelper::cstrOcclusion[] = L"occlusion";
-const wchar_t FaceAttributeHelper::cstrAccessories[] = L"accessories";
-const wchar_t FaceAttributeHelper::cstrBlur[] = L"blur";
-const wchar_t FaceAttributeHelper::cstrExposure[] = L"exposure";
-const wchar_t FaceAttributeHelper::cstrNoise[] = L"noise";
+const wchar_t FaceAttributeOptionsHelper::cstrAge[] = L"age";
+const wchar_t FaceAttributeOptionsHelper::cstrGender[] = L"gender";
+const wchar_t FaceAttributeOptionsHelper::cstrHeadPose[] = L"headPose";
+const wchar_t FaceAttributeOptionsHelper::cstrSmile[] = L"smile";
+const wchar_t FaceAttributeOptionsHelper::cstrFacialHair[] = L"facialHair";
+const wchar_t FaceAttributeOptionsHelper::cstrGlasses[] = L"glasses";
+const wchar_t FaceAttributeOptionsHelper::cstrEmotion[] = L"emotion";
+const wchar_t FaceAttributeOptionsHelper::cstrHair[] = L"hair";
+const wchar_t FaceAttributeOptionsHelper::cstrMakeup[] = L"makeup";
+const wchar_t FaceAttributeOptionsHelper::cstrOcclusion[] = L"occlusion";
+const wchar_t FaceAttributeOptionsHelper::cstrAccessories[] = L"accessories";
+const wchar_t FaceAttributeOptionsHelper::cstrBlur[] = L"blur";
+const wchar_t FaceAttributeOptionsHelper::cstrExposure[] = L"exposure";
+const wchar_t FaceAttributeOptionsHelper::cstrNoise[] = L"noise";
 
-const wchar_t *FaceAttributeHelper::lstAttributes[] = { 
+const wchar_t *FaceAttributeOptionsHelper::lstAttributes[] = { 
 	Globals::cstrEmptyString,
 	cstrAge, 
 	cstrGender,
@@ -162,7 +162,7 @@ const wchar_t *FaceAttributeHelper::lstAttributes[] = {
 	cstrNoise
 };
 
-PCWSTR FaceAttributeHelper::GetFaceAttribute(FaceAttributes _Attribute)
+PCWSTR FaceAttributeOptionsHelper::GetFaceAttribute(FaceAttributeOptions _Attribute)
 {
 	int index = (int)_Attribute;
 	if (index > 0 && index < (sizeof(lstAttributes) / sizeof(PCWSTR)) )
@@ -230,7 +230,7 @@ Uri^ EndpointHelper::BuildEndpointUri(PCWSTR _BaseUri, AzureRegions _Region, Str
 Platform::String^ EndpointHelper::BuildParameterList(
 	bool ReturnFaceId,
 	bool ReturnFaceLandmarks,
-	Windows::Foundation::Collections::IIterable<FaceAttributes>^ ReturnFaceAttributes)
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
 {
 	std::wstringstream ssParams;
 	ssParams << L"?" << Parameters::FaceId << L"=" << Globals::Bool_ToString(ReturnFaceId);
@@ -238,10 +238,10 @@ Platform::String^ EndpointHelper::BuildParameterList(
 	if (ReturnFaceAttributes != nullptr && ReturnFaceAttributes->First()->HasCurrent)
 	{
 		auto iter = ReturnFaceAttributes->First();
-		ssParams << L"&" << Parameters::FaceAttributes << L"=" << FaceAttributeHelper::GetFaceAttribute(iter->Current);
+		ssParams << L"&" << Parameters::FaceAttributes << L"=" << FaceAttributeOptionsHelper::GetFaceAttribute(iter->Current);
 		while (iter->MoveNext())
 			if (iter->HasCurrent)
-				ssParams << L"," << FaceAttributeHelper::GetFaceAttribute(iter->Current);
+				ssParams << L"," << FaceAttributeOptionsHelper::GetFaceAttribute(iter->Current);
 	}
 
 	return ref new String(ssParams.str().c_str());
