@@ -1,7 +1,13 @@
 #include "pch.h"
+#include "HeadPose.h"
+#include "Glasses.h"
 #include "Accessory.h"
 #include "Blur.h"
 #include "Exposure.h"
+#include "FacialHair.h"
+#include "Emotion.h"
+#include "Noise.h"
+#include "Makeup.h"
 #include "FaceAttributes.h"
 
 using namespace CognitiveServicesLib;

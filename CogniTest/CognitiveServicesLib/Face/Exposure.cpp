@@ -4,6 +4,9 @@
 using namespace Platform;
 using namespace CognitiveServicesLib;
 
+
+
+
 #pragma region ExposureLevelHelper implementation
 EnumKeyJsonName<ExposureLevel> ExposureLevelHelper::ckvJsonNames[] =
 {
@@ -33,7 +36,7 @@ Exposure::Exposure()
 {
 }
 
-Exposure ^ CognitiveServicesLib::Exposure::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
+Exposure ^ Exposure::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 {
 	Exposure^ exp = nullptr;
 	if (jsonObject != nullptr)

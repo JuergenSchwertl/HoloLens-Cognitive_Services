@@ -11,6 +11,7 @@ namespace CognitiveServicesLib
 
 
 #pragma region Properties
+	private:
 
 	public:
 
@@ -36,7 +37,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The head pose.
 		/// </value>
-//			property CognitiveServicesLib::HeadPose^ HeadPose { CognitiveServicesLib::HeadPose^ get(); void set(CognitiveServicesLib::HeadPose^ value); }
+		property CognitiveServicesLib::HeadPose^ HeadPose { CognitiveServicesLib::HeadPose^ get(); void set(CognitiveServicesLib::HeadPose^ value); }
 
 		/// <summary>
 		/// Gets or sets the smile value. Represents the confidence of face is smiling.
@@ -52,7 +53,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The facial hair.
 		/// </value>
-//		property CognitiveServicesLib::FacialHair^ FacialHair { CognitiveServicesLib::FacialHair^ get(); void set(CognitiveServicesLib::FacialHair^ value); }
+		property CognitiveServicesLib::FacialHair^ FacialHair { CognitiveServicesLib::FacialHair^ get(); void set(CognitiveServicesLib::FacialHair^ value); }
 
 		/// <summary>
 		/// Gets or sets the emotion.
@@ -60,7 +61,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The emotion.
 		/// </value>
-//		property CognitiveServicesLib::EmotionScores^ Emotion {CognitiveServicesLib::EmotionScores^  get(); void set(CognitiveServicesLib::EmotionScores^ value); }
+		property CognitiveServicesLib::EmotionScores^ Emotion {CognitiveServicesLib::EmotionScores^  get(); void set(CognitiveServicesLib::EmotionScores^ value); }
 
 		/// <summary>
 		/// Gets or sets the glasses type.
@@ -68,7 +69,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The glasses type.
 		/// </value>
-//		property CognitiveServicesLib::Glasses^ Glasses { CognitiveServicesLib::Glasses^ get(); void set(CognitiveServicesLib::Glasses^ value); }
+		property CognitiveServicesLib::Glasses Glasses { CognitiveServicesLib::Glasses get(); void set(CognitiveServicesLib::Glasses value); }
 
 		/// <summary>
 		/// Gets or sets the blur
@@ -92,7 +93,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The noise type
 		/// </value>
-//		property CognitiveServicesLib::Noise^ Noise { CognitiveServicesLib::Noise^ get(); void set(CognitiveServicesLib::Noise^ value); }
+		property CognitiveServicesLib::Noise^ Noise { CognitiveServicesLib::Noise^ get(); void set(CognitiveServicesLib::Noise^ value); }
 
 		/// <summary>
 		/// Gets or sets the makeup
@@ -100,7 +101,7 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The makeup type
 		/// </value>
-//		property CognitiveServicesLib::Makeup^ Makeup { CognitiveServicesLib::Makeup^ get(); void set(CognitiveServicesLib::Makeup^ value); }
+		property CognitiveServicesLib::Makeup^ Makeup { CognitiveServicesLib::Makeup^ get(); void set(CognitiveServicesLib::Makeup^ value); }
 
 		/// <summary>
 		/// Gets or sets the accessories
