@@ -4,7 +4,7 @@ namespace CognitiveServicesLib
 	/// <summary>
 	/// Represents length of moustache, beard and sideburn
 	/// </summary>
-	ref class FacialHair sealed
+	public ref class FacialHair sealed
 	{
 
 	public:

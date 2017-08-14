@@ -9,9 +9,22 @@ namespace CognitiveServicesLib
 	internal:
 		static FaceAttributes^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
 
-
 #pragma region Properties
 	private:
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, double, Age, L"age")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, Platform::String^, Gender, L"gender")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::HeadPose^, HeadPose, L"headPose")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, double, Smile, L"smile")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::FacialHair^, FacialHair, L"facialHair")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::EmotionScores^, Emotion, L"emotion")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Glasses, Glasses, L"glasses")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Blur^, Blur, L"blur")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Exposure^, Exposure, L"exposure")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Noise^, Noise, L"noise")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Makeup^, Makeup, L"makeup")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, Windows::Foundation::Collections::IVector<CognitiveServicesLib::Accessory^>^, Accessories, L"accessories")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Occlusion^, Occlusion, L"occlusion")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Hair^, Hair, L"hair")
 
 	public:
 
@@ -37,7 +50,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The head pose.
 		/// </value>
-		property CognitiveServicesLib::HeadPose^ HeadPose { CognitiveServicesLib::HeadPose^ get(); void set(CognitiveServicesLib::HeadPose^ value); }
+		property CognitiveServicesLib::HeadPose^ HeadPose 
+		{ 
+			CognitiveServicesLib::HeadPose^ get(); 
+			void set(CognitiveServicesLib::HeadPose^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the smile value. Represents the confidence of face is smiling.
@@ -53,7 +70,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The facial hair.
 		/// </value>
-		property CognitiveServicesLib::FacialHair^ FacialHair { CognitiveServicesLib::FacialHair^ get(); void set(CognitiveServicesLib::FacialHair^ value); }
+		property CognitiveServicesLib::FacialHair^ FacialHair 
+		{ 
+			CognitiveServicesLib::FacialHair^ get(); 
+			void set(CognitiveServicesLib::FacialHair^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the emotion.
@@ -61,7 +82,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The emotion.
 		/// </value>
-		property CognitiveServicesLib::EmotionScores^ Emotion {CognitiveServicesLib::EmotionScores^  get(); void set(CognitiveServicesLib::EmotionScores^ value); }
+		property CognitiveServicesLib::EmotionScores^ Emotion 
+		{
+			CognitiveServicesLib::EmotionScores^  get(); 
+			void set(CognitiveServicesLib::EmotionScores^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the glasses type.
@@ -69,7 +94,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The glasses type.
 		/// </value>
-		property CognitiveServicesLib::Glasses Glasses { CognitiveServicesLib::Glasses get(); void set(CognitiveServicesLib::Glasses value); }
+		property CognitiveServicesLib::Glasses Glasses 
+		{ 
+			CognitiveServicesLib::Glasses get(); 
+			void set(CognitiveServicesLib::Glasses value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the blur
@@ -77,7 +106,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The blur type
 		/// </value>
-		property CognitiveServicesLib::Blur^ Blur { CognitiveServicesLib::Blur^ get(); void set(CognitiveServicesLib::Blur^ value); }
+		property CognitiveServicesLib::Blur^ Blur 
+		{ 
+			CognitiveServicesLib::Blur^ get(); 
+			void set(CognitiveServicesLib::Blur^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the exposure
@@ -85,7 +118,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The exposure type
 		/// </value>
-		property CognitiveServicesLib::Exposure^ Exposure { CognitiveServicesLib::Exposure^ get(); void set(CognitiveServicesLib::Exposure^ value); }
+		property CognitiveServicesLib::Exposure^ Exposure 
+		{ 
+			CognitiveServicesLib::Exposure^ get(); 
+			void set(CognitiveServicesLib::Exposure^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the noise
@@ -93,7 +130,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The noise type
 		/// </value>
-		property CognitiveServicesLib::Noise^ Noise { CognitiveServicesLib::Noise^ get(); void set(CognitiveServicesLib::Noise^ value); }
+		property CognitiveServicesLib::Noise^ Noise 
+		{ 
+			CognitiveServicesLib::Noise^ get(); 
+			void set(CognitiveServicesLib::Noise^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the makeup
@@ -101,7 +142,11 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The makeup type
 		/// </value>
-		property CognitiveServicesLib::Makeup^ Makeup { CognitiveServicesLib::Makeup^ get(); void set(CognitiveServicesLib::Makeup^ value); }
+		property CognitiveServicesLib::Makeup^ Makeup 
+		{ 
+			CognitiveServicesLib::Makeup^ get(); 
+			void set(CognitiveServicesLib::Makeup^ value); 
+		}
 
 		/// <summary>
 		/// Gets or sets the accessories
@@ -115,29 +160,21 @@ namespace CognitiveServicesLib
 			void set(Windows::Foundation::Collections::IVector< CognitiveServicesLib::Accessory^>^ value);
 		}
 
-		/// <summary>
-		/// Gets or sets the occlusion
-		/// </summary>
-		/// <value>
-		/// The occlusion type
-		/// </value>
-		//property CognitiveServicesLib::Occlusion^ Occlusion
-		//{
-		//		property CognitiveServicesLib::Occlusion^ get(); 
-		//		void set(property CognitiveServicesLib::Occlusion^ value);
-		//}
+		/// <summary>Gets or sets the occlusion</summary>
+		/// <value>The occlusion type</value>
+		property CognitiveServicesLib::Occlusion^ Occlusion
+		{
+				CognitiveServicesLib::Occlusion^ get(); 
+				void set( CognitiveServicesLib::Occlusion^ value);
+		}
 
-		/// <summary>
-		/// Gets or sets the hair
-		/// </summary>
-		/// <value>
-		/// The hair type
-		/// </value>
-		//property CognitiveServicesLib::Hair^ Hair
-		//{
-		//		CognitiveServicesLib::Hair^ get();
-		//		void set(CognitiveServicesLib::Hair^ value);
-		//}
+		//<summary>Gets or sets the hair</summary>
+		//<value>The hair type//</value>
+		property CognitiveServicesLib::Hair^ Hair
+		{
+				CognitiveServicesLib::Hair^ get();
+				void set(CognitiveServicesLib::Hair^ value);
+		}
 
 #pragma endregion
 

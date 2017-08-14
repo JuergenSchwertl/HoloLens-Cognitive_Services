@@ -3,7 +3,11 @@
 
 
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace CognitiveServicesLib;
+using namespace Windows::Data::Json;
+using namespace Windows::Foundation::Collections;
+
 
 #pragma region AccessoryTypeHelper implementation
 EnumKeyJsonName<AccessoryType> AccessoryTypeHelper::ckvJsonNames[] =
@@ -48,4 +52,27 @@ Accessory ^ Accessory::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 		accessory->Confidence = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Confidence), 0.0);
 	}
 	return accessory;
+}
+
+IVector<Accessory^>^ Accessory::FromJsonArray(JsonArray ^ jsonArray)
+{
+	Vector<Accessory^>^ vec = nullptr;
+	if (jsonArray != nullptr)
+	{
+		vec = ref new Vector<Accessory^>;
+
+		for each (IJsonValue^ jsonValue in jsonArray)
+		{
+			if (jsonValue != nullptr && jsonValue->ValueType == JsonValueType::Object)
+			{
+				JsonObject^ jsonObject = jsonValue->GetObject();
+				Accessory^ accessory = Accessory::FromJson(jsonObject);
+				if (accessory != nullptr)
+				{
+					vec->Append(accessory);
+				}
+			}
+		}
+	}
+	return vec;
 }

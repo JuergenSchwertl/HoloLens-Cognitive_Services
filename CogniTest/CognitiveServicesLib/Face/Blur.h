@@ -22,7 +22,7 @@ namespace CognitiveServicesLib
 		High
 	};
 
-	static class BlurLevelHelper
+	class BlurLevelHelper
 	{
 		static EnumKeyJsonName<CognitiveServicesLib::BlurLevel> ckvJsonNames[];
 

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp build" xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build">
+  <!--
+    DIESE PAKETMANIFESTDATEI WIRD DURCH DEN BUILDVORGANG GENERIERT.
+
+    Änderungen an dieser Datei gehen verloren, wenn sie erneut erstellt wird. Um Fehler in dieser Datei zu beheben, bearbeiten Sie die ".appxmanifest"-Quelldatei.
+
+    Weitere Informationen zu Paketmanifestdateien finden Sie unter http://go.microsoft.com/fwlink/?LinkID=241727
+  -->
+  <Identity Name="63732WetScubaTools.CogniTestJS" Publisher="CN=7311A84B-234D-428B-8749-0A77084AF81A" Version="1.1.2.0" ProcessorArchitecture="x86" />
+  <mp:PhoneIdentity PhoneProductId="f69402b8-317d-40e6-ada9-a9b2d928f57b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>CogniTestJS</DisplayName>
+    <PublisherDisplayName>WetScubaTools</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.15063.0" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.24123.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="EN-US" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="CogniTest.exe" EntryPoint="CogniTest.App">
+      <uap:VisualElements DisplayName="CogniTestJS" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="CogniTest" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"></uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="webcam" />
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>CognitiveServicesLib.dll</Path>
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FeatureCoordinate" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Noise" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceClient" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Occlusion" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Exposure" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Accessory" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Hair" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Blur" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.EmotionScores" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Errors.ErrorResponse" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.HairColor" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceAttributes" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FacialHair" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.HeadPose" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Makeup" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+  <build:Metadata>
+    <build:Item Name="cl.exe" Version="19.10.25019.0 built by: VCTOOLSD15RTM" />
+    <build:Item Name="VisualStudio" Version="15.0" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2017" />
+    <build:Item Name="OperatingSystem" Version="10.0.15063.0 (WinBuild.160101.0800)" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.26419.1" />
+    <build:Item Name="ProjectGUID" Value="{ea92dce6-f882-491d-b4cf-db9e616c72b0}" />
+    <build:Item Name="ilc.exe" Version="1.4.24211.00 built by: PROJECTNGDR2" />
+    <build:Item Name="OptimizingToolset" Value="ilc.exe" />
+    <build:Item Name="UseDotNetNativeSharedAssemblyFrameworkPackage" Value="True" />
+    <build:Item Name="UniversalGenericsOptOut" Value="false" />
+    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="15.0.26419.1" />
+    <build:Item Name="MakePri.exe" Version="10.0.15063.137 (WinBuild.160101.0800)" />
+  </build:Metadata>
+</Package>

@@ -59,9 +59,6 @@
     <ClCompile Include="Face\FacialHair.cpp">
       <Filter>Face</Filter>
     </ClCompile>
-    <ClCompile Include="Face\FaceTest.cpp">
-      <Filter>Face</Filter>
-    </ClCompile>
     <ClCompile Include="Face\Emotion.cpp">
       <Filter>Face</Filter>
     </ClCompile>
@@ -75,6 +72,12 @@
       <Filter>Face</Filter>
     </ClCompile>
     <ClCompile Include="Face\Noise.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+    <ClCompile Include="Face\Hair.cpp">
+      <Filter>Face</Filter>
+    </ClCompile>
+    <ClCompile Include="Face\Occlusion.cpp">
       <Filter>Face</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,9 +126,6 @@
     <ClInclude Include="Face\FacialHair.h">
       <Filter>Face</Filter>
     </ClInclude>
-    <ClInclude Include="Face\FaceTest.h">
-      <Filter>Face</Filter>
-    </ClInclude>
     <ClInclude Include="Face\Emotion.h">
       <Filter>Face</Filter>
     </ClInclude>
@@ -139,6 +139,12 @@
       <Filter>Face</Filter>
     </ClInclude>
     <ClInclude Include="Face\Noise.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\Hair.h">
+      <Filter>Face</Filter>
+    </ClInclude>
+    <ClInclude Include="Face\Occlusion.h">
       <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>

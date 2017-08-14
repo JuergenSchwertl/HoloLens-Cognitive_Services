@@ -53,22 +53,22 @@ MainPage::MainPage()
 	_systemMediaControls = SystemMediaTransportControls::GetForCurrentView();
 
 	m_FaceClient = ref new FaceClient(AzureRegions::WestEurope, L"c36cbe9c22c3409a9e5ee9f56bb5c543");
-	Vector<FaceAttributes>^ m_FaceAttributeList = ref new Vector<FaceAttributes>(
+	Vector<FaceAttributeOptions>^ m_FaceAttributeList = ref new Vector<FaceAttributeOptions>(
 	{
-		FaceAttributes::Age,
-		FaceAttributes::Gender,
-		FaceAttributes::HeadPose,
-		FaceAttributes::Smile,
-		FaceAttributes::FacialHair,
-		FaceAttributes::Glasses,
-		FaceAttributes::Emotion,
-		FaceAttributes::Hair,
-		FaceAttributes::Makeup,
-		FaceAttributes::Occlusion,
-		FaceAttributes::Accessories,
-		FaceAttributes::Blur,
-		FaceAttributes::Exposure,
-		FaceAttributes::Noise
+		FaceAttributeOptions::Age,
+		FaceAttributeOptions::Gender,
+		FaceAttributeOptions::HeadPose,
+		FaceAttributeOptions::Smile,
+		FaceAttributeOptions::FacialHair,
+		FaceAttributeOptions::Glasses,
+		FaceAttributeOptions::Emotion,
+		FaceAttributeOptions::Hair,
+		FaceAttributeOptions::Makeup,
+		FaceAttributeOptions::Occlusion,
+		FaceAttributeOptions::Accessories,
+		FaceAttributeOptions::Blur,
+		FaceAttributeOptions::Exposure,
+		FaceAttributeOptions::Noise
 	}
 	);
 }

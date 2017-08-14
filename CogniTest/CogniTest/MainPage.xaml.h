@@ -28,7 +28,7 @@ namespace CogniTest
 	{
 	private:
 		CognitiveServicesLib::FaceClient^ m_FaceClient;
-		Platform::Collections::Vector<CognitiveServicesLib::FaceAttributes>^ m_FaceAttributeList;
+		Platform::Collections::Vector<CognitiveServicesLib::FaceAttributeOptions>^ m_FaceAttributeList;
 
 	public:
 		MainPage();

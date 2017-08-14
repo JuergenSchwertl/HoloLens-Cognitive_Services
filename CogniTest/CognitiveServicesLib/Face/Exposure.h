@@ -20,7 +20,7 @@ namespace CognitiveServicesLib
 		OverExposure
 	};
 
-	static class ExposureLevelHelper
+	class ExposureLevelHelper
 	{
 		static EnumKeyJsonName<CognitiveServicesLib::ExposureLevel> ckvJsonNames[];
 

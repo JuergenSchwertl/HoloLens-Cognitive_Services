@@ -20,7 +20,7 @@ namespace CognitiveServicesLib
 		Mask
 	};
 
-	static class AccessoryTypeHelper
+	class AccessoryTypeHelper
 	{
 		static EnumKeyJsonName<CognitiveServicesLib::AccessoryType> ckvJsonNames[];
 
@@ -42,6 +42,7 @@ namespace CognitiveServicesLib
 
 	internal:
 		static Accessory^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
+		static Windows::Foundation::Collections::IVector<CognitiveServicesLib::Accessory^>^ FromJsonArray(Windows::Data::Json::JsonArray ^ jsonArray);
 
 	private:
 		DEFINE_PROPERTY_VARIABLES(Accessory, CognitiveServicesLib::AccessoryType, Type, L"type")
