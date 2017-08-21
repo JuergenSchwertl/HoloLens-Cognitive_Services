@@ -1,6 +1,6 @@
 #pragma once
 namespace CognitiveServicesLib
-{
+{ 
 	/// <summary>
 	/// Represents length of moustache, beard and sideburn
 	/// </summary>

@@ -1,15 +1,4 @@
 #include "pch.h"
-#include "HeadPose.h"
-#include "Glasses.h"
-#include "Accessory.h"
-#include "Blur.h"
-#include "Exposure.h"
-#include "FacialHair.h"
-#include "Emotion.h"
-#include "Noise.h"
-#include "Makeup.h"
-#include "Hair.h"
-#include "Occlusion.h"
 #include "FaceAttributes.h"
 
 using namespace Platform;
@@ -46,12 +35,13 @@ FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)
 		JsonObject^ jsonObj = nullptr;
 
 		attr->Age = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Age), 0.0);
+
 		attr->Gender = jsonObject->GetNamedString(JSON_PROPERTYNAME(Gender), nullptr);
 		
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(HeadPose), nullptr);
 		attr->HeadPose = CognitiveServicesLib::HeadPose::FromJson( jsonObj );
 		
-		attr->Smile = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Gender), 0.0);
+		attr->Smile = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Smile), 0.0);
 
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(FacialHair), nullptr);
 		attr->FacialHair = CognitiveServicesLib::FacialHair::FromJson(jsonObj);
@@ -65,11 +55,11 @@ FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Blur), nullptr);
 		attr->Blur = CognitiveServicesLib::Blur::FromJson(jsonObj);
 
+		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Exposure), nullptr);
+		attr->Exposure = CognitiveServicesLib::Exposure::FromJson(jsonObj);
+
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Noise), nullptr);
 		attr->Noise = CognitiveServicesLib::Noise::FromJson(jsonObj);
-
-		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Blur), nullptr);
-		attr->Blur = CognitiveServicesLib::Blur::FromJson(jsonObj);
 
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Makeup), nullptr);
 		attr->Makeup = CognitiveServicesLib::Makeup::FromJson(jsonObj);
@@ -82,13 +72,6 @@ FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)
 
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Hair), nullptr);
 		attr->Hair = CognitiveServicesLib::Hair::FromJson(jsonObj);
-
-
-
-
-		//jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Exposure), nullptr);
-		//attr->Exposure = Exposure::FromJson( jsonObj );
-
 	}
 	return attr;
 }

@@ -72,7 +72,7 @@ namespace CognitiveServicesLib
 #pragma region Properties
 
 	private:
-		DEFINE_PROPERTY_VARIABLES(HairColor, CognitiveServicesLib::HairColorType, HairColorTypeName, L"HairColorTypeName")
+		DEFINE_PROPERTY_VARIABLES(HairColor, CognitiveServicesLib::HairColorType, Color, L"color")
 		DEFINE_PROPERTY_VARIABLES(HairColor, double, Confidence, L"confidence")
 
 	public:
@@ -80,7 +80,7 @@ namespace CognitiveServicesLib
 		/// <summary>
 		/// Indicating the hair color type
 		/// </summary>
-		property CognitiveServicesLib::HairColorType HairColorTypeName 
+		property CognitiveServicesLib::HairColorType Color 
 		{ 
 			CognitiveServicesLib::HairColorType get(); 
 			void set(CognitiveServicesLib::HairColorType value); 

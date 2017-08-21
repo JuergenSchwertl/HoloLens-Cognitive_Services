@@ -281,17 +281,14 @@ task<void> MainPage::TakePhotoAsync()
 	.then([this](Platform::String^ result) 
 	{
 		LblResult->Text = result;	
-		//Windows::Data::Json::JsonArray^ json = Windows::Data::Json::JsonArray::Parse(result);
-		//
-		//auto face = CognitiveServicesLib::Face::FromJson(json->First()->Current);
-		
+
 		//WriteLine("Photo taken! Saving to " + file->Path);
 
 		// Done taking a photo, so re-enable the button
 
 		//auto photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 		//return ReencodeAndSavePhotoAsync(inputStream, file, photoOrientation);
-			return create_task([]() {});
+		return create_task([this]() {});
 	}).then([this](task<void> previousTask)
 	{
 		try
@@ -500,4 +497,15 @@ void MainPage::MediaCapture_Failed(Capture::MediaCapture ^currentCaptureObject, 
 {
 
 	CleanupCameraAsync();
+}
+
+
+void CogniTest::MainPage::BtnJsonTest_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	create_task(m_FaceClient->FakeDetectAsync(L""))
+		.then([this](task<Windows::Foundation::Collections::IVector<CognitiveServicesLib::Face^>^> previousTask) {
+		previousTask.get();
+	});
+
+
 }

@@ -52,19 +52,26 @@ void ::CogniTest::MainPage::Connect(int __connectionId, ::Platform::Object^ __ta
         break;
     case 5:
         {
+            this->BtnJsonTest = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->BtnJsonTest))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
+                (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::BtnJsonTest_Click);
+        }
+        break;
+    case 6:
+        {
             this->BtnFile = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->BtnFile))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Button_Click);
         }
         break;
-    case 6:
+    case 7:
         {
             this->BtnCamera = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->BtnCamera))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::BtnCamera_Click);
         }
         break;
-    case 7:
+    case 8:
         {
             this->PhotoButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->PhotoButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::CogniTest::MainPage::*)

@@ -7,14 +7,19 @@
 
 
 # Visual Studio 2015 cache directory
+/AppPkg/
 /.vs/
 /CogniTest/.vs/
 /CogniTest/Debug
 /CogniTest/Release
+/CogniTest/AppPkg
+/CogniTest/CognitiveServicesLib/AppPkg
 /CogniTest/CognitiveServicesLib/Debug
 /CogniTest/CognitiveServicesLib/Release
+/CogniTest/CogniTest/AppPkg
 /CogniTest/CogniTest/Debug
 /CogniTest/CogniTest/Release
+/CogniTest/CogniTest/Generated Files/
 
 
 

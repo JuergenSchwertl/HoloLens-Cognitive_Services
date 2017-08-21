@@ -4,7 +4,7 @@
 using namespace CognitiveServicesLib;
 
 IMPLEMENT_PROPERTY(FeatureCoordinate, double, X, L"x")
-IMPLEMENT_PROPERTY(FeatureCoordinate, double, Y, L"x")
+IMPLEMENT_PROPERTY(FeatureCoordinate, double, Y, L"y")
 
 FeatureCoordinate::FeatureCoordinate() :
 	PROPERTY_VARIABLE(X)(0.0),

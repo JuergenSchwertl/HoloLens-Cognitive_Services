@@ -7,6 +7,7 @@ namespace CognitiveServicesLib
 	public:
 		FaceLandmarks();
 
+	internal:
 		static FaceLandmarks^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
 
 #pragma region Properties

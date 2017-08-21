@@ -14,6 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
+            <Button Name="BtnJsonTest" Click="BtnJsonTest_Click" Content="Check json" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
             <Button Name="BtnFile" Grid.Row="0" Click="Button_Click" Content="Detect from File" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
             <Button Name="BtnCamera" Grid.Row="0" Click="BtnCamera_Click" Content="Detect from Camera" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" />
             <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False">

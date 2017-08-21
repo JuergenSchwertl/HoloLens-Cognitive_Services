@@ -6,6 +6,7 @@ namespace CognitiveServicesLib
 	{
 	public:
 		FaceAttributes();
+
 	internal:
 		static FaceAttributes^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
 

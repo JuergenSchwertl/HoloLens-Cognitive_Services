@@ -15,6 +15,7 @@ namespace CognitiveServicesLib
 	public:
 		FaceClient(CognitiveServicesLib::AzureRegions Region, Platform::String^ SubscriptionKey);
 		
+
 		[Windows::Foundation::Metadata::DefaultOverload]
 		Windows::Foundation::IAsyncOperation<Platform::String^>^ DetectAsync(
 			Platform::String^ FileName,
@@ -34,7 +35,7 @@ namespace CognitiveServicesLib
 			bool ReturnFaceLandmarks,
 			Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
 
-		Windows::Foundation::IAsyncOperation<Platform::String^>^ FakeDetectAsync(Platform::String^ FileName);
+		Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVector<CognitiveServicesLib::Face^>^>^ FakeDetectAsync(Platform::String^ FileName);
 	};
 }
 

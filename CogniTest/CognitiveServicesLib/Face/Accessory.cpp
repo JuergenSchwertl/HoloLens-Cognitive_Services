@@ -12,9 +12,9 @@ using namespace Windows::Foundation::Collections;
 #pragma region AccessoryTypeHelper implementation
 EnumKeyJsonName<AccessoryType> AccessoryTypeHelper::ckvJsonNames[] =
 {
-	{ AccessoryType::Headwear, L"Headwear" },
-	{ AccessoryType::Glasses, L"Glasses" },
-	{ AccessoryType::Mask, L"Mask" },
+	{ AccessoryType::Headwear, L"headWear" },
+	{ AccessoryType::Glasses, L"glasses" },
+	{ AccessoryType::Mask, L"mask" },
 };
 
 AccessoryType AccessoryTypeHelper::parse(Platform::String^ strValue)

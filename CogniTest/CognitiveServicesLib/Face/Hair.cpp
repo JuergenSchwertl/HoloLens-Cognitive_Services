@@ -10,14 +10,14 @@ using namespace CognitiveServicesLib;
 #pragma region HairColorTypeHelper implementation
 EnumKeyJsonName<HairColorType> HairColorTypeHelper::ckvJsonNames[] =
 {
-	{ HairColorType::Unknown, L"Unknown" },
-	{ HairColorType::White, L"White" },
-	{ HairColorType::Gray, L"Gray" },
-	{ HairColorType::Blond, L"Blond" },
-	{ HairColorType::Brown, L"Brown" },
-	{ HairColorType::Red, L"Red" },
-	{ HairColorType::Black, L"Black" },
-	{ HairColorType::Other, L"Other" },
+	{ HairColorType::Unknown, L"unknown" },
+	{ HairColorType::White, L"white" },
+	{ HairColorType::Gray, L"gray" },
+	{ HairColorType::Blond, L"blond" },
+	{ HairColorType::Brown, L"brown" },
+	{ HairColorType::Red, L"red" },
+	{ HairColorType::Black, L"black" },
+	{ HairColorType::Other, L"other" },
 };
 
 HairColorType HairColorTypeHelper::parse(Platform::String^ strValue)
@@ -32,7 +32,7 @@ Platform::String^  HairColorTypeHelper::toString(HairColorType enumValue)
 #pragma endregion
 
 
-IMPLEMENT_PROPERTY(HairColor, CognitiveServicesLib::HairColorType, HairColorTypeName, L"HairColorTypeName")
+IMPLEMENT_PROPERTY(HairColor, CognitiveServicesLib::HairColorType, Color, L"color")
 IMPLEMENT_PROPERTY(HairColor, double, Confidence, L"confidence")
 
 HairColor::HairColor()
@@ -48,8 +48,8 @@ HairColor ^ HairColor::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 		String^ strValue = nullptr;
 
 
-		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(HairColorTypeName), nullptr);
-		obj->HairColorTypeName = HairColorTypeHelper::parse(strValue);
+		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(Color), nullptr);
+		obj->Color = HairColorTypeHelper::parse(strValue);
 
 		obj->Confidence = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Confidence), 0.0);
 	}
@@ -96,7 +96,7 @@ Hair ^ Hair::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 		obj = ref new Hair();
 
 		obj->Bald = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Bald), 0.0);
-		obj->Invisible = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Invisible), 0.0);
+		obj->Invisible = jsonObject->GetNamedBoolean(JSON_PROPERTYNAME(Invisible), false);
 
 		JsonArray^ jsonArray = jsonObject->GetNamedArray(JSON_PROPERTYNAME(HairColor), nullptr);
 		obj->HairColor = CognitiveServicesLib::HairColor::FromJsonArray( jsonArray );

@@ -7,6 +7,7 @@ namespace CognitiveServicesLib
 	public:
 		FaceRectangle();
 
+	internal:
 		static FaceRectangle^ FromJson(Windows::Data::Json::JsonObject^);
 
 #pragma region Properties

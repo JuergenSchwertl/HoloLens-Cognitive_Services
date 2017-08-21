@@ -8,6 +8,7 @@ namespace CognitiveServicesLib
 	public:
 		FeatureCoordinate();
 
+	internal:
 		static FeatureCoordinate^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
 
 #pragma region Properties
