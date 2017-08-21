@@ -2,7 +2,7 @@
 
 namespace CognitiveServicesLib
 {
-	ref class FaceRectangle sealed
+	public ref class FaceRectangle sealed
 	{
 	public:
 		FaceRectangle();

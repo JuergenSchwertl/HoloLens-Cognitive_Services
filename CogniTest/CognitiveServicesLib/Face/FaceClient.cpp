@@ -81,6 +81,7 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 
 		return m_WebClient.PostBufferAsync(uriEndpoint, ImageData);
 	});
+
 	return postaction;
 }
 

@@ -53,7 +53,7 @@ MainPage::MainPage()
 	_systemMediaControls = SystemMediaTransportControls::GetForCurrentView();
 
 	m_FaceClient = ref new FaceClient(AzureRegions::WestEurope, L"c36cbe9c22c3409a9e5ee9f56bb5c543");
-	Vector<FaceAttributeOptions>^ m_FaceAttributeList = ref new Vector<FaceAttributeOptions>(
+	m_FaceAttributeList = ref new Vector<FaceAttributeOptions>(
 	{
 		FaceAttributeOptions::Age,
 		FaceAttributeOptions::Gender,
@@ -276,12 +276,15 @@ task<void> MainPage::TakePhotoAsync()
 	})
 	.then([this](Windows::Storage::Streams::IBuffer^ buf) 
 	{
-		return create_task(m_FaceClient->DetectAsync(buf, true, true, m_FaceAttributeList ));
+		return create_task(m_FaceClient->DetectAsync(buf, false, false, m_FaceAttributeList ));
 	})
 	.then([this](Platform::String^ result) 
 	{
-			LblResult->Text = result;		
-			
+		LblResult->Text = result;	
+		//Windows::Data::Json::JsonArray^ json = Windows::Data::Json::JsonArray::Parse(result);
+		//
+		//auto face = CognitiveServicesLib::Face::FromJson(json->First()->Current);
+		
 		//WriteLine("Photo taken! Saving to " + file->Path);
 
 		// Done taking a photo, so re-enable the button

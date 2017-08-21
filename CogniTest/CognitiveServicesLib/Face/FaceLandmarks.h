@@ -2,7 +2,7 @@
 namespace CognitiveServicesLib
 {
 
-	ref class FaceLandmarks sealed
+	public ref class FaceLandmarks sealed
 	{
 	public:
 		FaceLandmarks();

@@ -22,7 +22,9 @@
                 </Viewbox>
             </Button>
         </StackPanel>
-        <TextBlock Name="LblResult" Grid.Row="1" VerticalAlignment="Stretch" Text="Result box"/>
+        <ScrollViewer Name="Scroller"  Grid.Row="1" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
+            <TextBlock Name="LblResult" VerticalAlignment="Stretch" Text="Result box The quick brown fox jumps overthe lazy leg and falls into a trap"/>
+        </ScrollViewer>
         <!--Camera preview-->
         <CaptureElement Name="PreviewControl" Grid.Row="2" Stretch="Uniform"/>
         <Canvas Grid.Row="2">
