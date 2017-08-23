@@ -148,4 +148,10 @@
       <Filter>Face</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="NatvisFile.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CognitiveServicesLib.cd" />
+  </ItemGroup>
 </Project>

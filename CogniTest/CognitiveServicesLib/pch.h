@@ -3,6 +3,8 @@
 #include <collection.h>
 #include <ppltasks.h>
 #include <pplawait.h>
+#include <string>
+#include <sstream>
 
 #include "EnumHelper.h"
 #include "PropertyHelper.h"

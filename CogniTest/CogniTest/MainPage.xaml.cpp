@@ -276,11 +276,14 @@ task<void> MainPage::TakePhotoAsync()
 	})
 	.then([this](Windows::Storage::Streams::IBuffer^ buf) 
 	{
-		return create_task(m_FaceClient->DetectAsync(buf, false, false, m_FaceAttributeList ));
+		return create_task(m_FaceClient->FaceDetectAsync(buf, false, false, m_FaceAttributeList ));
 	})
-	.then([this](Platform::String^ result) 
+	.then([this](IVector<Face^>^ result) 
+	//	return create_task(m_FaceClient->DetectAsync(buf, false, false, m_FaceAttributeList));
+	//})
+	//.then([this](Platform::String^ result)
 	{
-		LblResult->Text = result;	
+		LblResult->Text = "gotcha";// result;	
 
 		//WriteLine("Photo taken! Saving to " + file->Path);
 

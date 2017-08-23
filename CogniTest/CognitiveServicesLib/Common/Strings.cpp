@@ -14,6 +14,7 @@ using namespace Windows::Foundation;
 const wchar_t Globals::cstrEmptyString[] = L"";
 const wchar_t Globals::cstrTrue[] = L"true";
 const wchar_t Globals::cstrFalse[] = L"false";
+const wchar_t Globals::cstrNull[] = L"null";
 
 PCWSTR Globals::Bool_ToString(bool param)
 {

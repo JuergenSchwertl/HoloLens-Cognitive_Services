@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010"> 
+  <Type Name="CognitiveServicesLib::FeatureCoordinate"  >
+    <DisplayString>(x:{m_X, g}, y:{m_Y, g})</DisplayString>
+  </Type>
+  <Type Name="CognitiveServicesLib::FaceRectangle"  >
+    <DisplayString>(Width:{m_Width, g}, Height:{m_Height, g}, Left:{m_Left, g}, Top:{m_Top, g})</DisplayString>
+  </Type>
+  <Type Name="CognitiveServicesLib::Face"  >
+    <DisplayString>(Id:{m_FaceId})</DisplayString>
+  </Type>
+</AutoVisualizer>

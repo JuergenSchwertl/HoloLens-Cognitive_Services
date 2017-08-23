@@ -50,24 +50,28 @@ namespace CognitiveServicesLib
 
 	class HairColorTypeHelper
 	{
-		static EnumKeyJsonName<CognitiveServicesLib::HairColorType> ckvJsonNames[];
+		private:
+			static EnumKeyJsonName<CognitiveServicesLib::HairColorType> ckvJsonNames[];
 
-	public:
-		static CognitiveServicesLib::HairColorType parse(Platform::String^ strValue);
-		static Platform::String^ toString(CognitiveServicesLib::HairColorType enumValue);
+		public:
+			static CognitiveServicesLib::HairColorType parse(Platform::String^ strValue);
+			static Platform::String^ toString(CognitiveServicesLib::HairColorType enumValue);
+			static LPCTSTR c_str(CognitiveServicesLib::HairColorType enumValue);
 	};
 
 	/// <summary>
 	/// Face HairColor class contains hair color information
 	/// </summary>
-	public ref class HairColor sealed
+	public ref class HairColor sealed : Windows::Foundation::IStringable
 	{
 	public:
 		HairColor();
+		Platform::String^ ToString() override;
 
 	internal:
 		static HairColor^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
 		static Windows::Foundation::Collections::IVector<CognitiveServicesLib::HairColor^>^ FromJsonArray(Windows::Data::Json::JsonArray ^ jsonArray);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 
@@ -99,19 +103,21 @@ namespace CognitiveServicesLib
 	/// <summary>
 	/// Face Hair class contains hair information
 	/// </summary>
-	public ref class Hair sealed
+	public ref class Hair sealed : Windows::Foundation::IStringable
 	{
 	public:
 		Hair();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Hair^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 
 	private:
 		DEFINE_PROPERTY_VARIABLES(Hair, double, Bald, L"bald")
-		DEFINE_PROPERTY_VARIABLES(Hair, bool, Invisible, L"bald")
+		DEFINE_PROPERTY_VARIABLES(Hair, bool, Invisible, L"invisible")
 		DEFINE_PROPERTY_VARIABLES(Hair, Windows::Foundation::Collections::IVector< CognitiveServicesLib::HairColor^>^, HairColor, L"hairColor")
 
 	public:

@@ -3,13 +3,17 @@
 namespace CognitiveServicesLib
 {
 	/// <summary>Contains information about a detected face.</summary>
-	public ref class Face sealed
+	public ref class Face sealed : Windows::Foundation::IStringable
 	{
 	public:
 		Face();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Face^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		static Windows::Foundation::Collections::IVector<Face^>^ FromJsonArray(Windows::Data::Json::JsonArray^ jsonArray);
+		static Windows::Foundation::Collections::IVector<Face^>^ FromJsonString(Platform::String^ jsonString);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 	private:

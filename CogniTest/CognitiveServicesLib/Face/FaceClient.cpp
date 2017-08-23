@@ -12,6 +12,18 @@ using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
+using namespace Windows::Data::Json;
+
+Windows::Foundation::Uri^ FaceClient::buildUri(
+	PCWSTR _baseUri,
+	bool _returnFaceId,
+	bool _returnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ _returnFaceAttributes)
+{
+	String^ strParams = EndpointHelper::BuildParameterList(_returnFaceId, _returnFaceLandmarks, _returnFaceAttributes);
+	Uri^ uri = EndpointHelper::BuildEndpointUri(EndpointHelper::FaceDetect, this->m_Region, strParams);
+	return uri;
+}
 
 ///<summary>Creates a new FaceClient for Cognitive Services face recognition</summary>
 ///<param name="Region">A member of the <see cref="AzureRegions" /> enumeration</param>
@@ -44,7 +56,7 @@ IAsyncOperation<String^>^ FaceClient::DetectAsync(
 	return postaction;
 }
 
-///<summary>Detects faces from an image iri</summary>
+///<summary>Detects faces from an image Uri</summary>
 ///<param name="FileUri">Uri to an Image on the web or locally (ms-appx://)</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
 ///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
@@ -87,25 +99,42 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	return postaction;
 }
 
+///<summary>Detects faces from an image data buffer</summary>
+///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
+///<returns>async task completing with Face - Detect API response as json string</returns>
+Windows::Foundation::IAsyncOperation<
+	Windows::Foundation::Collections::IVector<
+		CognitiveServicesLib::Face^
+	>^
+>^ FaceClient::FaceDetectAsync(
+	Windows::Storage::Streams::IBuffer^ ImageData,
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
+{
+	auto postaction = create_async([=]() {
+		Uri^ uriEndpoint = buildUri(EndpointHelper::FaceDetect, ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+
+		auto worker = m_WebClient.PostBufferAsync(uriEndpoint, ImageData)
+		.then([](String^ result) {
+			auto vec = Face::FromJsonString(result);
+			return vec;
+		});
+		return worker;
+	});
+
+	return postaction;
+}
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">Image file name</param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>
-IAsyncOperation<IVector<CognitiveServicesLib::Face^>^>^ FaceClient::FakeDetectAsync(Platform::String^ FileName)
+IAsyncOperation<IVector<Face^>^>^ FaceClient::FakeDetectAsync(Platform::String^ FileName)
 {
 	auto postaction = create_async([=]() {
-		Windows::Data::Json::JsonArray^ jsonArray = Windows::Data::Json::JsonArray::Parse(jsonResult);
-		Vector<CognitiveServicesLib::Face^>^ collFaces = ref new Vector<CognitiveServicesLib::Face ^ >();
-		int i = 0;
-		for (auto m : jsonArray)
-		{
-			if (m->ValueType == Windows::Data::Json::JsonValueType::Object)
-			{
-				Windows::Data::Json::JsonObject^ jsonObject = m->GetObject();
-				CognitiveServicesLib::Face^ face = CognitiveServicesLib::Face::FromJson(jsonObject);
-				collFaces->Append( face );
-			}
-		}
-		return task_from_result( (IVector<CognitiveServicesLib::Face^>^) collFaces);
+		return Face::FromJsonString(jsonResult);
 	});
 	return postaction;
 }

@@ -3,6 +3,12 @@
 #ifndef COMMON_STRINGS_DEFINED
 #define COMMON_STRINGS_DEFINED
 
+#define _ENDL L'\r'
+#define _ENDS L'\0'
+#define _COLON L','
+#define _OBRACKET L'('
+#define _CBRACKET L')'
+
 namespace CognitiveServicesLib
 {
 	namespace Common
@@ -14,9 +20,12 @@ namespace CognitiveServicesLib
 			static const wchar_t cstrEmptyString[];
 			static const wchar_t cstrTrue[];
 			static const wchar_t cstrFalse[];
+			static const wchar_t cstrNull[];
 
 			static PCWSTR Bool_ToString(bool param);
 		};
+
+#define CSTR_NULL CognitiveServicesLib::Common::Globals::cstrNull
 
 		class HttpHeaderName
 		{

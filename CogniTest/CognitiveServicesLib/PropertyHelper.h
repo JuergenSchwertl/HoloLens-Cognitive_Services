@@ -9,6 +9,10 @@
 ///<summary>returns the json property name of the given property name as <see cref="Platform::String" /> reference</summary>
 #define JSON_PROPERTYNAME( propname ) ((Platform::String^) __JSON_PROPERTYNAME( propname ))
 
+///<summary>returns the json property name of the given property name as <see cref="Platform::String" /> reference</summary>
+#define JSON_PROPERTYNAME_PCWSTR( propname ) ((Platform::String^) __JSON_PROPERTYNAME( propname ))->Data()
+
+
 ///<summary>Defines a C# consumable property including it's backing store and a json name string</summary>
 #define DEFINE_PROPERTY(propclass, proptype, propname, jsonname) \
 	property proptype propname { proptype get(); void set(proptype); };

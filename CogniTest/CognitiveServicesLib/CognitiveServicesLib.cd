@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CognitiveServicesLib::Face">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAQCAgAAAAQAABAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Face\Face.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FaceAttributes" />
+      <Property Name="FaceLandmarks" />
+      <Property Name="FaceRectangle" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CognitiveServicesLib::FaceAttributes">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAACAAAABAAAAiAAZAAAAAAQAAAAAAAEAAAICQAAMA=</HashCode>
+      <FileName>Face\FaceAttributes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CognitiveServicesLib::FaceLandmarks">
+    <Position X="2.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAIAACQAAEgZAQQBAEAAEAAACVZAAAAgIAEAAAIA=</HashCode>
+      <FileName>Face\FaceLandmarks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CognitiveServicesLib::FaceRectangle">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACAAAAAAQAAAAAAAAAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Face\FaceRectangle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CognitiveServicesLib::Accessory">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAQQAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Face\Accessory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

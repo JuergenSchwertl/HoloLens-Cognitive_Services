@@ -26,21 +26,33 @@ namespace CognitiveServicesLib
 			return (E)0;
 		}
 
-		static Platform::String^ toString(E value, const EnumKeyJsonName<E> ckvJsonNamesArray[], size_t nArraySize)
+		static LPCTSTR c_str(E value, const EnumKeyJsonName<E> ckvJsonNamesArray[], size_t nArraySize)
 		{
 			// quick check if enums have continuous values starting with 1
 			size_t nIndex = (size_t)value - 1;
-			if( (nIndex >= 0) &&  (nIndex < nArraySize) ) // index within array boundaries?
-				if(ckvJsonNamesArray[nIndex].EnumKey == value) // value same as enum key at index entry
-					return ref new Platform::String( ckvJsonNamesArray[nIndex].JsonName );
+			if ((nIndex >= 0) && (nIndex < nArraySize)) // index within array boundaries?
+				if (ckvJsonNamesArray[nIndex].EnumKey == value) // value same as enum key at index entry
+					return ckvJsonNamesArray[nIndex].JsonName;
 
 			// non continuous array require linear search
 			for (nIndex = 0; nIndex < nArraySize; nIndex++)
 				if (ckvJsonNamesArray[nIndex].EnumKey == value)
-					return ref new Platform::String(ckvJsonNamesArray[nIndex].JsonName);
+					return ckvJsonNamesArray[nIndex].JsonName;
 
 			return nullptr;
 		}
+
+		static Platform::String^ toString(E value, const EnumKeyJsonName<E> ckvJsonNamesArray[], size_t nArraySize)
+		{
+			LPCTSTR strValue = c_str(value, ckvJsonNamesArray, nArraySize);
+			if (strValue != nullptr)
+			{
+				return ref new Platform::String(strValue);
+			}
+			
+			return nullptr;
+		}
+
 	};
 
 	//public enum class TuTu

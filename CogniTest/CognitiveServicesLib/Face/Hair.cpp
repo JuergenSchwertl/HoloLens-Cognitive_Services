@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Hair.h"
 
+using namespace std;
 using namespace Platform;
 using namespace Platform::Collections;
 using namespace Windows::Data::Json;
@@ -27,8 +28,13 @@ HairColorType HairColorTypeHelper::parse(Platform::String^ strValue)
 
 Platform::String^  HairColorTypeHelper::toString(HairColorType enumValue)
 {
-	return(EnumHelper<HairColorType>::toString(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
+	return( ref new Platform::String( c_str(enumValue) ) );
 };
+
+LPCTSTR HairColorTypeHelper::c_str(HairColorType enumValue)
+{
+	return(EnumHelper<HairColorType>::c_str(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
+}
 #pragma endregion
 
 
@@ -37,6 +43,24 @@ IMPLEMENT_PROPERTY(HairColor, double, Confidence, L"confidence")
 
 HairColor::HairColor()
 {
+}
+
+void HairColor::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(2);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(Color) << _COLON << HairColorTypeHelper::c_str(PROPERTY_VARIABLE(Color) ) << L", "
+		<< L"c:" << PROPERTY_VARIABLE(Confidence) 
+		<< _CBRACKET;
+}
+
+Platform::String^ HairColor::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
 }
 
 HairColor ^ HairColor::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
@@ -86,6 +110,28 @@ IMPLEMENT_PROPERTY(Hair, Windows::Foundation::Collections::IVector< CognitiveSer
 
 Hair::Hair()
 {
+}
+
+void Hair::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(1);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(Bald) << _COLON << PROPERTY_VARIABLE(Bald) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Invisible) << _COLON << PROPERTY_VARIABLE(Invisible) << L", [";
+	for (auto hc : PROPERTY_VARIABLE(HairColor))
+	{
+		hc->toStringStream(out);
+	}
+	out << L"])";
+}
+
+Platform::String^ Hair::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
 }
 
 Hair ^ Hair::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
