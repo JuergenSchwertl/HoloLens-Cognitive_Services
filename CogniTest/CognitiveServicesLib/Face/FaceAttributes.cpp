@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "FaceAttributes.h"
 
+using namespace std;
 using namespace Platform;
 using namespace Windows::Data::Json;
 using namespace CognitiveServicesLib;
@@ -23,6 +24,26 @@ IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::H
 
 FaceAttributes::FaceAttributes()
 {
+}
+
+void FaceAttributes::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(1);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(Age) << _COLON << PROPERTY_VARIABLE(Age) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Gender) << _COLON << PROPERTY_VARIABLE(Gender)->Data() << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Smile) << _COLON << PROPERTY_VARIABLE(Smile) 
+		<< _CBRACKET;
+}
+
+
+Platform::String ^ FaceAttributes::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
 }
 
 FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)

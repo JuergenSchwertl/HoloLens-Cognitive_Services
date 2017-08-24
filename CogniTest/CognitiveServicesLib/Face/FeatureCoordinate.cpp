@@ -19,19 +19,18 @@ void FeatureCoordinate::toStringStream(std::wostringstream& out)
 {
 	out.setf(ios::fixed);
 	out.precision(1);
-	out << L"(" 
-		<< JSON_PROPERTYNAME_PCWSTR(X) << L":" << PROPERTY_VARIABLE(X) << L", "
-		<< JSON_PROPERTYNAME_PCWSTR(Y) << L":" << PROPERTY_VARIABLE(Y)
-		<< L")";
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(X) << _COLON << PROPERTY_VARIABLE(X) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Y) << _COLON << PROPERTY_VARIABLE(Y)
+		<< _CBRACKET;
 }
-
 
 
 Platform::String ^ CognitiveServicesLib::FeatureCoordinate::ToString()
 {
 	std::wostringstream out;
 	toStringStream(out);
-	out << ends;
+	out << _ENDS;
 	return ref new Platform::String(out.str().c_str());
 }
 

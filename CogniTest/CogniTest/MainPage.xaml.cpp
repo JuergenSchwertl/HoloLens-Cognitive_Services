@@ -283,7 +283,10 @@ task<void> MainPage::TakePhotoAsync()
 	//})
 	//.then([this](Platform::String^ result)
 	{
-		LblResult->Text = "gotcha";// result;	
+		Face^ face = result->First()->Current;
+
+		String^ strDisplayText = face->FaceAttributes->ToString();
+		LblResult->Text = strDisplayText;// result;	
 
 		//WriteLine("Photo taken! Saving to " + file->Path);
 

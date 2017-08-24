@@ -9,4 +9,16 @@
   <Type Name="CognitiveServicesLib::Face"  >
     <DisplayString>(Id:{m_FaceId})</DisplayString>
   </Type>
+  <Type Name="CognitiveServicesLib::HairColor"  >
+    <DisplayString>(Color:{m_Color}, c:{m_Confidence, g})</DisplayString>
+  </Type>
+  <Type Name="CognitiveServicesLib::Hair"  >
+    <DisplayString>(Bald:{m_Bald}, Invisible:{m_Invisible}, [HairColors])</DisplayString>
+  </Type>
+  <Type Name="CognitiveServicesLib::Accessory"  >
+    <DisplayString>(Type:{m_Type}, c:{m_Confidence, g})</DisplayString>
+  </Type>
+  <Type Name="CognitiveServicesLib::FaceAttributes"  >
+    <DisplayString>(Age:{m_Age, g}, Gender:{m_Gender}, Smile:{m_Smile, g}, ...)</DisplayString>
+  </Type>
 </AutoVisualizer>

@@ -2,13 +2,15 @@
 
 namespace CognitiveServicesLib
 {
-	public ref class FaceAttributes sealed
+	public ref class FaceAttributes sealed : Windows::Foundation::IStringable
 	{
 	public:
 		FaceAttributes();
+		Platform::String^ ToString() override;
 
 	internal:
 		static FaceAttributes^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 	private:

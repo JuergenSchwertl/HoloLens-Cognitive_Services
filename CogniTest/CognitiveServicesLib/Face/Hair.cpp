@@ -24,16 +24,16 @@ EnumKeyJsonName<HairColorType> HairColorTypeHelper::ckvJsonNames[] =
 HairColorType HairColorTypeHelper::parse(Platform::String^ strValue)
 {
 	return(EnumHelper<HairColorType>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
-};
-
-Platform::String^  HairColorTypeHelper::toString(HairColorType enumValue)
-{
-	return( ref new Platform::String( c_str(enumValue) ) );
-};
+}
 
 LPCTSTR HairColorTypeHelper::c_str(HairColorType enumValue)
 {
 	return(EnumHelper<HairColorType>::c_str(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
+}
+
+Platform::String^  HairColorTypeHelper::toString(HairColorType enumValue)
+{
+	return( ref new Platform::String( c_str(enumValue) ) );
 }
 #pragma endregion
 

@@ -57,7 +57,7 @@ void Face::toStringStream(std::wostringstream& out)
 	}
 	else
 	{
-//		FaceAttributes->toStringStream(out);
+		FaceAttributes->toStringStream(out);
 		out << _ENDL;
 	}
 
