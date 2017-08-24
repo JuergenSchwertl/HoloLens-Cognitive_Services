@@ -5,7 +5,7 @@
 
 #define _ENDL L'\r'
 #define _ENDS L'\0'
-#define _COLON L','
+#define _COLON L':'
 #define _OBRACKET L'('
 #define _CBRACKET L')'
 

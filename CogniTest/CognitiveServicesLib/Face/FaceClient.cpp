@@ -99,6 +99,66 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	return postaction;
 }
 
+///<summary>Detects faces from an image file</summary>
+///<param name="FileName">relative path of a file</param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
+///<returns>async task completing with Face - Detect API response as json string</returns>
+Windows::Foundation::IAsyncOperation<
+	Windows::Foundation::Collections::IVector<
+	CognitiveServicesLib::Face^
+	>^
+>^ FaceClient::FaceDetectAsync(
+	Platform::String^ FileName,
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
+{
+	auto postaction = create_async([=]() {
+		Uri^ uriEndpoint = buildUri(EndpointHelper::FaceDetect, ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+
+		auto worker = m_WebClient.PostFileAsync(uriEndpoint, FileName)
+			.then([](String^ result) {
+			auto vec = Face::FromJsonString(result);
+			return vec;
+		});
+		return worker;
+	});
+
+	return postaction;
+}
+
+///<summary>Detects faces from an image uri</summary>
+///<param name="FileUri">Uri to an Image file on the web or in your msappx:/// installation directory </param>
+///<param name="ReturnFaceId">requests Face Api to return face id</param>
+///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
+///<returns>async task completing with Face - Detect API response as json string</returns>
+Windows::Foundation::IAsyncOperation<
+	Windows::Foundation::Collections::IVector<
+	CognitiveServicesLib::Face^
+	>^
+>^ FaceClient::FaceDetectAsync(
+	Windows::Foundation::Uri^ FileUri,
+	bool ReturnFaceId,
+	bool ReturnFaceLandmarks,
+	Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
+{
+	auto postaction = create_async([=]() {
+		Uri^ uriEndpoint = buildUri(EndpointHelper::FaceDetect, ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
+
+		auto worker = m_WebClient.PostFileAsync(uriEndpoint, FileName)
+			.then([](String^ result) {
+			auto vec = Face::FromJsonString(result);
+			return vec;
+		});
+		return worker;
+	});
+
+	return postaction;
+}
+
 ///<summary>Detects faces from an image data buffer</summary>
 ///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
@@ -128,6 +188,11 @@ Windows::Foundation::IAsyncOperation<
 
 	return postaction;
 }
+
+
+
+
+
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">Image file name</param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>

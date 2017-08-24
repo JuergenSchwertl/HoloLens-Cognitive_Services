@@ -11,7 +11,7 @@ namespace CognitiveServicesLib
 	internal:
 		static FaceAttributes^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
 		void toStringStream(std::wostringstream& out);
-
+	
 #pragma region Properties
 	private:
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, double, Age, L"age")

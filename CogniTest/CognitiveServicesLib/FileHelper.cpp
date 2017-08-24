@@ -38,3 +38,4 @@ task<IRandomAccessStream^> FileHelper::GetOutputFileStreamAsync(String ^ _FileNa
 	IRandomAccessStream^ fileStream = co_await storagefile->OpenAsync(FileAccessMode::ReadWrite);
 	co_return fileStream;
 }
+
