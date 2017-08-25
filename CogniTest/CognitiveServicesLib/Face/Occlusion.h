@@ -3,12 +3,15 @@ namespace CognitiveServicesLib
 {
 
 	public ref class Occlusion sealed
+		: Windows::Foundation::IStringable
 	{
 	public:
 		Occlusion();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Occlusion^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

@@ -16,22 +16,6 @@ EnumKeyJsonName<AccessoryType> AccessoryTypeHelper::ckvJsonNames[] =
 	{ AccessoryType::Glasses, L"glasses" },
 	{ AccessoryType::Mask, L"mask" },
 };
-
-AccessoryType AccessoryTypeHelper::parse(Platform::String^ strValue)
-{
-	return EnumHelper<AccessoryType>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<AccessoryType>));
-}
-
-LPCTSTR AccessoryTypeHelper::c_str(AccessoryType enumValue)
-{
-	return(EnumHelper<AccessoryType>::c_str(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<AccessoryType>)));
-}
-
-Platform::String^ AccessoryTypeHelper::toString(AccessoryType enumValue)
-{
-	return(ref new Platform::String(c_str(enumValue)));
-}
-
 #pragma endregion
 
 
@@ -51,7 +35,8 @@ void Accessory::toStringStream(std::wostringstream& out)
 	out.setf(ios::fixed);
 	out.precision(2);
 	out << _OBRACKET
-		<< JSON_PROPERTYNAME_PCWSTR(Type) << _COLON << AccessoryTypeHelper::c_str(PROPERTY_VARIABLE(Type)) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Type) << _COLON 
+		<< EnumHelper<AccessoryType, AccessoryTypeHelper>::c_str(PROPERTY_VARIABLE(Type)) << L", "
 		<< L"c:" << PROPERTY_VARIABLE(Confidence)
 		<< _CBRACKET;
 }
@@ -74,7 +59,7 @@ Accessory ^ Accessory::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 		String^ strValue = nullptr;
 
 		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(Type), nullptr);
-		accessory->Type = AccessoryTypeHelper::parse(strValue);
+		accessory->Type = EnumHelper<AccessoryType, AccessoryTypeHelper>::parse(strValue);
 
 		accessory->Confidence = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Confidence), 0.0);
 	}

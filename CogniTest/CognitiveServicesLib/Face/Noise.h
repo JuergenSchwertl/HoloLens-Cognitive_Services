@@ -21,21 +21,21 @@ namespace CognitiveServicesLib
 
 	class NoiseLevelHelper
 	{
-		static EnumKeyJsonName<CognitiveServicesLib::NoiseLevel> ckvJsonNames[];
-
 	public:
-		static CognitiveServicesLib::NoiseLevel parse(Platform::String^ strValue);
-		static Platform::String^ toString(CognitiveServicesLib::NoiseLevel enumValue);
+		static EnumKeyJsonName<CognitiveServicesLib::NoiseLevel> ckvJsonNames[];
 	};
 
 
 	public ref class Noise sealed
+		: Windows::Foundation::IStringable
 	{
 	public:
 		Noise();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Noise^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

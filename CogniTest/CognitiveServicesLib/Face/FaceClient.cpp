@@ -36,6 +36,7 @@ FaceClient::FaceClient(AzureRegions Region, String^ SubscriptionKey) :
 
 }
 
+[Windows::Foundation::Metadata::DefaultOverload]
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">Image file name</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
@@ -99,6 +100,7 @@ IAsyncOperation<Platform::String^>^ FaceClient::DetectAsync(
 	return postaction;
 }
 
+[Windows::Foundation::Metadata::DefaultOverload]
 ///<summary>Detects faces from an image file</summary>
 ///<param name="FileName">relative path of a file</param>
 ///<param name="ReturnFaceId">requests Face Api to return face id</param>
@@ -148,7 +150,7 @@ Windows::Foundation::IAsyncOperation<
 	auto postaction = create_async([=]() {
 		Uri^ uriEndpoint = buildUri(EndpointHelper::FaceDetect, ReturnFaceId, ReturnFaceLandmarks, ReturnFaceAttributes);
 
-		auto worker = m_WebClient.PostFileAsync(uriEndpoint, FileName)
+		auto worker = m_WebClient.PostUriAsync(uriEndpoint, FileUri)
 			.then([](String^ result) {
 			auto vec = Face::FromJsonString(result);
 			return vec;

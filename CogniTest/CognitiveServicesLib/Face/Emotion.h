@@ -1,13 +1,15 @@
 #pragma once
 namespace CognitiveServicesLib
 {
-	public ref class EmotionScores sealed
+	public ref class EmotionScores sealed : Windows::Foundation::IStringable
 	{
 	public:
 		EmotionScores();
+		Platform::String^ ToString() override;
 
 	internal:
 		static EmotionScores^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Noise.h"
 
+using namespace std;
 using namespace Platform;
 using namespace CognitiveServicesLib;
 
@@ -10,16 +11,6 @@ EnumKeyJsonName<NoiseLevel> NoiseLevelHelper::ckvJsonNames[] =
 	{ NoiseLevel::Low, L"Low" },
 	{ NoiseLevel::Medium, L"Medium" },
 	{ NoiseLevel::High, L"High" }
-};
-
-NoiseLevel NoiseLevelHelper::parse(Platform::String^ strValue)
-{
-	return(EnumHelper<NoiseLevel>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<NoiseLevel>)));
-};
-
-Platform::String^  NoiseLevelHelper::toString(NoiseLevel enumValue)
-{
-	return(EnumHelper<NoiseLevel>::toString(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<NoiseLevel>)));
 };
 #pragma endregion
 
@@ -31,6 +22,26 @@ Noise::Noise()
 {
 }
 
+void Noise::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(1);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(NoiseLevel) << _COLON
+		<< EnumHelper<CognitiveServicesLib::NoiseLevel, NoiseLevelHelper>::c_str(NoiseLevel) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Value) << _COLON << PROPERTY_VARIABLE(Value)
+		<< _CBRACKET;
+
+}
+
+Platform::String^ Noise::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
+}
+
 Noise ^ Noise::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 {
 	Noise^ obj = nullptr;
@@ -40,7 +51,7 @@ Noise ^ Noise::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 		String^ strValue = nullptr;
 
 		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(NoiseLevel), nullptr);
-		obj->NoiseLevel = NoiseLevelHelper::parse(strValue);
+		obj->NoiseLevel = EnumHelper<CognitiveServicesLib::NoiseLevel,NoiseLevelHelper>::parse(strValue);
 
 		obj->Value = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Value), 0.0);
 	}

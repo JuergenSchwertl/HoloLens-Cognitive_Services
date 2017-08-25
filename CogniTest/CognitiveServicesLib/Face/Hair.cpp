@@ -20,21 +20,6 @@ EnumKeyJsonName<HairColorType> HairColorTypeHelper::ckvJsonNames[] =
 	{ HairColorType::Black, L"black" },
 	{ HairColorType::Other, L"other" },
 };
-
-HairColorType HairColorTypeHelper::parse(Platform::String^ strValue)
-{
-	return(EnumHelper<HairColorType>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
-}
-
-LPCTSTR HairColorTypeHelper::c_str(HairColorType enumValue)
-{
-	return(EnumHelper<HairColorType>::c_str(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<HairColorType>)));
-}
-
-Platform::String^  HairColorTypeHelper::toString(HairColorType enumValue)
-{
-	return( ref new Platform::String( c_str(enumValue) ) );
-}
 #pragma endregion
 
 
@@ -50,7 +35,8 @@ void HairColor::toStringStream(std::wostringstream& out)
 	out.setf(ios::fixed);
 	out.precision(2);
 	out << _OBRACKET
-		<< JSON_PROPERTYNAME_PCWSTR(Color) << _COLON << HairColorTypeHelper::c_str(PROPERTY_VARIABLE(Color) ) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Color) << _COLON 
+		<< EnumHelper<HairColorType,HairColorTypeHelper>::c_str(PROPERTY_VARIABLE(Color) ) << L", "
 		<< L"c:" << PROPERTY_VARIABLE(Confidence) 
 		<< _CBRACKET;
 }
@@ -73,7 +59,7 @@ HairColor ^ HairColor::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 
 
 		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(Color), nullptr);
-		obj->Color = HairColorTypeHelper::parse(strValue);
+		obj->Color = EnumHelper<HairColorType, HairColorTypeHelper>::parse(strValue);
 
 		obj->Confidence = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Confidence), 0.0);
 	}

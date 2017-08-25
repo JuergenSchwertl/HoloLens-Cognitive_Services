@@ -2,13 +2,15 @@
 namespace CognitiveServicesLib
 {
 
-	public ref class HeadPose sealed
+	public ref class HeadPose sealed : Windows::Foundation::IStringable
 	{
 	public:
 		HeadPose();
+		Platform::String^ ToString() override;
 
 	internal:
 		static HeadPose^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

@@ -30,11 +30,42 @@ void FaceAttributes::toStringStream(std::wostringstream& out)
 {
 	out.setf(ios::fixed);
 	out.precision(1);
-	out << _OBRACKET
-		<< JSON_PROPERTYNAME_PCWSTR(Age) << _COLON << PROPERTY_VARIABLE(Age) << L", "
-		<< JSON_PROPERTYNAME_PCWSTR(Gender) << _COLON << PROPERTY_VARIABLE(Gender)->Data() << L", "
-		<< JSON_PROPERTYNAME_PCWSTR(Smile) << _COLON << PROPERTY_VARIABLE(Smile) 
-		<< _CBRACKET;
+	out << _OBRACKET;
+
+	STRINGIFY_PROPERTY(Age, out);
+	STRINGIFY_STRING_PROPERTY(Gender, out)
+	STRINGIFY_REF_PROPERTY(HeadPose, out)
+	STRINGIFY_PROPERTY(Smile, out);
+	STRINGIFY_REF_PROPERTY(FacialHair, out)
+	STRINGIFY_REF_PROPERTY(Emotion, out)
+
+	//out << JSON_PROPERTYNAME_PCWSTR(Glasses) << _COLON
+	//	<< EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::c_str(PROPERTY_VARIABLE(Glasses)) << L", ";
+
+	STRINGIFY_REF_PROPERTY(Blur, out)
+	STRINGIFY_REF_PROPERTY(Exposure, out)
+	STRINGIFY_REF_PROPERTY(Noise, out)
+	STRINGIFY_REF_PROPERTY(Makeup, out)
+
+	if(Accessories!=nullptr)
+	{ 
+		out << L"[";
+		auto iter = Accessories->First();
+		while( iter->HasCurrent )
+		{
+			auto accessory = iter->Current;
+			accessory->toStringStream(out);
+			iter->MoveNext();
+			if( iter->HasCurrent )
+				out << L",";
+		}
+		out << L"], ";
+	}
+
+	STRINGIFY_REF_PROPERTY(Occlusion, out)
+	STRINGIFY_REF_PROPERTY(Hair, out)
+
+	out	<< _CBRACKET;
 }
 
 
@@ -71,7 +102,7 @@ FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)
 		attr->Emotion = CognitiveServicesLib::EmotionScores::FromJson(jsonObj);
 
 		jsonString = jsonObj->GetNamedString(JSON_PROPERTYNAME(Glasses), nullptr);
-		attr->Glasses = GlassesHelper::parse(jsonString);
+		attr->Glasses = EnumHelper<CognitiveServicesLib::Glasses,GlassesHelper>::parse(jsonString);
 
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Blur), nullptr);
 		attr->Blur = CognitiveServicesLib::Blur::FromJson(jsonObj);

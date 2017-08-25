@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Exposure.h"
 
+using namespace std;
 using namespace Platform;
 using namespace CognitiveServicesLib;
 
@@ -15,15 +16,15 @@ EnumKeyJsonName<ExposureLevel> ExposureLevelHelper::ckvJsonNames[] =
 	{ ExposureLevel::OverExposure, L"OverExposure" },
 };
 
-ExposureLevel ExposureLevelHelper::parse(Platform::String^ strValue)
-{
-	return(EnumHelper<ExposureLevel>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
-};
-
-Platform::String^  ExposureLevelHelper::toString(ExposureLevel enumValue)
-{
-	return(EnumHelper<ExposureLevel>::toString(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
-};
+//ExposureLevel ExposureLevelHelper::parse(Platform::String^ strValue)
+//{
+//	return(EnumHelper<ExposureLevel>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
+//};
+//
+//Platform::String^  ExposureLevelHelper::toString(ExposureLevel enumValue)
+//{
+//	return(EnumHelper<ExposureLevel>::toString(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
+//};
 #pragma endregion
 
 
@@ -36,6 +37,25 @@ Exposure::Exposure()
 {
 }
 
+void Exposure::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(2);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(ExposureLevel) << _COLON
+		<< EnumHelper<CognitiveServicesLib::ExposureLevel, ExposureLevelHelper>::c_str(PROPERTY_VARIABLE(ExposureLevel))
+		<< JSON_PROPERTYNAME_PCWSTR(ExposureLevel) << _COLON << PROPERTY_VARIABLE(Value)
+		<< _CBRACKET;
+}
+
+Platform::String^ Exposure::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
+}
+
 Exposure ^ Exposure::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 {
 	Exposure^ exp = nullptr;
@@ -46,7 +66,7 @@ Exposure ^ Exposure::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)
 
 
 		strValue = jsonObject->GetNamedString(JSON_PROPERTYNAME(ExposureLevel), nullptr);
-		exp->ExposureLevel = ExposureLevelHelper::parse(strValue);
+		exp->ExposureLevel = EnumHelper<CognitiveServicesLib::ExposureLevel, ExposureLevelHelper>::parse(strValue);
 
 		exp->Value = jsonObject->GetNamedNumber(JSON_PROPERTYNAME(Value), 0.0);
 	}

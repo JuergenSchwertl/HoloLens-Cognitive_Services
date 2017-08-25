@@ -4,14 +4,16 @@ namespace CognitiveServicesLib
 	/// <summary>
 	/// Represents length of moustache, beard and sideburn
 	/// </summary>
-	public ref class FacialHair sealed
+	public ref class FacialHair sealed : Windows::Foundation::IStringable
 	{
 
 	public:
 		FacialHair();
+		Platform::String^ ToString() override;
 
 	internal:
 		static FacialHair^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

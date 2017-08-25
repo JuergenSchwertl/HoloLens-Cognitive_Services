@@ -5,12 +5,15 @@ namespace CognitiveServicesLib
 	/// Face Makeup class contains Makeup information
 	/// </summary>
 	public ref class Makeup sealed
+		: Windows::Foundation::IStringable
 	{
 	public:
 		Makeup();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Makeup^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

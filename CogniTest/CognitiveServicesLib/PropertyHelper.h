@@ -33,3 +33,17 @@ proptype propclass :: propname :: get() { \
 void propclass :: propname:: set(proptype value) { \
 	PROPERTY_VARIABLE( propname ) = value; \
 }
+
+///<summary>outputs property as "propname:value, "</summary>
+#define STRINGIFY_PROPERTY(propname, out)  out << JSON_PROPERTYNAME_PCWSTR(propname) << _COLON << PROPERTY_VARIABLE(propname) << L", ";
+
+///<summary>outputs string property as "propname:value, "</summary>
+#define STRINGIFY_STRING_PROPERTY(propname, out)  out << JSON_PROPERTYNAME_PCWSTR(propname) << _COLON << ((PROPERTY_VARIABLE(propname)!=nullptr) ? PROPERTY_VARIABLE(propname)->Data() : L"") << L", ";
+
+///<summary>outputs ref property as "propname:prop->toStringStream(), "</summary>
+#define STRINGIFY_REF_PROPERTY(propname, out) \
+	if (PROPERTY_VARIABLE(propname) != nullptr) { \
+		out << JSON_PROPERTYNAME_PCWSTR(propname) << _COLON; \
+		PROPERTY_VARIABLE(propname)->toStringStream(out); \
+		out << L", "; }
+

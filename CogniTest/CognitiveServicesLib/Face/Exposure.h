@@ -22,20 +22,20 @@ namespace CognitiveServicesLib
 
 	class ExposureLevelHelper
 	{
+	public:
 		static EnumKeyJsonName<CognitiveServicesLib::ExposureLevel> ckvJsonNames[];
-
-		public:
-			static CognitiveServicesLib::ExposureLevel parse(Platform::String^ strValue);
-			static Platform::String^ toString(CognitiveServicesLib::ExposureLevel enumValue);
 	};
 
-	public ref class Exposure sealed
+
+	public ref class Exposure sealed : Windows::Foundation::IStringable
 	{
 	public:
 		Exposure();
+		Platform::String^ ToString() override;
 
 	internal:
 		static Exposure^ FromJson(Windows::Data::Json::JsonObject^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 

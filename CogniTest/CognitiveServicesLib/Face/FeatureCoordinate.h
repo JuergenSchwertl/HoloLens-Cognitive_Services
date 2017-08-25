@@ -2,7 +2,8 @@
 
 namespace CognitiveServicesLib
 {
-	public ref class FeatureCoordinate sealed : Windows::Foundation::IStringable
+	public ref class FeatureCoordinate sealed 
+		: Windows::Foundation::IStringable
 	{
 	public:
 		FeatureCoordinate();

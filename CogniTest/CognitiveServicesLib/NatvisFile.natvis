@@ -21,4 +21,7 @@
   <Type Name="CognitiveServicesLib::FaceAttributes"  >
     <DisplayString>(Age:{m_Age, g}, Gender:{m_Gender}, Smile:{m_Smile, g}, ...)</DisplayString>
   </Type>
+  <Type Name="CognitiveServicesLib::EmotionScores"  >
+    <DisplayString>(Anger:{m_Anger, g}, Contempt:{m_Contempt}, Disgust:{m_Disgust, g}, Fear:{m_Fear, g}, Happiness:{m_Happiness, g}, Neutral:{m_Neutral, g}, Sadness:{m_Sadness, g}, Surprise:{m_Surprise, g})</DisplayString>
+  </Type>
 </AutoVisualizer>

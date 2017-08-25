@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Emotion.h"
 
+using namespace std;
 using namespace Platform;
 using namespace CognitiveServicesLib;
 
@@ -15,6 +16,29 @@ IMPLEMENT_PROPERTY(EmotionScores, double, Surprise	, L"surprise")
 
 EmotionScores::EmotionScores()
 {
+}
+void EmotionScores::toStringStream(std::wostringstream& out)
+{
+	out.setf(ios::fixed);
+	out.precision(1);
+	out << _OBRACKET
+		<< JSON_PROPERTYNAME_PCWSTR(Anger) << _COLON << PROPERTY_VARIABLE(Anger) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Contempt) << _COLON << PROPERTY_VARIABLE(Contempt) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Disgust) << _COLON << PROPERTY_VARIABLE(Disgust) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Fear) << _COLON << PROPERTY_VARIABLE(Fear) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Happiness) << _COLON << PROPERTY_VARIABLE(Happiness) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Neutral) << _COLON << PROPERTY_VARIABLE(Neutral) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Sadness) << _COLON << PROPERTY_VARIABLE(Sadness) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Surprise) << _COLON << PROPERTY_VARIABLE(Surprise)
+		<< _CBRACKET;
+}
+
+Platform::String^ EmotionScores::ToString()
+{
+	std::wostringstream out;
+	toStringStream(out);
+	out << _ENDS;
+	return ref new Platform::String(out.str().c_str());
 }
 
 EmotionScores ^ EmotionScores::FromJson(Windows::Data::Json::JsonObject ^ jsonObject)

@@ -24,20 +24,21 @@ namespace CognitiveServicesLib
 
 	class BlurLevelHelper
 	{
-		static EnumKeyJsonName<CognitiveServicesLib::BlurLevel> ckvJsonNames[];
-
 	public:
-		static CognitiveServicesLib::BlurLevel parse(Platform::String^ strValue);
-		static Platform::String^ toString(CognitiveServicesLib::BlurLevel enumValue);
+		static EnumKeyJsonName<CognitiveServicesLib::BlurLevel> ckvJsonNames[];
 	};
 
 
 	public ref class Blur sealed
+		: Windows::Foundation::IStringable
 	{
 	public:
 		Blur();
+		Platform::String^ ToString() override;
+
 	internal:
 		static Blur^ FromJson(Windows::Data::Json::JsonObject ^ jsonObject);
+		void toStringStream(std::wostringstream& out);
 
 #pragma region Properties
 
@@ -54,11 +55,8 @@ namespace CognitiveServicesLib
 		/// <summary>
 		/// Indicating the confidence for accessory type
 		/// </summary>
-		property double Value { double get(); void set(double value);
-		}
+		property double Value { double get(); void set(double value); }
 #pragma endregion
 
 	};
-
-
 }

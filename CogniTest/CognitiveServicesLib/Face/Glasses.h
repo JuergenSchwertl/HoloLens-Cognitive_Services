@@ -26,11 +26,8 @@ namespace CognitiveServicesLib
 
 	class GlassesHelper
 	{
-		static EnumKeyJsonName<CognitiveServicesLib::Glasses> ckvJsonNames[];
-
 	public:
-		static CognitiveServicesLib::Glasses parse(Platform::String^ strValue);
-		static Platform::String^ toString(CognitiveServicesLib::Glasses enumValue);
+		static EnumKeyJsonName<CognitiveServicesLib::Glasses> ckvJsonNames[];
 	};
 
 

@@ -20,14 +20,10 @@ namespace CognitiveServicesLib
 		Mask
 	};
 
-	class AccessoryTypeHelper
+	class AccessoryTypeHelper : EnumHelper<AccessoryType, AccessoryTypeHelper>
 	{
-		static EnumKeyJsonName<CognitiveServicesLib::AccessoryType> ckvJsonNames[];
-
 	public:
-		static CognitiveServicesLib::AccessoryType parse(Platform::String^ strValue);
-		static Platform::String^ toString(CognitiveServicesLib::AccessoryType enumValue);
-		static LPCTSTR c_str(CognitiveServicesLib::AccessoryType enumValue);
+		static EnumKeyJsonName<CognitiveServicesLib::AccessoryType> ckvJsonNames[];
 	};
 
 
