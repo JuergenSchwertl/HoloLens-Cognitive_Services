@@ -23,7 +23,7 @@ namespace CognitiveServicesLib
 	class AccessoryTypeHelper : EnumHelper<AccessoryType, AccessoryTypeHelper>
 	{
 	public:
-		static EnumKeyJsonName<CognitiveServicesLib::AccessoryType> ckvJsonNames[];
+		static EnumKeyJsonName<CognitiveServicesLib::AccessoryType> ckvJsonNames[3];
 	};
 
 

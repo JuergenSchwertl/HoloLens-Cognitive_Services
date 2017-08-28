@@ -33,19 +33,19 @@ void FaceAttributes::toStringStream(std::wostringstream& out)
 	out << _OBRACKET;
 
 	STRINGIFY_PROPERTY(Age, out);
-	STRINGIFY_STRING_PROPERTY(Gender, out)
-	STRINGIFY_REF_PROPERTY(HeadPose, out)
+	STRINGIFY_STRING_PROPERTY(Gender, out);
+	STRINGIFY_REF_PROPERTY(HeadPose, out);
 	STRINGIFY_PROPERTY(Smile, out);
-	STRINGIFY_REF_PROPERTY(FacialHair, out)
-	STRINGIFY_REF_PROPERTY(Emotion, out)
+	STRINGIFY_REF_PROPERTY(FacialHair, out);
+	STRINGIFY_REF_PROPERTY(Emotion, out);
 
-	//out << JSON_PROPERTYNAME_PCWSTR(Glasses) << _COLON
-	//	<< EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::c_str(PROPERTY_VARIABLE(Glasses)) << L", ";
+	out << JSON_PROPERTYNAME_PCWSTR(Glasses) << _COLON
+		<< EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::c_str(PROPERTY_VARIABLE(Glasses)) << L", ";
 
-	STRINGIFY_REF_PROPERTY(Blur, out)
-	STRINGIFY_REF_PROPERTY(Exposure, out)
-	STRINGIFY_REF_PROPERTY(Noise, out)
-	STRINGIFY_REF_PROPERTY(Makeup, out)
+	STRINGIFY_REF_PROPERTY(Blur, out);
+	STRINGIFY_REF_PROPERTY(Exposure, out);
+	STRINGIFY_REF_PROPERTY(Noise, out);
+	STRINGIFY_REF_PROPERTY(Makeup, out);
 
 	if(Accessories!=nullptr)
 	{ 
@@ -62,8 +62,8 @@ void FaceAttributes::toStringStream(std::wostringstream& out)
 		out << L"], ";
 	}
 
-	STRINGIFY_REF_PROPERTY(Occlusion, out)
-	STRINGIFY_REF_PROPERTY(Hair, out)
+	STRINGIFY_REF_PROPERTY(Occlusion, out);
+	STRINGIFY_REF_PROPERTY(Hair, out);
 
 	out	<< _CBRACKET;
 }

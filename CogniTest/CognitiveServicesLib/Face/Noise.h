@@ -22,7 +22,7 @@ namespace CognitiveServicesLib
 	class NoiseLevelHelper
 	{
 	public:
-		static EnumKeyJsonName<CognitiveServicesLib::NoiseLevel> ckvJsonNames[];
+		static EnumKeyJsonName<CognitiveServicesLib::NoiseLevel> ckvJsonNames[3];
 	};
 
 

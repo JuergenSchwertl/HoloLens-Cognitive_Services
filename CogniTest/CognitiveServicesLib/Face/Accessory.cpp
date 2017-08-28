@@ -10,7 +10,7 @@ using namespace Windows::Foundation::Collections;
 
 
 #pragma region AccessoryTypeHelper implementation
-EnumKeyJsonName<AccessoryType> AccessoryTypeHelper::ckvJsonNames[] =
+EnumKeyJsonName<AccessoryType> AccessoryTypeHelper::ckvJsonNames[3] =
 {
 	{ AccessoryType::Headwear, L"headWear" },
 	{ AccessoryType::Glasses, L"glasses" },

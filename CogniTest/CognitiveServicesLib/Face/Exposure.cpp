@@ -9,22 +9,12 @@ using namespace CognitiveServicesLib;
 
 
 #pragma region ExposureLevelHelper implementation
-EnumKeyJsonName<ExposureLevel> ExposureLevelHelper::ckvJsonNames[] =
+EnumKeyJsonName<ExposureLevel> ExposureLevelHelper::ckvJsonNames[3] =
 {
 	{ ExposureLevel::UnderExposure, L"UnderExposure" },
 	{ ExposureLevel::GoodExposure, L"GoodExposure" },
 	{ ExposureLevel::OverExposure, L"OverExposure" },
 };
-
-//ExposureLevel ExposureLevelHelper::parse(Platform::String^ strValue)
-//{
-//	return(EnumHelper<ExposureLevel>::parse(strValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
-//};
-//
-//Platform::String^  ExposureLevelHelper::toString(ExposureLevel enumValue)
-//{
-//	return(EnumHelper<ExposureLevel>::toString(enumValue, ckvJsonNames, sizeof(ckvJsonNames) / sizeof(EnumKeyJsonName<ExposureLevel>)));
-//};
 #pragma endregion
 
 

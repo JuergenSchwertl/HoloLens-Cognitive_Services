@@ -6,7 +6,7 @@ using namespace CognitiveServicesLib;
 using namespace Platform;
 
 #pragma region BlurLevelHelper implementation
-EnumKeyJsonName<BlurLevel> BlurLevelHelper::ckvJsonNames[] =
+EnumKeyJsonName<BlurLevel> BlurLevelHelper::ckvJsonNames[3] =
 {
 	{ BlurLevel::Low, L"Low" },
 	{ BlurLevel::Medium, L"Medium" },

@@ -9,7 +9,7 @@ using namespace Windows::Foundation::Collections;
 using namespace CognitiveServicesLib;
 
 #pragma region HairColorTypeHelper implementation
-EnumKeyJsonName<HairColorType> HairColorTypeHelper::ckvJsonNames[] =
+EnumKeyJsonName<HairColorType> HairColorTypeHelper::ckvJsonNames[8] =
 {
 	{ HairColorType::Unknown, L"unknown" },
 	{ HairColorType::White, L"white" },

@@ -27,9 +27,9 @@ namespace CognitiveServicesLib
 	class GlassesHelper
 	{
 	public:
-		static EnumKeyJsonName<CognitiveServicesLib::Glasses> ckvJsonNames[];
+		static EnumKeyJsonName<CognitiveServicesLib::Glasses> ckvJsonNames[4];
+		void Test();
 	};
-
 
 }
 

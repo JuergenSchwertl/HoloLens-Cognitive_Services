@@ -51,7 +51,7 @@ namespace CognitiveServicesLib
 	class HairColorTypeHelper
 	{
 		public:
-			static EnumKeyJsonName<CognitiveServicesLib::HairColorType> ckvJsonNames[];
+			static EnumKeyJsonName<CognitiveServicesLib::HairColorType> ckvJsonNames[8];
 	};
 
 	/// <summary>
