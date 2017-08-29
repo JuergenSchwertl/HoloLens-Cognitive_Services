@@ -12,7 +12,7 @@ IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::H
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, double, Smile, L"smile")
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::FacialHair^, FacialHair, L"facialHair")
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::EmotionScores^, Emotion, L"emotion")
-IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::Glasses, Glasses, L"glasses")
+IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, Platform::IBox<CognitiveServicesLib::Glasses>^, Glasses, L"glasses")
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::Blur^, Blur, L"blur")
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::Exposure^, Exposure, L"exposure")
 IMPLEMENT_PROPERTY(CognitiveServicesLib::FaceAttributes, CognitiveServicesLib::Noise^, Noise, L"noise")
@@ -39,8 +39,11 @@ void FaceAttributes::toStringStream(std::wostringstream& out)
 	STRINGIFY_REF_PROPERTY(FacialHair, out);
 	STRINGIFY_REF_PROPERTY(Emotion, out);
 
-	out << JSON_PROPERTYNAME_PCWSTR(Glasses) << _COLON
-		<< EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::c_str(PROPERTY_VARIABLE(Glasses)) << L", ";
+	if (PROPERTY_VARIABLE(Glasses) != nullptr)
+	{
+		out << JSON_PROPERTYNAME_PCWSTR(Glasses) << _COLON
+			<< EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::c_str(PROPERTY_VARIABLE(Glasses)->Value) << L", ";
+	}
 
 	STRINGIFY_REF_PROPERTY(Blur, out);
 	STRINGIFY_REF_PROPERTY(Exposure, out);
@@ -102,7 +105,7 @@ FaceAttributes ^ FaceAttributes::FromJson(JsonObject ^ jsonObject)
 		attr->Emotion = CognitiveServicesLib::EmotionScores::FromJson(jsonObj);
 
 		jsonString = jsonObj->GetNamedString(JSON_PROPERTYNAME(Glasses), nullptr);
-		attr->Glasses = EnumHelper<CognitiveServicesLib::Glasses,GlassesHelper>::parse(jsonString);
+		attr->Glasses = EnumHelper<CognitiveServicesLib::Glasses, GlassesHelper>::parse_nullable(jsonString);
 
 		jsonObj = jsonObject->GetNamedObject(JSON_PROPERTYNAME(Blur), nullptr);
 		attr->Blur = CognitiveServicesLib::Blur::FromJson(jsonObj);

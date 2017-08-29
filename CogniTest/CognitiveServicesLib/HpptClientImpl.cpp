@@ -94,6 +94,9 @@ task<String^> HpptClientImpl::retrieveResponseAsync(HttpRequestMessage^ request)
 		__LOG_EXCEPTION(ex);
 		throw ex;
 	}
+
+	__LOGMSG(strResponse);
+	
 	co_return strResponse;
 }
 

@@ -36,6 +36,21 @@ namespace CognitiveServicesLib
 			return (E)0;
 		}
 
+		static Platform::IBox<E>^ parse_nullable(Platform::String^ strValue)
+		{
+			Platform::Box<CognitiveServicesLib::Glasses>^ boxValue = nullptr;
+
+			if (strValue != nullptr)
+			{
+				E value = parse(strValue);
+				if ((int)value != 0)
+				{
+					boxValue = ref new Platform::Box<E>(value);
+				}
+			}
+			return(boxValue);
+		}
+
 		static LPCTSTR c_str(E value)
 		{
 			size_t nArraySize = sizeof(ETH::ckvJsonNames) / sizeof(EnumKeyJsonName<E>);
@@ -51,18 +66,13 @@ namespace CognitiveServicesLib
 				if (ETH::ckvJsonNames[nIndex].EnumKey == value)
 					return ETH::ckvJsonNames[nIndex].JsonName;
 
-			return nullptr;
+			return Common::Globals::cstrEmptyString;
 		}
 
 		static Platform::String^ toString(E value)
 		{
 			LPCTSTR strValue = c_str(value);
-			if (strValue != nullptr)
-			{
-				return ref new Platform::String(strValue);
-			}
-
-			return nullptr;
+			return ref new Platform::String(strValue);
 		}
 
 	};

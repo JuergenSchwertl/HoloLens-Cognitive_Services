@@ -78,10 +78,10 @@ void CogniTest::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xa
 {
 	Uri^ uriTestImage = ref new Uri(L"ms-appx:///Assets/Juergen_Schwertl.jpg");
 
-
-	Concurrency::create_task(m_FaceClient->DetectAsync(uriTestImage, true, true, m_FaceAttributeList))
-	.then([=](Platform::String^ result) {
-		LblResult->Text = result;
+	Concurrency::create_task(m_FaceClient->DetectFromUriAsync(uriTestImage, true, true, m_FaceAttributeList))
+	.then([=](IVector<Face^>^ result) {
+		Face^ face = result->First()->Current;
+		LblResult->Text = face->FaceAttributes->ToString();
 	}, task_continuation_context::use_current())
 	.then([=](task<void> t) {
 		try {
@@ -276,7 +276,7 @@ task<void> MainPage::TakePhotoAsync()
 	})
 	.then([this](Windows::Storage::Streams::IBuffer^ buf) 
 	{
-		return create_task(m_FaceClient->FaceDetectAsync(buf, true, true, m_FaceAttributeList ));
+		return create_task(m_FaceClient->DetectFromImageAsync(buf, true, true, m_FaceAttributeList ));
 	})
 	.then([this](IVector<Face^>^ result) 
 	//	return create_task(m_FaceClient->DetectAsync(buf, false, false, m_FaceAttributeList));

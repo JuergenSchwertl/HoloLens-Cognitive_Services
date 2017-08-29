@@ -8,9 +8,9 @@ using namespace Platform;
 #pragma region BlurLevelHelper implementation
 EnumKeyJsonName<BlurLevel> BlurLevelHelper::ckvJsonNames[3] =
 {
-	{ BlurLevel::Low, L"Low" },
-	{ BlurLevel::Medium, L"Medium" },
-	{ BlurLevel::High, L"High" },
+	{ BlurLevel::Low, L"low" },
+	{ BlurLevel::Medium, L"medium" },
+	{ BlurLevel::High, L"high" },
 };
 #pragma endregion
 

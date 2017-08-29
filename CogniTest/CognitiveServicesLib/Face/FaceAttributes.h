@@ -20,7 +20,7 @@ namespace CognitiveServicesLib
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, double, Smile, L"smile")
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::FacialHair^, FacialHair, L"facialHair")
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::EmotionScores^, Emotion, L"emotion")
-		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Glasses, Glasses, L"glasses")
+		DEFINE_PROPERTY_VARIABLES(FaceAttributes, Platform::IBox<CognitiveServicesLib::Glasses>^, Glasses, L"glasses")
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Blur^, Blur, L"blur")
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Exposure^, Exposure, L"exposure")
 		DEFINE_PROPERTY_VARIABLES(FaceAttributes, CognitiveServicesLib::Noise^, Noise, L"noise")
@@ -97,10 +97,10 @@ namespace CognitiveServicesLib
 		/// <value>
 		/// The glasses type.
 		/// </value>
-		property CognitiveServicesLib::Glasses Glasses 
+		property Platform::IBox<CognitiveServicesLib::Glasses>^ Glasses
 		{ 
-			CognitiveServicesLib::Glasses get(); 
-			void set(CognitiveServicesLib::Glasses value); 
+			Platform::IBox<CognitiveServicesLib::Glasses>^ get();
+			void set(Platform::IBox<CognitiveServicesLib::Glasses>^ value);
 		}
 
 		/// <summary>

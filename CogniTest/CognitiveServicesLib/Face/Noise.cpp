@@ -8,9 +8,9 @@ using namespace CognitiveServicesLib;
 #pragma region NoiseLevelHelper implementation
 EnumKeyJsonName<NoiseLevel> NoiseLevelHelper::ckvJsonNames[3] =
 {
-	{ NoiseLevel::Low, L"Low" },
-	{ NoiseLevel::Medium, L"Medium" },
-	{ NoiseLevel::High, L"High" }
+	{ NoiseLevel::Low, L"low" },
+	{ NoiseLevel::Medium, L"medium" },
+	{ NoiseLevel::High, L"high" }
 };
 #pragma endregion
 

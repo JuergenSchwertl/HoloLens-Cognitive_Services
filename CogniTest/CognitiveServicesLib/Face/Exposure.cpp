@@ -11,9 +11,9 @@ using namespace CognitiveServicesLib;
 #pragma region ExposureLevelHelper implementation
 EnumKeyJsonName<ExposureLevel> ExposureLevelHelper::ckvJsonNames[3] =
 {
-	{ ExposureLevel::UnderExposure, L"UnderExposure" },
-	{ ExposureLevel::GoodExposure, L"GoodExposure" },
-	{ ExposureLevel::OverExposure, L"OverExposure" },
+	{ ExposureLevel::UnderExposure, L"underExposure" },
+	{ ExposureLevel::GoodExposure, L"goodExposure" },
+	{ ExposureLevel::OverExposure, L"overExposure" },
 };
 #pragma endregion
 
@@ -33,8 +33,8 @@ void Exposure::toStringStream(std::wostringstream& out)
 	out.precision(2);
 	out << _OBRACKET
 		<< JSON_PROPERTYNAME_PCWSTR(ExposureLevel) << _COLON
-		<< EnumHelper<CognitiveServicesLib::ExposureLevel, ExposureLevelHelper>::c_str(PROPERTY_VARIABLE(ExposureLevel))
-		<< JSON_PROPERTYNAME_PCWSTR(ExposureLevel) << _COLON << PROPERTY_VARIABLE(Value)
+		<< EnumHelper<CognitiveServicesLib::ExposureLevel, ExposureLevelHelper>::c_str(PROPERTY_VARIABLE(ExposureLevel)) << L", "
+		<< JSON_PROPERTYNAME_PCWSTR(Value) << _COLON << PROPERTY_VARIABLE(Value)
 		<< _CBRACKET;
 }
 
