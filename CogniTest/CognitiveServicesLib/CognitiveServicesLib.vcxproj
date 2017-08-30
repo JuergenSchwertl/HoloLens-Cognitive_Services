@@ -299,7 +299,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Authentication.h" />
     <ClInclude Include="Common\Logger.h" />
     <ClInclude Include="EnumHelper.h" />
     <ClInclude Include="Enums.h" />
@@ -324,11 +323,13 @@
     <ClInclude Include="Face\Occlusion.h" />
     <ClInclude Include="FileHelper.h" />
     <ClInclude Include="HpptClientImpl.h" />
+    <ClInclude Include="IAuthorizationProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PropertyHelper.h" />
+    <ClInclude Include="Speech\AuthorizationProvider.h" />
+    <ClInclude Include="Speech\SpeechClient.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Authentication.cpp" />
     <ClCompile Include="Common\Logger.cpp" />
     <ClCompile Include="EnumHelper.cpp" />
     <ClCompile Include="Enums.cpp" />
@@ -364,6 +365,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='AppPkg|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Speech\AuthorizationProvider.cpp" />
+    <ClCompile Include="Speech\SpeechClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="NatvisFile.natvis" />

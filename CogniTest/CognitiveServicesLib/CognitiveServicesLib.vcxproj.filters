@@ -14,11 +14,13 @@
     <Filter Include="Errors">
       <UniqueIdentifier>{12e43281-09bc-4f22-ab80-2c64ce6c4ee5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Speech">
+      <UniqueIdentifier>{b73ba183-8230-4347-9ce7-841ea64ebe84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="HpptClientImpl.cpp" />
-    <ClCompile Include="Authentication.cpp" />
     <ClCompile Include="Common\Strings.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -82,11 +84,16 @@
     <ClCompile Include="Face\Blur.cpp">
       <Filter>Face</Filter>
     </ClCompile>
+    <ClCompile Include="Speech\SpeechClient.cpp">
+      <Filter>Speech</Filter>
+    </ClCompile>
+    <ClCompile Include="Speech\AuthorizationProvider.cpp">
+      <Filter>Speech</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="HpptClientImpl.h" />
-    <ClInclude Include="Authentication.h" />
     <ClInclude Include="Common\Strings.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -151,6 +158,13 @@
     <ClInclude Include="Face\Blur.h">
       <Filter>Face</Filter>
     </ClInclude>
+    <ClInclude Include="Speech\SpeechClient.h">
+      <Filter>Speech</Filter>
+    </ClInclude>
+    <ClInclude Include="Speech\AuthorizationProvider.h">
+      <Filter>Speech</Filter>
+    </ClInclude>
+    <ClInclude Include="IAuthorizationProvider.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="NatvisFile.natvis" />
