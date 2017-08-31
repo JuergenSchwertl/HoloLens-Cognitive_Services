@@ -22,7 +22,13 @@ PCWSTR Globals::Bool_ToString(bool param)
 }
 // Common Header strings
 const wchar_t HttpHeaderName::ContentType[] = L"Content-Type";
+const wchar_t HttpHeaderName::ContentLength[] = L"Content-Length";
 const wchar_t HttpHeaderName::OcpApimSubscriptionKey[] = L"Ocp-Apim-Subscription-Key";
+const wchar_t HttpHeaderName::X_Microsoft_OutputFormat[] = L"X-Microsoft-OutputFormat";
+const wchar_t HttpHeaderName::X_Search_AppId[] = L"X-Search-AppId";
+const wchar_t HttpHeaderName::X_Search_ClientId[] = L"X-Search-ClientId";
+const wchar_t HttpHeaderName::Authorization[] = L"Authorization";
+const wchar_t HttpHeaderName::User_Agent[] = L"User-Agent";
 
 // Common Parameter strings
 const wchar_t Parameters::FaceId[] = L"returnFaceId";
@@ -38,6 +44,9 @@ const wchar_t ContentTypes::ApplicationOctetStream[] = L"application/octet-strea
 
 /// <summary>Http Content-Type: application/json</summary>
 const wchar_t ContentTypes::ApplicationJson[] = L"application/json";
+
+/// <summary>Http Content-Type: application/ssml+xml</summary>
+const wchar_t ContentTypes::ApplicationSsmlXml[] = L"application/ssml+xml";
 
 /// <summary>Http Content-Type: multipart/form-data</summary>
 const wchar_t ContentTypes::MultipartFormdata[] = L"multipart/form-data";

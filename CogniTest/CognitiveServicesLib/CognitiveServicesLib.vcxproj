@@ -327,7 +327,9 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PropertyHelper.h" />
     <ClInclude Include="Speech\AuthorizationProvider.h" />
+    <ClInclude Include="Speech\OutputFormat.h" />
     <ClInclude Include="Speech\SpeechClient.h" />
+    <ClInclude Include="Speech\VoiceFont.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\Logger.cpp" />
@@ -366,7 +368,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='AppPkg|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Speech\AuthorizationProvider.cpp" />
+    <ClCompile Include="Speech\OutputFormat.cpp" />
     <ClCompile Include="Speech\SpeechClient.cpp" />
+    <ClCompile Include="Speech\VoiceFont.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="NatvisFile.natvis" />

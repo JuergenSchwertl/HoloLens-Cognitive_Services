@@ -26,6 +26,8 @@ namespace CognitiveServicesLib
 
 		public:
 			AuthorizationProvider(Platform::String^ SubscriptionKey);
+
+		private:
 			~AuthorizationProvider();
 
 		public:

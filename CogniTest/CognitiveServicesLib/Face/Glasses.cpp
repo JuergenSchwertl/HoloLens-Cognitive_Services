@@ -14,11 +14,3 @@ EnumKeyJsonName<Glasses> GlassesHelper::ckvJsonNames[4] =
 };
 #pragma endregion
 
-void GlassesHelper::Test()
-{
-	std::wostringstream out;
-	size_t s1 = sizeof(CognitiveServicesLib::GlassesHelper::ckvJsonNames);
-	size_t s2 = sizeof(EnumKeyJsonName<CognitiveServicesLib::Glasses>);
-
-	
-}

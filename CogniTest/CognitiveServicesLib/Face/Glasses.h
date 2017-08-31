@@ -28,7 +28,6 @@ namespace CognitiveServicesLib
 	{
 	public:
 		static EnumKeyJsonName<CognitiveServicesLib::Glasses> ckvJsonNames[4];
-		void Test();
 	};
 
 }

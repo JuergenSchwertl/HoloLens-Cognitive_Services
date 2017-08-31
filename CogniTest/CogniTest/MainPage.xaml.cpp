@@ -515,3 +515,10 @@ void CogniTest::MainPage::BtnJsonTest_Click(Platform::Object^ sender, Windows::U
 
 
 }
+
+
+void CogniTest::MainPage::BtnSpeak_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+
+
+}

@@ -74,7 +74,6 @@ task<String^> AuthorizationProvider::FetchTokenAsync()
 		return httpResponse->Content->ReadAsStringAsync();
 	}, m_CancellationTokenSource.get_token())
 	.then([httpClient, this](String^ strResult) {
-		httpClient->Close();
 		m_AuthorizationToken = strResult;
 		return strResult;
 	}, m_CancellationTokenSource.get_token());

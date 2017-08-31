@@ -31,8 +31,15 @@ namespace CognitiveServicesLib
 		{
 			public:
 				static const wchar_t ContentType[];
+				static const wchar_t ContentLength[];
 				static const wchar_t OcpApimSubscriptionKey[];
+				static const wchar_t X_Microsoft_OutputFormat[];
+				static const wchar_t X_Search_AppId[];
+				static const wchar_t X_Search_ClientId[];
+				static const wchar_t Authorization[];
+				static const wchar_t User_Agent[];
 		};
+
 
 		class Parameters
 		{
@@ -48,6 +55,7 @@ namespace CognitiveServicesLib
 			public:
 				static const wchar_t ApplicationOctetStream[];
 				static const wchar_t ApplicationJson[];
+				static const wchar_t ApplicationSsmlXml[];
 				static const wchar_t MultipartFormdata[];
 				static const wchar_t ImageJpg[];
 				static const wchar_t ImagePng[];

@@ -13,6 +13,14 @@ namespace CognitiveServicesLib
 		LPCTSTR JsonName;
 	};
 
+	///<summary>
+	///EnumKeyString template struct contains E keys and string values
+	///</summary>
+	template <class E> struct EnumKeyString
+	{
+		E EnumKey;
+		LPCTSTR String;
+	};
 
 	///<summary>
 	///EnumHelper template class to parse and stringify enum class E using enumHelper class ETH
