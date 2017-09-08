@@ -124,6 +124,15 @@ task<IRandomAccessStream^> SpeechClient::synthesize(String^ TextToSpeak)
 
 	__LOGMSG(content->Headers->ToString()->Data());
 	IBuffer^ buffer = co_await content->ReadAsBufferAsync();
+	
+	unsigned long long length;
+	if (content->TryComputeLength(&length))
+	{
+		std::wostringstream ss;
+		ss << L"Content-Length:" << length;
+		__LOGMSG(ss.str().c_str());
+	}
+
 	InMemoryRandomAccessStream^ raStream = ref new InMemoryRandomAccessStream();
 
 	co_await raStream->WriteAsync(buffer);

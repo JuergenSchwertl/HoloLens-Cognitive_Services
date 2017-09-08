@@ -96,6 +96,7 @@
     <ClCompile Include="Speech\VoiceFont.cpp">
       <Filter>Speech</Filter>
     </ClCompile>
+    <ClCompile Include="BufferedStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Speech\VoiceFont.h">
       <Filter>Speech</Filter>
     </ClInclude>
+    <ClInclude Include="BufferedStream.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="NatvisFile.natvis" />

@@ -23,6 +23,7 @@
                 </Viewbox>
             </Button>
             <Button Name="BtnSpeak" Content="Speak" Margin="10,10,10,10" Click="BtnSpeak_Click" />
+            <MediaElement Name="AudioPlayer" Margin="10,10,10,10" />
         </StackPanel>
         <ScrollViewer Name="Scroller"  Grid.Row="1" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
             <TextBlock Name="LblResult" VerticalAlignment="Stretch" Text="Result box The quick brown fox jumps overthe lazy leg and falls into a trap"/>

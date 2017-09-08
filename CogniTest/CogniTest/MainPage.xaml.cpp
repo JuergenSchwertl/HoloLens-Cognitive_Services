@@ -531,7 +531,7 @@ void CogniTest::MainPage::BtnSpeak_Click(Platform::Object^ sender, Windows::UI::
 		_speechClient->VoiceFont = VoiceFont::DE_DE_Female_Hedda;
 	}
 
-	MediaPlayer^ player = ref new MediaPlayer();
+	
 	InMemoryRandomAccessStream^ memStream = ref new InMemoryRandomAccessStream();
 
 	create_task( _speechClient->TextToSpeech(L"Franz fährt im komplett verwahrlosten Taxi quer durch Bayern.") )
@@ -539,10 +539,9 @@ void CogniTest::MainPage::BtnSpeak_Click(Platform::Object^ sender, Windows::UI::
 
 		if (stream != nullptr)
 		{
-			MediaSource^ source = MediaSource::CreateFromStream(stream, L"audio/mpeg");
-			player->Source = source;
+			AudioPlayer->SetSource( stream, L"audio/mpeg");
 			// https://blogs.msdn.microsoft.com/mcsuksoldev/2014/07/12/video-streaming-with-a-custom-irandomaccessstream-on-windows-and-windows-phone-universal-app/
-			player->Play();
+			AudioPlayer->Play();
 		}
 	});
 }

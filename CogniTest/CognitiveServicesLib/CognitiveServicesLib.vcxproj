@@ -299,6 +299,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BufferedStream.h" />
     <ClInclude Include="Common\Logger.h" />
     <ClInclude Include="EnumHelper.h" />
     <ClInclude Include="Enums.h" />
@@ -332,6 +333,7 @@
     <ClInclude Include="Speech\VoiceFont.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BufferedStream.cpp" />
     <ClCompile Include="Common\Logger.cpp" />
     <ClCompile Include="EnumHelper.cpp" />
     <ClCompile Include="Enums.cpp" />
