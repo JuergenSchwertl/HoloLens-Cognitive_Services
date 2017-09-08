@@ -30,6 +30,7 @@ namespace CogniTest
 		CognitiveServicesLib::FaceClient^ m_FaceClient;
 		Platform::Collections::Vector<CognitiveServicesLib::FaceAttributeOptions>^ m_FaceAttributeList;
 
+
 	public:
 		MainPage();
 
@@ -64,7 +65,9 @@ namespace CogniTest
 		bool _externalCamera;
 		bool _mirroringPreview;
 
+		// CognitiveServicesLib members
 		Windows::Media::Core::FaceDetectionEffect^ _faceDetectionEffect;
+		CognitiveServicesLib::Speech::SpeechClient^ _speechClient;
 
 		// Rotation metadata to apply to the preview stream and recorded videos (MF_MT_VIDEO_ROTATION)
 		// Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx

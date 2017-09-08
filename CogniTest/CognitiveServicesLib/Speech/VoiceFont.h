@@ -1,6 +1,10 @@
 #pragma once
+
+#define SUPPORTED_VOICEFONTS 72
+
 namespace CognitiveServicesLib
 {
+
 	namespace Speech
 	{
 		///<summary>
@@ -83,14 +87,26 @@ namespace CognitiveServicesLib
 			ZH_TW_Male_Zhiwei_Apollo
 		};
 
+		struct VoiceFontMapEntry
+		{
+			VoiceFont EnumKey;
+			LPCTSTR FontName;
+			LPCTSTR Language;
+			LPCTSTR Gender;
+		};
+
+
 		class VoiceFontHelper
 		{
 			private:
 				static const wchar_t VoiceFontHeader[];
-				static const EnumKeyString<CognitiveServicesLib::Speech::VoiceFont> VoiceFontMap[72];
+				static const VoiceFontMapEntry VoiceFontMap[SUPPORTED_VOICEFONTS];
 
 			public:
-				Platform::String^ ToString(VoiceFont font);
+				static Platform::String^ ToString(VoiceFont font);
+				static Platform::String^ GetFontName(VoiceFont font);
+				static Platform::String^ GetLanguage(VoiceFont font);
+				static Platform::String^ GetGender(VoiceFont font);
 		};
 
 	}

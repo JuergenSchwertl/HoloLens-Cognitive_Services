@@ -14,12 +14,61 @@ using namespace CognitiveServicesLib::Speech;
 using namespace Windows::Storage::Streams;
 using namespace Windows::Web::Http;
 using namespace Windows::Web::Http::Headers;
+using namespace Windows::Data::Xml::Dom;
 
+///<seealso cref="https://docs.microsoft.com/en-us/azure/cognitive-services/Speech/api-reference-rest/bingvoiceoutput" />
 Platform::String^ SpeechClient::m_cstrSpeechendpoint = L"https://speech.platform.bing.com";
 Platform::String^ SpeechClient::m_cstrSynthesizeMethod = L"/synthesize";
 
 
-task<HttpRequestMessage^> SpeechClient::buildHttpRequestWithHeadersAsync(HttpMethod^ method, Uri^ uri)
+String^ SpeechClient::buildSSML(String^ TextToSpeak)
+{
+	Windows::Data::Xml::Dom::XmlDocument ^ xml = ref new Windows::Data::Xml::Dom::XmlDocument();
+	//String^ strXml = L"<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='Microsoft Server Speech Text to Speech Voice (en-US, ZiraRUS)'>Microsoft Bing Voice Output API</voice></speak>";
+	//xml->LoadXml(strXml);
+
+	auto xmlSpeak = xml->CreateElement(L"speak");
+	xmlSpeak->SetAttribute(L"version", L"1.0");
+	xmlSpeak->SetAttribute(L"xml:lang", VoiceFontHelper::GetLanguage(m_VoiceFont));
+
+	auto xmlVoice = xml->CreateElement(L"voice");
+	xmlVoice->SetAttribute(L"xml:lang", VoiceFontHelper::GetLanguage(m_VoiceFont));
+	xmlVoice->SetAttribute(L"xml:gender", VoiceFontHelper::GetGender(m_VoiceFont));
+	xmlVoice->SetAttribute(L"xml:name", VoiceFontHelper::GetFontName(m_VoiceFont));
+
+	auto xmlText = xml->CreateTextNode(TextToSpeak);
+
+	xmlVoice->AppendChild(xmlText);
+	xmlSpeak->AppendChild(xmlVoice);
+	xml->AppendChild(xmlSpeak);
+
+	String^ strXml = xmlSpeak->GetXml();
+	//__LOGMSG(strXml->Data());
+	return strXml;
+}
+
+IHttpContent^ SpeechClient::buildRequestContent(Platform::String^ TextToSpeak)
+{
+	__LOGFUNC;
+
+	String^ strSSMLContent = buildSSML(TextToSpeak);
+	HttpStringContent^ requestContent = ref new HttpStringContent(strSSMLContent);
+	auto headers = requestContent->Headers;
+	headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationSsmlXml));
+
+	unsigned long long ullContentLength;
+	if (requestContent->TryComputeLength(&ullContentLength))
+	{
+		headers->ContentLength = ullContentLength;
+	}
+
+	__LOGMSG(headers->ToString()->Data());
+	__LOGMSG(strSSMLContent->Data());
+
+	return requestContent;
+}
+
+task<HttpRequestMessage^> SpeechClient::buildHttpRequestWithHeadersAsync(HttpMethod^ method, Uri^ uri, String^ TextToSpeak)
 {
 	__LOGFUNC;
 
@@ -30,40 +79,26 @@ task<HttpRequestMessage^> SpeechClient::buildHttpRequestWithHeadersAsync(HttpMet
 	headers->Append(ref new String(HttpHeaderName::X_Search_ClientId), m_ClientId);
 	headers->Append(ref new String(HttpHeaderName::User_Agent), L"CognitiveServicesLib");
 
-	// since authorization requires a roundtrip to the authentication server, teh web requesdt may still be ongoing
+	// since authorization requires a roundtrip to the authentication server, the web request may still be ongoing
 	String^ authorization = co_await this->m_AuthorizationProvider->GetAuthorizationTokenAsync();
+
 	headers->Append(ref new String(HttpHeaderName::Authorization), authorization);
 
+	__LOGMSG(uri->ToString()->Data());
 	__LOGMSG(headers->ToString()->Data());
+
+	request->Content = buildRequestContent(TextToSpeak);
+
 	co_return request;
 }
 
-IHttpContent^ buildRequestContent(Platform::String^ TextToSpeak)
-{
-	__LOGFUNC;
 
-	HttpStringContent^ requestContent = ref new HttpStringContent(TextToSpeak);
-	auto headers = requestContent->Headers;
-	headers->ContentType = ref new Headers::HttpMediaTypeHeaderValue(ref new String(ContentTypes::ApplicationSsmlXml));
-
-	unsigned long long ullContentLength;
-	if (requestContent->TryComputeLength(&ullContentLength))
-	{
-		headers->ContentLength = ullContentLength;
-	}
-	__LOGMSG(headers->ToString()->Data());
-
-	return requestContent;
-}
-
-
-task<IInputStream^> SpeechClient::synthesize(String^ TextToSpeak)
+task<IRandomAccessStream^> SpeechClient::synthesize(String^ TextToSpeak)
 {
 	__LOGFUNC;
 
 	Uri^ uri = ref new Uri(m_cstrSpeechendpoint, m_cstrSynthesizeMethod);
-	HttpRequestMessage^ request = co_await buildHttpRequestWithHeadersAsync(HttpMethod::Post, uri);
-	request->Content = buildRequestContent( TextToSpeak );
+	HttpRequestMessage^ request = co_await buildHttpRequestWithHeadersAsync(HttpMethod::Post, uri, TextToSpeak);
 
 	HttpResponseMessage^ response = co_await m_httpClient->SendRequestAsync( request );
 
@@ -71,17 +106,30 @@ task<IInputStream^> SpeechClient::synthesize(String^ TextToSpeak)
 
 	if (!response->IsSuccessStatusCode)
 	{
+		std::wostringstream ss;
+		ss << L"BAD REQUEST\r\nHttpStatusCode:" << (int)response->StatusCode << L", Reason:" << response->ReasonPhrase->Data();
+
 		String^ strErrorResponse = co_await content->ReadAsStringAsync();
-		__LOGMSG(strErrorResponse->Data());
-		throw ref new Platform::FailureException(strErrorResponse);
+		if (strErrorResponse != nullptr)
+		{
+			ss << L", body:" << strErrorResponse->Data();
+		}
+		__LOGMSG(ss.str().c_str());
+
+		String^ strError = ref new String(ss.str().c_str());
+		throw ref new Platform::FailureException(strError);
 	}
 
 	IInputStream^ stream = nullptr;
-	String^ strContentType = content->Headers->ContentType->MediaType;
-	__LOGMSG(strContentType->Data());
-	stream = co_await content->ReadAsInputStreamAsync();
 
-	co_return stream;
+	__LOGMSG(content->Headers->ToString()->Data());
+	IBuffer^ buffer = co_await content->ReadAsBufferAsync();
+	InMemoryRandomAccessStream^ raStream = ref new InMemoryRandomAccessStream();
+
+	co_await raStream->WriteAsync(buffer);
+	co_await raStream->FlushAsync();
+	raStream->Seek(0ull);
+	co_return raStream;
 }
 
 
@@ -94,6 +142,8 @@ SpeechClient::SpeechClient(String^ SubscriptionKey, String^ AppId, String^ Clien
 	m_VoiceFont( Speech::VoiceFont::DE_DE_Female_Hedda),
 	m_OutputFormat( Speech::OutputFormat::Audio_16khz_32kbitrate_mono_mp3 )
 {
+	__LOGFUNC;
+
 	m_AuthorizationProvider = ref new AuthorizationProvider(SubscriptionKey);
 	m_httpClient = ref new HttpClient();
 }
@@ -103,8 +153,10 @@ SpeechClient::~SpeechClient()
 {
 }
 
-IAsyncOperation<IInputStream ^>^ SpeechClient::TextToSpeech(Platform::String ^ TextToSpeak)
+IAsyncOperation<IRandomAccessStream ^>^ SpeechClient::TextToSpeech(Platform::String ^ TextToSpeak)
 {
+	__LOGFUNC;
+
 	auto action = create_async([=]() {
 		return synthesize(TextToSpeak);
 	});

@@ -19,6 +19,7 @@ using namespace Windows::Graphics::Display;
 using namespace Windows::Media;
 using namespace Windows::Media::Core;
 using namespace Windows::Media::FaceAnalysis;
+using namespace Windows::Media::Playback;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
@@ -29,8 +30,10 @@ using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Devices::Sensors;
 using namespace Windows::Devices::Enumeration;
 using namespace Windows::Storage;
+using namespace Windows::Storage::Streams;
 
 using namespace CognitiveServicesLib;
+using namespace CognitiveServicesLib::Speech;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -45,6 +48,7 @@ MainPage::MainPage()
 	, _displayOrientation(DisplayOrientations::Portrait)
 	, _displayRequest(ref new Windows::System::Display::DisplayRequest())
 	, RotationKey({ 0xC380465D, 0x2271, 0x428C,{ 0x9B, 0x83, 0xEC, 0xEA, 0x3B, 0x4A, 0x85, 0xC1 } })
+	, _speechClient( nullptr )
 {
 	InitializeComponent();
 
@@ -519,6 +523,26 @@ void CogniTest::MainPage::BtnJsonTest_Click(Platform::Object^ sender, Windows::U
 
 void CogniTest::MainPage::BtnSpeak_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	if (_speechClient == nullptr)
+	{
 
+		_speechClient = ref new SpeechClient(L"cc8ed65702864541bfdf6e4a1992f817", L"1216AE2105044930980B516FE1356618", L"FC48480ED6AE4669A2C08D551DDB438A");
+		_speechClient->OutputFormat = OutputFormat::Audio_16khz_32kbitrate_mono_mp3;
+		_speechClient->VoiceFont = VoiceFont::DE_DE_Female_Hedda;
+	}
 
+	MediaPlayer^ player = ref new MediaPlayer();
+	InMemoryRandomAccessStream^ memStream = ref new InMemoryRandomAccessStream();
+
+	create_task( _speechClient->TextToSpeech(L"Franz fährt im komplett verwahrlosten Taxi quer durch Bayern.") )
+		.then([=](IRandomAccessStream^ stream) {
+
+		if (stream != nullptr)
+		{
+			MediaSource^ source = MediaSource::CreateFromStream(stream, L"audio/mpeg");
+			player->Source = source;
+			// https://blogs.msdn.microsoft.com/mcsuksoldev/2014/07/12/video-streaming-with-a-custom-irandomaccessstream-on-windows-and-windows-phone-universal-app/
+			player->Play();
+		}
+	});
 }

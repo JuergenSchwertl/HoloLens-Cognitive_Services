@@ -81,3 +81,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 /CogniTest/AppPkg
+/CogniTest/AppPackages/CogniTest

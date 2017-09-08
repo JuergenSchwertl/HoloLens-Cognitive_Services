@@ -20,11 +20,16 @@ namespace CognitiveServicesLib
 			CognitiveServicesLib::IAuthorizationProvider^ m_AuthorizationProvider;
 			Windows::Web::Http::HttpClient^ m_httpClient;
 
+			///private helper functions
 			concurrency::task< Windows::Web::Http::HttpRequestMessage^> buildHttpRequestWithHeadersAsync(
 				Windows::Web::Http::HttpMethod^ method, 
-				Windows::Foundation::Uri^ uri);
+				Windows::Foundation::Uri^ uri,
+				Platform::String^ TextToSpeak);
 
-			concurrency::task<Windows::Storage::Streams::IInputStream^> synthesize(Platform::String^ TextToSpeak);
+			Windows::Web::Http::IHttpContent^ SpeechClient::buildRequestContent(Platform::String^ TextToSpeak);
+			Platform::String^ SpeechClient::buildSSML(Platform::String^ TextToSpeak);
+
+			concurrency::task<Windows::Storage::Streams::IRandomAccessStream^> synthesize(Platform::String^ TextToSpeak);
 
 		public:
 			property CognitiveServicesLib::Speech::VoiceFont VoiceFont
@@ -40,12 +45,26 @@ namespace CognitiveServicesLib
 			};
 
 		public:
+			///<summary>
+			/// SpeechClient ctor
+			///</summary>
+			///<param name="SubscriptionKey">The Azure SpeechAPI service key</param>
+			///<param name="AppId">Your applications ApplicationId</param>
+			///<param name="ClientId">Arbitrary Client Id</param>
 			SpeechClient(Platform::String^ SubscriptionKey, Platform::String^ AppId, Platform::String^ ClientId);
+
+
+			///<summary>
+			/// Converts given plain text into speech stream
+			///</summary>
+			///<param name="TextToSpeak">Plain text to convert to speech</param>
+			///<returns><see cref="Windows::Foundation::IAsyncOperation">IAsyncOperation</see> that completes with 
+			///<see cref="Windows::Storage::Streams::IInputStream">IInputStream</see></returns>
+			Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream^>^ TextToSpeech(Platform::String^ TextToSpeak);
 
 		private:
 			~SpeechClient();
 
-			Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IInputStream^>^ TextToSpeech(Platform::String^ TextToSpeak);
 		};
 
 	}
