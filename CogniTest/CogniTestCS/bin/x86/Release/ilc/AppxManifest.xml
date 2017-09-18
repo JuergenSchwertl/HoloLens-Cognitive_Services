@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp build" xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build">
+  <!--
+    DIESE PAKETMANIFESTDATEI WIRD DURCH DEN BUILDVORGANG GENERIERT.
+
+    Änderungen an dieser Datei gehen verloren, wenn sie erneut erstellt wird. Um Fehler in dieser Datei zu beheben, bearbeiten Sie die ".appxmanifest"-Quelldatei.
+
+    Weitere Informationen zu Paketmanifestdateien finden Sie unter http://go.microsoft.com/fwlink/?LinkID=241727
+  -->
+  <Identity Name="bf0b7c9a-55a0-4fa1-ac0e-cbd195f92cba" Publisher="CN=jschwert" Version="1.0.0.0" ProcessorArchitecture="x86" />
+  <mp:PhoneIdentity PhoneProductId="bf0b7c9a-55a0-4fa1-ac0e-cbd195f92cba" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>CogniTestCS</DisplayName>
+    <PublisherDisplayName>jschwert</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.24123.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <PackageDependency Name="Microsoft.NET.Native.Framework.1.3" MinVersion="1.3.24201.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <PackageDependency Name="Microsoft.NET.Native.Runtime.1.4" MinVersion="1.4.24201.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="DE-DE" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="CogniTestCS.exe" EntryPoint="CogniTestCS.App">
+      <uap:VisualElements DisplayName="CogniTestCS" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="CogniTestCS" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>CognitiveServicesLib.dll</Path>
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Noise" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceClient" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Hair" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Occlusion" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceLandmarks" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.HairColor" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.EmotionScores" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Accessory" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.HeadPose" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceRectangle" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Makeup" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FacialHair" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FaceAttributes" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Blur" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Errors.ErrorResponse" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Face" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Exposure" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.Speech.SpeechClient" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="CognitiveServicesLib.FeatureCoordinate" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+  <build:Metadata>
+    <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />
+    <build:Item Name="VisualStudio" Version="15.0" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2017" />
+    <build:Item Name="OperatingSystem" Version="10.0.15063.0 (WinBuild.160101.0800)" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.26720.2" />
+    <build:Item Name="ProjectGUID" Value="{CB60DAA5-D904-4232-B06B-52D049DB09AC}" />
+    <build:Item Name="ilc.exe" Version="1.4.24211.00 built by: PROJECTNGDR2" />
+    <build:Item Name="OptimizingToolset" Value="ilc.exe" />
+    <build:Item Name="UseDotNetNativeSharedAssemblyFrameworkPackage" Value="True" />
+    <build:Item Name="UniversalGenericsOptOut" Value="false" />
+    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="15.0.26720.2" />
+    <build:Item Name="MakePri.exe" Version="10.0.14393.795 (rs1_release_sec.170105-1850)" />
+  </build:Metadata>
+</Package>

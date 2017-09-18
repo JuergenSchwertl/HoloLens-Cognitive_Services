@@ -4,6 +4,10 @@
 
 namespace CognitiveServicesLib
 {
+	///<summary>
+	///FaceDetect API surface
+	///<seealso cref="https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236" />
+	///</summary>
 	public ref class FaceClient sealed
 	{
 	private:
@@ -57,6 +61,19 @@ namespace CognitiveServicesLib
 		Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVector<CognitiveServicesLib::Face^>^>^
 			DetectFromImageAsync(
 				Windows::Storage::Streams::IBuffer^ ImageData,
+				bool ReturnFaceId,
+				bool ReturnFaceLandmarks,
+				Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);
+
+		///<summary>Detects faces from an image data byte array</summary>
+		///<param name="ImageData">IBuffer with image data. Pass from C# as Array.AsBuffer()</param>
+		///<param name="ReturnFaceId">requests Face Api to return face id</param>
+		///<param name="ReturnFaceLandmarks">requests Face Api to return face landmarks</param>
+		///<param name="ReturnFaceAttributes">requests Face Api to return listed face attributes. <seealso cref="CognitiveServices::FaceAttributeOptions" /></param>
+		///<returns>async operation completing with Face - Detect API response as <seealso cref="CognitiveServicesLib::Face" /></returns>
+		Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVector<CognitiveServicesLib::Face^>^>^
+			DetectFromImageDataAsync(
+				const Platform::Array<byte>^ ImageData,
 				bool ReturnFaceId,
 				bool ReturnFaceLandmarks,
 				Windows::Foundation::Collections::IIterable<FaceAttributeOptions>^ ReturnFaceAttributes);

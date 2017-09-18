@@ -56,6 +56,7 @@ namespace CognitiveServicesLib
 
 			///<summary>
 			/// Converts given plain text into speech stream
+			/// <seealso cref="https://docs.microsoft.com/en-us/azure/cognitive-services/Speech/api-reference-rest/bingvoiceoutput" />
 			///</summary>
 			///<param name="TextToSpeak">Plain text to convert to speech</param>
 			///<returns><see cref="Windows::Foundation::IAsyncOperation">IAsyncOperation</see> that completes with 

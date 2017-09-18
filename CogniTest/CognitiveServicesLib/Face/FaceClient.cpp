@@ -195,6 +195,19 @@ Windows::Foundation::IAsyncOperation<
 
 
 
+IAsyncOperation<IVector<Face^>^>^ CognitiveServicesLib::FaceClient::DetectFromImageDataAsync(
+	const Platform::Array<byte>^ ImageData, 
+	bool ReturnFaceId, 
+	bool ReturnFaceLandmarks, 
+	IIterable<FaceAttributeOptions>^ ReturnFaceAttributes)
+{
+	Buffer^ buffer = ref new Buffer(ImageData->Length);
+
+
+	throw ref new Platform::NotImplementedException();
+	// TODO: hier Rückgabeanweisung eingeben
+}
+
 ///<summary>Fake detection from a static jsopn result</summary>
 ///<param name="FileName">Image file name</param>
 ///<returns>async task completing with Face - Detect API response as json string</returns>

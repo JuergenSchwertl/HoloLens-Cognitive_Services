@@ -1,0 +1,2 @@
+C:\Users\jschwert\Source\Repos\HoloLens-Cognitive_Services\CogniTest\CogniTestCS\CogniTestCS.csproj;x86
+C:\Users\jschwert\Source\Repos\HoloLens-Cognitive_Services\CogniTest\CognitiveServicesLib\CognitiveServicesLib.vcxproj;x86
