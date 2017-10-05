@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -27,6 +27,7 @@ namespace CogniTestCS
     {
 
         FaceClient m_FaceClient;
+        SpeechClient m_SpeechClient;
         List<FaceAttributeOptions> m_FaceAttributeList;
 
         private void InitializeFaceClient()
@@ -50,24 +51,23 @@ namespace CogniTestCS
             };
         }
 
+        private void InitializeSpeechClient()
+        {
+            m_SpeechClient = new SpeechClient("cc8ed65702864541bfdf6e4a1992f817", "1216AE2105044930980B516FE1356618", "FC48480ED6AE4669A2C08D551DDB438A");
+            m_SpeechClient.OutputFormat = OutputFormat.Audio_16khz_32kbitrate_mono_mp3;
+            m_SpeechClient.VoiceFont = VoiceFont.DE_DE_Female_Hedda;
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
             this.InitializeFaceClient();
+            this.InitializeSpeechClient();
         }
 
-        SpeechClient m_SpeechClient;
 
         private async void BtnSpeak_Click(object sender, RoutedEventArgs e)
         {
-            if (m_SpeechClient == null)
-            {
-
-                m_SpeechClient = new SpeechClient("cc8ed65702864541bfdf6e4a1992f817", "1216AE2105044930980B516FE1356618", "FC48480ED6AE4669A2C08D551DDB438A");
-                m_SpeechClient.OutputFormat = OutputFormat.Audio_16khz_32kbitrate_mono_mp3;
-                m_SpeechClient.VoiceFont = VoiceFont.DE_DE_Female_Hedda;
-            }
-
             IRandomAccessStream stream = await m_SpeechClient.TextToSpeech("Franz fährt im komplett verwahrlosten Taxi quer durch Bayern.");
             if (stream != null)
             {
@@ -91,6 +91,74 @@ namespace CogniTestCS
 
             //List<byte> Img = new List<byte>(1000);
             //IList<Face> faceList2 = await m_FaceClient.DetectFromImageAsync(Img.ToArray().AsBuffer(), true, true, m_FaceAttributeList);
+
+        }
+
+        private async void BtnDetectFromFile_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uriTestImage =  new Uri("ms-appx:///Assets/Juergen_Schwertl.jpg");
+            IList<Face> faceList = await m_FaceClient.DetectFromUriAsync(uriTestImage, true, false, m_FaceAttributeList);
+            Face face = faceList[0];
+            String strText = "";
+
+            //LblResult.Text = face.ToString();
+
+            strText += (face.FaceAttributes.Gender == "male") ? "Der Mann " : "Die Frau ";
+            strText += "ist etwa ";
+            strText += ( (int)face.FaceAttributes.Age).ToString();
+            strText += " Jahre alt und sieht ";
+
+            if (face.FaceAttributes.Emotion.Happiness > 0.7)
+            {
+                strText += "glücklich";
+            }
+            else if (face.FaceAttributes.Emotion.Surprise > 0.7)
+            {
+                strText += "überrascht";
+            }
+            else if (face.FaceAttributes.Emotion.Sadness > 0.7)
+            {
+                strText += "traurig";
+            }
+            else if (face.FaceAttributes.Emotion.Fear > 0.7)
+            {
+                strText += "ängstlich";
+            }
+            else if (face.FaceAttributes.Emotion.Anger > 0.7)
+            {
+                strText += "ärgerlich";
+            }
+            else
+            {
+                strText += "neutral";
+            }
+            strText += " aus ";
+            if( face.FaceAttributes.Glasses != null )
+            {
+                strText += " und trägt ";
+                switch(face.FaceAttributes.Glasses)
+                {
+                    case Glasses.NoGlasses:
+                        strText += "keine Brille";
+                        break;
+                    case Glasses.ReadingGlasses:
+                        strText += "eine Lesebrille";
+                        break;
+                    case Glasses.Sunglasses:
+                        strText += "eine Sonnenbrille";
+                        break;
+                    case Glasses.SwimmingGoggles:
+                        strText += "eine Tauchermaske";
+                        break;
+                }
+            }
+
+            IRandomAccessStream stream = await m_SpeechClient.TextToSpeech(strText);
+            if (stream != null)
+            {
+                MediaPlayer.SetSource(stream, "audio/mpeg");
+                MediaPlayer.Play();
+            }
 
         }
     }

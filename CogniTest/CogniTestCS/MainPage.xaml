@@ -14,6 +14,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Content="FakeDetect" Name="BtnFakeDetect" Click="BtnFakeDetect_Click" Margin="10,10,10,10" />
+            <Button Content="Detect from File" Name="BtnDetectFromFile" Click="BtnDetectFromFile_Click" Margin="10,10,10,10" />
             <Button Content="Speak" Name="BtnSpeak" Click="BtnSpeak_Click" Margin="10,10,10,10" />
             <MediaElement Grid.Row="0" Name="MediaPlayer" />
         </StackPanel>
